@@ -40,4 +40,6 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
+JsonSerializableAddressBook --> "*" JsonAdaptedTag
+
 @enduml
