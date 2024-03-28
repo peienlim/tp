@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -120,5 +123,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     * The String formatted should be of the pattern "yyyy-MM-dd HH:mm:ss" by default.
+     *
+     * @throws DateTimeParseException if the given {@code tag} is invalid.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
+        requireNonNull(dateTime);
+        String trimmedTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = LocalDateTime.parse(trimmedTime, formatter);
+        return time;
     }
 }
