@@ -325,8 +325,39 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+### \[Proposed\] Grouping Students by an EventTag.
 
+As our student leaders will be in-charge of multiple events, they will need to know which student is involved in which event. As such, we are propose an EventTag feature pack which allows you to have easy access to the event features students are tagged with.
+
+This proposed event tag feature introduces a new class EventTag, which allows students leaders to tag students involved in an event with its respective EventTag, which also contains the event description, such as start and end dates, event details, etc.
+
+The key operations and components of the proposed implementation include:
+
+* **Creates an EventTag** with starting date, ending date and event description.
+* **Filter students** based on the event they are tagged to.
+* The ability for to **see the event description and time easily.**
+
+An example usage scenario illustrates how the EventTag feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
+2. The user sees the description of an EventTag a person is tagged with by either using CLI or by clicking a button.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/EventTagActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How EventTag works:**
+
+* **Alternative 1 (Proposed Choice):** You can group students by EventTag using the search function that shows people with a common tag.
+    * Pros: Easy to search for the different event Tags and displays them easily.
+    * Cons: You have to type the name of the event Tag every time you need to see who is in which group, which can be annoying.
+
+* **Alternative 2:** Have a GUI feature which allows you to display people currently in group "X" by clicking a tab in the EventBook called "X".
+    * Pros: Easy to navigate between different groups.
+    * Cons: If you have too many groups to manage it will take a while for you to find an EventTag group every time you switch the group you are looking at.
+
+_{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -364,16 +395,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a(n) …​             | I want to …​                                        | So that I can…​                                   |
-|----------|------------------------|-----------------------------------------------------|---------------------------------------------------|
-| `* * *`  | user                   | include tags when adding people                     | tag people based on their roles                   |
-| `* * *`  | user                   | search by tags                                      | find groups of people                             |
-| `* * *`  | user                   | have different tagging options                      | keep my contacts organised and search effectively |
-| `* *`    | user                   | delete by name OR index                             | manage my contacts easier                         |
-| `* *`    | user                   | add contacts with partial information               | keep my contacts as up to date as possible        |
-| `*`      | user                   | sort my tags based on event (and subsequently role) | visualise my contacts in a neat way               |
-| `* *`    | user                   | have a space to write notes for each contact        | note my thoughts in an organised way              |
-| `* *`    | user proficient in CLI | have short form commands                            | use the programe faster                           |
+| Priority | As a(n) …​             | I want to …​                                         | So that I can…​                                             |
+|----------|------------------------|------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user                   | include tags when adding people                      | tag people based on their roles                             |
+| `* * *`  | user                   | search by tags                                       | find groups of people                                       |
+| `* * *`  | user                   | have different tagging options                       | keep my contacts organised and search effectively           |
+| `* *`    | user                   | delete by name OR index                              | manage my contacts easier                                   |
+| `* *`    | user                   | add contacts with partial information                | keep my contacts as up to date as possible                  |
+| `* * *`  | user                   | have knowledge on what event a person is involved in | keep my contacts easily                                     |
+| `* *`    | user                   | know details about an event, such as its time, etc   | keep a clear mind on who is doing what and not get confused |
+| `*`      | user                   | sort my tags based on event (and subsequently role)  | visualise my contacts in a neat way                         |
+| `* *`    | user                   | have a space to write notes for each contact         | note my thoughts in an organised way                        |
+| `* *`    | user proficient in CLI | have short form commands                             | use the programe faster                                     |
 
 
 *{More to be added}*
