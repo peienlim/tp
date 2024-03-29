@@ -150,6 +150,32 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Creating and Deleting Tag Objects
+
+As part of the functionality of EventBook, a myriad of tag objects might be required to facilitate organisation of
+contacts within the program. EventBook aims to support this capability by providing the ability to create or delete
+standalone tags separate from people.
+
+The proposed mechanism is as follows:
+* `ctag`: Creates a Tag object that will be stored in a global Tag array within the `ModelManager` class.
+* `dtag`: Deletes a Tag object that is currently stored in the global Tag array within the `ModelManager` class. This
+will also delete all instances of the Tag object within the program.
+
+Each Tag object that exists in the program must exist within this global Tag array. Existing functions such as
+`add` will support the creation of Tag objects to be added to this global Tag array.
+
+An example usage scenario illustrates how the `ctag` feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list
+of contacts in the EventBook.
+2. The user executes `ctag Friend`, creating a new Tag object named `Friend`.
+3. The user can then tag people in the program with the new `Friend` tag.
+
+An example usage scenario illustrates how the `dtag` feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of
+contacts in the EventBook.
+2. The user executes `dtag Friend`, deleting the Tag object named `Friend`.
+3. All instances of `Friend` will be deleted from the EventBook.
+
 ### \[Proposed\] Importing and Exporting as .csv file
 
 As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook 
