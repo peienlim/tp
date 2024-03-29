@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AddressBook Developer Guide
+# EventBook Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -171,6 +171,36 @@ Cons: Requires modifications to the tagging system to support event-specific tag
 Alternative 2: Introduce separate address books for each event, providing a clear separation of contacts by events.
 Pros: Offers a straightforward organization of data by events.
 Cons: Increases complexity by managing multiple address books, harder to implement.
+
+### \[Proposed\] Deleting by Name and Index feature
+
+As our student leaders will be in-charge of multiple events, they will tend to encounter a large amount of contacts saved in the EventBook. As such, we are proposing to implement delete by name or index feature which allows them to delete the contacts by names. This saves their time of scrolling through the large amount of contacts before deleting them by index.
+
+This proposed delete name and index feature introduces the concept of deleting the contacts by either name or index. 
+
+Given below is an example usage scenario and how delete mechanism behaves at each step.
+
+Step 1: The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
+
+Step 2: The user executes `delete John Doe` command to delete the person named John Doe in the EventBook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete John Doe` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+**Note:** If the command fails the execution, it means that the person does not exist and an error indicating that the person is not found will be shown.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/DeleteActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How delete executes:**
+
+* **Alternative 1 (Proposed Choice):** Delete the name from the address book.
+    * Pros: Easy to search for the person by typing their full exact name.
+    * Cons: May have some issues with typing the full exact name if the person's full name that you want to delete is unknown to you.
+
+* **Alternative 2:**  Search for the name of the person and delete the index from the address book.
+    * Pros: Able to see which name you want to delete by searching for their name.
+    * Cons: Having to search and delete is slower than simply deleting the person by name.
 
 ### \[Proposed\] Undo/redo feature
 
