@@ -150,6 +150,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Importing and Exporting as .csv file
+
+As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook 
+aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
+upload and sharing.
+
+The proposed mechanism is as follows:
+* Import: Facilitated by the `import` command that takes a path parameter. The file named `import.csv` at the given 
+path will be read in a set format. The contact details in the csv will then be imported into the address book following
+the format of the add command (Implication being that each field in the .csv should be compatible with the current
+implementation of the address book, and follow all conventions of the add command like formatting and non-duplicates)
+* Export: Facilitated by the `export` command that takes no parameters. The command will access the `UniquePersonList` 
+found in the `1AddressBook` of the `Model` and parse through the relevant data, formatting it into the relevant fields.
+
+The .csv should be formatted with the first row having the non-case sensitive headers (separate cells marked with `|`): 
+* `Name | Number | Email | Address | Tag`
+
+An example usage scenario illustrates how the import feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of contacts 
+in the EventBook.
+2. The user executes `import ./import/import.csv` , with import.csv having 2 rows: 
+   1. `Name | Number | Email | Address | Tag`
+   2. `John | 94756383 | john@mail.com | NUS UTown | BestFriend`
+3. The contact `John` is imported into the address book, with parameters as above.
+
+An example usage scenario illustrates how the export feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of contacts
+   in the EventBook.
+2. The user executes `export` to export all contacts
+3. All contacts in the address book will be exported to ./export/export.csv according to the format 
+`Name | Number | Email | Address | Tag`
+
 ### \[Proposed\] Event switching feature 
 
 As our target audience are student leaders, and they may be in-charge of multiple events throughout their course in NUS, we are proposing to implement a event-switching feature which allows them to switch between events and view contacts specific to each event.
