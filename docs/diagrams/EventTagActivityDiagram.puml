@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam monochrome black
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Launch the address book;
+if (Search person associated with a tag) then (yes)
+  :Tag found;
+  if (Is EventTag) then (yes)
+    :Displays EventTag description and date;
+  else (no)
+    :Displays error message;
+  endif
+else (no)
+  :Displays error message;
+endif
+stop
+@enduml
