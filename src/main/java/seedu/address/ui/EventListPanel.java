@@ -34,14 +34,14 @@ public class EventListPanel extends UiPart<Region> {
      */
     class EventListViewCell extends ListCell<EventTag> {
         @Override
-        protected void updateItem(EventTag event, boolean empty) {
-            super.updateItem(event, empty);
+        protected void updateItem(EventTag eventTag, boolean empty) {
+            super.updateItem(eventTag, empty);
 
-            if (empty || event == null) {
+            if (empty || eventTag == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventCard(eventTag).getRoot());
             }
         }
     }
