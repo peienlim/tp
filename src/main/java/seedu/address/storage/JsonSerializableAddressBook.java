@@ -23,6 +23,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT_TAG = "Events tag list contains duplicate event tag(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
@@ -79,7 +80,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedEventTag jsonAdaptedEventTag : eventTagList) {
             Tag eventTag = jsonAdaptedEventTag.toModelType();
             if (addressBook.hasEventTag(eventTag)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT_TAG);
             }
             addressBook.addEventTag(eventTag);
         }
