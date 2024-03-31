@@ -96,19 +96,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if an event tag {@code tag} exists in the address book.
-     */
-    public boolean hasEventTag(Tag eventTag) {
-        requireNonNull(eventTag);
-        return eventTagList.contains(eventTag);
-    }
-
-    /**
      * Returns true if a tag with name {@code tagName} exists in the address book.
      */
     public boolean hasTag(String tagName) {
         requireNonNull(tagName);
         return tagList.contains(tagName);
+    }
+
+    /**
+     * Returns true if an event tag {@code tag} exists in the address book.
+     */
+    public boolean hasEventTag(Tag eventTag) {
+        requireNonNull(eventTag);
+        return eventTagList.contains(eventTag);
     }
 
     /**
@@ -192,12 +192,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tagList.remove(key);
     }
 
-    public void removeEventTag(Tag key) {
-        eventTagList.remove(key);
-    }
-
     public void removeTag(String key) {
         tagList.remove(key);
+    }
+
+    public void removeEventTag(Tag key) {
+        eventTagList.remove(key);
     }
 
     public void removeEventTag(String key) {
