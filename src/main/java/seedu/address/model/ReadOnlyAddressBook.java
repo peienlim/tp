@@ -18,4 +18,5 @@ public interface ReadOnlyAddressBook {
 
     ObservableSet<Tag> getTagList();
 
+    ObservableSet<Tag> getEventTagList();
 }
