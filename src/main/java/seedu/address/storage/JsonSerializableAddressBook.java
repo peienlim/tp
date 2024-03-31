@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +26,7 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
+    private final List<JsonAdaptedEventTag> eventTagList = new ArrayList<>();
 
 
     /**
@@ -32,9 +34,11 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("tagList") List<JsonAdaptedTag> tags) {
+                                       @JsonProperty("tagList") List<JsonAdaptedTag> tags,
+                                       @JsonProperty("eventTagList") List<JsonAdaptedEventTag> eventTags) {
         this.persons.addAll(persons);
         this.tagList.addAll(tags);
+        this.eventTagList.addAll(eventTags);
     }
 
     /**
@@ -45,6 +49,10 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        eventTagList.addAll(source.getEventTagList().stream()
+                .map(tag -> (EventTag) tag)
+                .map(JsonAdaptedEventTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -67,6 +75,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
             }
             addressBook.addTag(tag);
+        }
+        for (JsonAdaptedEventTag jsonAdaptedEventTag : eventTagList) {
+            Tag eventTag = jsonAdaptedEventTag.toModelType();
+            if (addressBook.hasEventTag(eventTag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addEventTag(eventTag);
         }
         return addressBook;
     }
