@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,12 +20,18 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.EventTag;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+
+    private static final ObservableList<EventTag> DUMMY_EVENTS = new FilteredList<>(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(
+            new EventTag("Tag1", "Description 1", LocalDateTime.now(), LocalDateTime.now()),
+            new EventTag("Tag2", "Description 2", LocalDateTime.now(), LocalDateTime.now())
+    )));
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -44,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +126,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        eventListPanel = new EventListPanel(DUMMY_EVENTS);
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

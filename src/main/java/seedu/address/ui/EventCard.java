@@ -11,7 +11,7 @@ import seedu.address.model.tag.EventTag;
  */
 public class EventCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "EventCard.fxml";
 
     public final EventTag eventTag;
 
