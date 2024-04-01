@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -175,12 +177,52 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasEventTag(EventTag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEventTag(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventTag(EventTag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventTag(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addEventTag(EventTag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public EventTag getEventTag(String tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableSet<EventTag> getEventTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCurrentEventTag(EventTag tagName) {
             throw new AssertionError("This method should not be called.");
         }
 

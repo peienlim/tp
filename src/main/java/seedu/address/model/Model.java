@@ -100,6 +100,18 @@ public interface Model {
      */
     void addTag(Tag tag);
 
+    boolean hasEventTag(EventTag tag);
+
+    boolean hasEventTag(String tagName);
+
+    void deleteEventTag(EventTag tag);
+
+    void deleteEventTag(String tagName);
+
+    void addEventTag(EventTag tag);
+
+    EventTag getEventTag(String tag);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -112,4 +124,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     ObservableSet<EventTag> getEventTagList();
+
+    void setCurrentEventTag(EventTag tagName);
 }

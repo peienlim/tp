@@ -38,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        currentEventTag = null;
     }
 
     public ModelManager() {
@@ -140,6 +141,39 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public boolean hasEventTag(EventTag tag) {
+        requireNonNull(tag);
+        return addressBook.hasEventTag(tag);
+    }
+
+    @Override
+    public boolean hasEventTag(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.hasEventTag(tagName);
+    }
+
+    @Override
+    public void deleteEventTag(EventTag tag) {
+        addressBook.removeEventTag(tag);
+    }
+
+    @Override
+    public void deleteEventTag(String tagName) {
+        addressBook.removeEventTag(tagName);
+    }
+
+    @Override
+    public void addEventTag(EventTag tag) {
+        addressBook.addTag(tag);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public EventTag getEventTag(String tag) {
+        return addressBook.getEventTag(tag);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -160,8 +194,30 @@ public class ModelManager implements Model {
     @Override
     public void updateTagPersonList(Tag t) {
         requireNonNull(t);
-        filteredPersons.setPredicate(person -> person.containsTag(t));
+        if (currentEventTag != null) {
+            Predicate<Person> eventTagPredicate = person -> person.containsTag(currentEventTag);
+            Predicate<Person> normalTagPredicate = person -> person.containsTag(t);
+            filteredPersons.setPredicate(eventTagPredicate.and(normalTagPredicate));
+        } else {
+            filteredPersons.setPredicate(person -> person.containsTag(t));
+        }
     }
+
+    /**
+     * Sets the current event tag to filter by.
+     * @param eventTag The event tag to filter by.
+     */
+    public void setCurrentEventTag(EventTag eventTag) {
+        this.currentEventTag = eventTag;
+    }
+
+    /**
+     * Clears the current event tag.
+     */
+    public void clearCurrentEventTag() {
+        this.currentEventTag = null;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

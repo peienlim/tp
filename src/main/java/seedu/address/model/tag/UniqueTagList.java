@@ -124,6 +124,22 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
     }
 
     /**
+     * Returns the event tag with the specified event tag name, if it exists in the list.
+     * Returns null if no such event tag is found.
+     * @param eventTagName The name of the event tag to retrieve.
+     * @return The event tag with the specified event tag name, or null if not found.
+     */
+    public EventTag getEventTag(String eventTagName) {
+        requireNonNull(eventTagName);
+        for (T tag : internalSet) {
+            if (tag instanceof EventTag && tag.tagName.equals(eventTagName)) {
+                return (EventTag) tag;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the backing set as an unmodifiable {@code ObservableSet}.
      */
     public ObservableSet<T> asUnmodifiableObservableSet() {
