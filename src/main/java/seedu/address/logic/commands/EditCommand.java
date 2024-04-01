@@ -36,9 +36,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number or the name used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) or NAME (must be the exact name saved)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -49,21 +49,24 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_ERROR = "Please provide either a valid name or index to edit.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
+    private final String name;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
+     * @param name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Index index, String name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
+        this.name = name;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -71,21 +74,43 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        String dummyName = " ";
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index != null) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToEdit = lastShownList.get(index.getZeroBased());
+            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        } else if (name != dummyName) {
+            Optional<Person> personToFind = lastShownList.stream().filter(person -> person.getName()
+                    .toString().equals(name)).findFirst();
+
+            if (personToFind.isPresent()) {
+                Person personToEdit = personToFind.get();
+                Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+                if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                }
+                model.setPerson(personToEdit, editedPerson);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+            }
+        } else {
+            throw new CommandException(MESSAGE_EDIT_PERSON_ERROR);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -116,7 +141,7 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return index.equals(otherEditCommand.index) && name.equals(otherEditCommand.name)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
@@ -124,6 +149,7 @@ public class EditCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
+                .add("name", name)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
