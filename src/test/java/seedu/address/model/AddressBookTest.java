@@ -207,7 +207,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableSet<Tag> tags = FXCollections.observableSet();
-        private final ObservableSet<Tag> eventTags = FXCollections.observableSet();
+        private final ObservableSet<EventTag> eventTags = FXCollections.observableSet();
 
         AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<EventTag> eventTags) {
             this.persons.setAll(persons);
@@ -226,7 +226,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableSet<Tag> getEventTagList() {
+        public ObservableSet<EventTag> getEventTagList() {
             return eventTags;
         }
     }
