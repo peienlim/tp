@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.EventTag;
@@ -13,8 +12,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link EventTag}.
  */
-class JsonAdaptedEventTag extends JsonAdaptedTag {
+class JsonAdaptedEventTag {
 
+    private final String tagName;
     private final String description;
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
@@ -27,7 +27,7 @@ class JsonAdaptedEventTag extends JsonAdaptedTag {
                                @JsonProperty("description") String description,
                                @JsonProperty("startDate") LocalDateTime startDate,
                                @JsonProperty("endDate") LocalDateTime endDate) {
-        super(tagName);
+        this.tagName = tagName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -38,16 +38,15 @@ class JsonAdaptedEventTag extends JsonAdaptedTag {
      * Converts a given {@code EventTag} into this class for Jackson use.
      */
     public JsonAdaptedEventTag(EventTag source) {
-        super(source.tagName);
+        tagName = source.tagName;
         description = source.description;
         startDate = source.startDate;
         endDate = source.endDate;
     }
 
-    @JsonValue
-    @Override
+    @JsonProperty("tagName")
     public String getTagName() {
-        return super.getTagName();
+        return tagName;
     }
 
     public String getDescription() {
@@ -67,12 +66,11 @@ class JsonAdaptedEventTag extends JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    @Override
     public EventTag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(super.getTagName())) {
+        if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        return new EventTag(super.getTagName(), description, startDate, endDate);
+        return new EventTag(tagName, description, startDate, endDate);
     }
 }

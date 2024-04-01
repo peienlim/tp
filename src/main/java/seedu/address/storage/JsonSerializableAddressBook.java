@@ -51,7 +51,6 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         eventTagList.addAll(source.getEventTagList().stream()
-                .map(tag -> (EventTag) tag)
                 .map(JsonAdaptedEventTag::new)
                 .collect(Collectors.toList()));
     }
