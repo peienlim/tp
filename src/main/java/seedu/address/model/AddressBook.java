@@ -11,6 +11,7 @@ import javafx.collections.ObservableSet;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -21,8 +22,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueTagList tagList;
-    private final UniqueTagList eventTagList;
+    private final UniqueTagList<Tag> tagList;
+    private final UniqueTagList<EventTag> eventTagList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,8 +34,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tagList = new UniqueTagList();
-        eventTagList = new UniqueTagList();
+        tagList = new UniqueTagList<Tag>();
+        eventTagList = new UniqueTagList<EventTag>();
     }
 
     public AddressBook() {}
@@ -61,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tagList.setTags(tagList);
     }
 
-    public void setEventTagList(Set<Tag> eventTagList) {
+    public void setEventTagList(Set<EventTag> eventTagList) {
         this.eventTagList.setTags(eventTagList);
     }
 
@@ -73,8 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTagList(newData.getTagList());
-        //TODO !!!!!
-        setEventTagList(newData.getTagList());
+        setEventTagList(newData.getEventTagList());
     }
 
     //// person-level and tag-level operations
@@ -106,7 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if an event tag {@code tag} exists in the address book.
      */
-    public boolean hasEventTag(Tag eventTag) {
+    public boolean hasEventTag(EventTag eventTag) {
         requireNonNull(eventTag);
         return eventTagList.contains(eventTag);
     }
@@ -139,7 +139,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds an event tag to the address book.
      * The event tag must not already exist in the address book.
      */
-    public void addEventTag(Tag t) {
+    public void addEventTag(EventTag t) {
         eventTagList.add(t);
     }
 
@@ -170,7 +170,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The {@code editedTag} must not be the same as another event tag in the address book.
      */
-    public void setEventTags(Tag target, Tag editedTag) {
+    public void setEventTags(EventTag target, EventTag editedTag) {
         requireNonNull(editedTag);
 
         eventTagList.replace(target, editedTag);
@@ -195,7 +195,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tagList.remove(key);
     }
 
-    public void removeEventTag(Tag key) {
+    public void removeEventTag(EventTag key) {
         eventTagList.remove(key);
     }
 
@@ -225,7 +225,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableSet<Tag> getEventTagList() {
+    public ObservableSet<EventTag> getEventTagList() {
         return eventTagList.asUnmodifiableObservableSet();
     }
 

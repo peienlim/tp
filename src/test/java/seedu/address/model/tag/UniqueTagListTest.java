@@ -16,7 +16,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 public class UniqueTagListTest {
 
-    private final UniqueTagList uniqueTagList = new UniqueTagList();
+    private final UniqueTagList<Tag> uniqueTagList = new UniqueTagList<>();
 
     @Test
     public void contains_nullTag_throwsNullPointerException() {
@@ -91,7 +91,7 @@ public class UniqueTagListTest {
     public void remove_existingTag_removesTag() {
         uniqueTagList.add(new Tag("friends"));
         uniqueTagList.remove(new Tag("friends"));
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        UniqueTagList<Tag> expectedUniqueTagList = new UniqueTagList<>();
         assertEquals(expectedUniqueTagList, uniqueTagList);
     }
 
@@ -99,18 +99,18 @@ public class UniqueTagListTest {
     public void remove_existingTagString_removesTag() {
         uniqueTagList.add(new Tag("friends"));
         uniqueTagList.remove("friends");
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        UniqueTagList<Tag> expectedUniqueTagList = new UniqueTagList<>();
         assertEquals(expectedUniqueTagList, uniqueTagList);
     }
     @Test
     public void setTags_nullUniqueTagList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTagList.setTags((UniqueTagList) null));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.setTags((UniqueTagList<Tag>) null));
     }
 
     @Test
     public void setTags_uniqueTagList_replacesOwnListWithProvidedUniqueTagList() {
         uniqueTagList.add(new Tag("friends"));
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        UniqueTagList<Tag> expectedUniqueTagList = new UniqueTagList<>();
         expectedUniqueTagList.add(new Tag("colleagues"));
         uniqueTagList.setTags(expectedUniqueTagList);
         assertEquals(expectedUniqueTagList, uniqueTagList);
@@ -126,7 +126,7 @@ public class UniqueTagListTest {
         uniqueTagList.add(new Tag("friends"));
         Set<Tag> tagSet = new HashSet<>(Arrays.asList(new Tag("colleagues"), new Tag("family")));
         uniqueTagList.setTags(tagSet);
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        UniqueTagList<Tag> expectedUniqueTagList = new UniqueTagList<>();
         expectedUniqueTagList.add(new Tag("colleagues"));
         expectedUniqueTagList.add(new Tag("family"));
         assertEquals(expectedUniqueTagList, uniqueTagList);
