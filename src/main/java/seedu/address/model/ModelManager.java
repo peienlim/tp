@@ -126,10 +126,6 @@ public class ModelManager implements Model {
     public void deleteTag(Tag tag) {
         addressBook.removeTag(tag);
     }
-    @Override
-    public void deleteTag(String tagName) {
-        addressBook.removeTag(tagName);
-    }
 
     @Override
     public void addTag(Tag tag) {

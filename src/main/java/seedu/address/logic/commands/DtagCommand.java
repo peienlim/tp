@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -36,8 +36,8 @@ public class DtagCommand extends Command {
         if (!model.hasTag(tagName)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG);
         }
-
-        model.deleteTag(tagName);
+        Tag dummyTag = new Tag(tagName);
+        model.deleteTag(dummyTag);
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagName));
     }
 
