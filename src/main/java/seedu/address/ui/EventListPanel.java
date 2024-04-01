@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -23,9 +26,10 @@ public class EventListPanel extends UiPart<Region> {
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
-    public EventListPanel(ObservableList<EventTag> eventList) {
+    public EventListPanel(ObservableSet<EventTag> eventSet) {
         super(FXML);
-        eventListView.setItems(eventList);
+        List<EventTag> eventList = new ArrayList<>(eventSet);
+        eventListView.getItems().addAll(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }
 

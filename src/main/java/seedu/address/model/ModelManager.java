@@ -8,10 +8,12 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private EventTag currentEventTag;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -174,6 +177,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Filtered Event List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code EventTag} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableSet<EventTag> getEventTagList() {
+        return addressBook.getEventTagList();
     }
 
 }
