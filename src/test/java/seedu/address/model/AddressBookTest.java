@@ -26,6 +26,7 @@ import javafx.collections.ObservableSet;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
@@ -60,7 +61,8 @@ public class AddressBookTest {
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> newTags = List.of();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        List<EventTag> newEventTags = List.of();
+        AddressBookStub newData = new AddressBookStub(newPersons, newTags, newEventTags);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -205,10 +207,12 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableSet<Tag> tags = FXCollections.observableSet();
+        private final ObservableSet<EventTag> eventTags = FXCollections.observableSet();
 
-        AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
+        AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<EventTag> eventTags) {
             this.persons.setAll(persons);
             this.tags.addAll(tags);
+            this.eventTags.addAll(eventTags);
         }
 
         @Override
@@ -219,6 +223,11 @@ public class AddressBookTest {
         @Override
         public ObservableSet<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public ObservableSet<EventTag> getEventTagList() {
+            return eventTags;
         }
     }
 
