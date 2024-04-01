@@ -125,6 +125,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        for (Tag tag:p.getTags()) {
+            if (!hasTag(tag)) {
+                addTag(tag);
+            }
+        }
     }
 
     /**

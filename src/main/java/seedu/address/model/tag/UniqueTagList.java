@@ -39,7 +39,7 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
-        return internalSet.stream().anyMatch(toCheck::isSameTag);
+        return internalSet.stream().anyMatch(tag -> tag.equals(toCheck));
     }
 
     /**
