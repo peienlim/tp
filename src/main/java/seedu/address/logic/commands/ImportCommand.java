@@ -24,10 +24,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contacts from csv have been added!";
     public static final String MESSAGE_FILE_NOT_FOUND = "File could not be found! Check import.csv exists at ./import";
     public static final String MESSAGE_FIELDS_FORMAT_ERROR = "An error occurred while parsing the csv! "
-            + "Check the fields!";
-    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while parsing the csv! "
             + "Check the values!";
-    public static final String MESSAGE_PARSE_FORMAT_ERROR = "An error occurred while adding persons to the csv! "
+    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while adding persons to the csv! "
             + "The values in the csv are converted to add command format\n"
             + "Make sure the values match the correct format for the add command!\n"
             + "The error with the add command occurred as follows:\n";
@@ -78,9 +76,9 @@ public class ImportCommand extends Command {
         } catch (FileNotFoundException e) {
             throw new CommandException(MESSAGE_FILE_NOT_FOUND);
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(MESSAGE_VALUES_FORMAT_ERROR);
+            throw new CommandException(MESSAGE_FIELDS_FORMAT_ERROR);
         } catch (ParseException e) {
-            throw new CommandException(MESSAGE_PARSE_FORMAT_ERROR + e.getMessage());
+            throw new CommandException(MESSAGE_VALUES_FORMAT_ERROR + e.getMessage());
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
