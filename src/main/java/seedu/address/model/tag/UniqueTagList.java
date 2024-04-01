@@ -17,9 +17,9 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * Represents a list of unique tags.
  * A UniqueTagList ensures that no duplicate tags are stored.
  */
-public class UniqueTagList implements Iterable<Tag> {
+public class UniqueTagList<T extends Tag> implements Iterable<T> {
 
-    private final ObservableSet<Tag> internalSet = FXCollections.observableSet();
+    private final ObservableSet<T> internalSet = FXCollections.observableSet();
 
     /**
      * Constructs an empty UniqueTagList.
@@ -30,14 +30,14 @@ public class UniqueTagList implements Iterable<Tag> {
      * Constructs a UniqueTagList with the given tags.
      * @param tags A list of tags.
      */
-    public UniqueTagList(Set<Tag> tags) {
+    public UniqueTagList(Set<T> tags) {
         internalSet.addAll(tags);
     }
 
     /**
      * Returns true if the list contains an equivalent tag as the given argument of type Tag.
      */
-    public boolean contains(Tag toCheck) {
+    public boolean contains(T toCheck) {
         requireNonNull(toCheck);
         return internalSet.stream().anyMatch(toCheck::isSameTag);
     }
@@ -54,7 +54,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Adds a tag to the list.
      * The tag must not already exist in the list.
      */
-    public void add(Tag toAdd) {
+    public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTagException();
@@ -67,7 +67,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * @param oldTag The tag to be replaced.
      * @param newTag The new tag to replace the old tag.
      */
-    public void replace(Tag oldTag, Tag newTag) {
+    public void replace(T oldTag, T newTag) {
         requireAllNonNull(oldTag, newTag);
 
         if (!internalSet.contains(oldTag)) {
@@ -86,7 +86,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Removes the equivalent tag from the list.
      * The argument of type Tag must exist in the list.
      */
-    public void remove(Tag toRemove) {
+    public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalSet.remove(toRemove)) {
             throw new TagNotFoundException();
@@ -107,7 +107,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Replaces all tags in this list with the tags from the replacement list.
      * @param replacement The replacement UniqueTagList.
      */
-    public void setTags(UniqueTagList replacement) {
+    public void setTags(UniqueTagList<T> replacement) {
         requireNonNull(replacement);
         internalSet.clear();
         internalSet.addAll(replacement.internalSet);
@@ -117,7 +117,7 @@ public class UniqueTagList implements Iterable<Tag> {
      * Replaces the tags in the list with the given set of tags.
      * @param tags The set of tags to replace the current tags.
      */
-    public void setTags(Set<Tag> tags) {
+    public void setTags(Set<T> tags) {
         requireAllNonNull(tags);
         internalSet.clear();
         internalSet.addAll(tags);
@@ -126,12 +126,12 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns the backing set as an unmodifiable {@code ObservableSet}.
      */
-    public ObservableSet<Tag> asUnmodifiableObservableSet() {
+    public ObservableSet<T> asUnmodifiableObservableSet() {
         return FXCollections.unmodifiableObservableSet(internalSet);
     }
 
     @Override
-    public Iterator<Tag> iterator() {
+    public Iterator<T> iterator() {
         return internalSet.iterator();
     }
 
@@ -142,11 +142,11 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         // handle nulls
-        if (!(other instanceof UniqueTagList)) {
+        if (!(other instanceof UniqueTagList<?>)) {
             return false;
         }
 
-        UniqueTagList otherUniqueTagSet = (UniqueTagList) other;
+        UniqueTagList<?> otherUniqueTagSet = (UniqueTagList<?>) other;
         return internalSet.equals(otherUniqueTagSet.internalSet);
     }
 
@@ -158,9 +158,9 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns true if {@code tags} contains only unique tags.
      */
-    private boolean tagsAreUnique(Set<Tag> tags) {
-        Set<Tag> uniqueTags = new HashSet<>();
-        for (Tag tag : tags) {
+    private boolean tagsAreUnique(Set<T> tags) {
+        Set<T> uniqueTags = new HashSet<>();
+        for (T tag : tags) {
             if (!uniqueTags.add(tag)) {
                 return false; // Duplicate tag found
             }

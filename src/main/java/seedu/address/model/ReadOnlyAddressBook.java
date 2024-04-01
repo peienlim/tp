@@ -3,6 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,5 +19,5 @@ public interface ReadOnlyAddressBook {
 
     ObservableSet<Tag> getTagList();
 
-    ObservableSet<Tag> getEventTagList();
+    ObservableSet<EventTag> getEventTagList();
 }

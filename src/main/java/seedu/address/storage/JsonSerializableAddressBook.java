@@ -78,7 +78,7 @@ class JsonSerializableAddressBook {
             addressBook.addTag(tag);
         }
         for (JsonAdaptedEventTag jsonAdaptedEventTag : eventTagList) {
-            Tag eventTag = jsonAdaptedEventTag.toModelType();
+            EventTag eventTag = jsonAdaptedEventTag.toModelType();
             if (addressBook.hasEventTag(eventTag)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT_TAG);
             }
