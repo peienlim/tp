@@ -7,14 +7,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import jdk.jfr.Event;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Person {
 
@@ -78,7 +77,7 @@ public class Person {
      * if modification is attempted.
      */
     public boolean containsTag(Tag tag) {
-        for (Tag t: tags) {
+        for (Tag t : tags) {
             if (t.isSameTag(tag)) {
                 return true;
             }
@@ -91,12 +90,21 @@ public class Person {
      * if modification is attempted.
      */
     public boolean containsEventTag(EventTag tag) {
-        for (EventTag t: eventTags) {
+        for (EventTag t : eventTags) {
             if (t.isSameTag(tag)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Removes a tag from the Person if it exists in the tags for this Person.
+     */
+    public void removeTag(Tag key) {
+        if (this.containsTag(key)) {
+            tags.remove(key);
+        }
     }
 
     /**

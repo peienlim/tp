@@ -28,7 +28,7 @@ public class SearchTagCommandParserTest {
     public void parse_validArgs_returnsSearchCommand() {
         // no leading and trailing whitespaces
         SearchTagCommand expectedFindCommand =
-                new SearchTagCommand(new Tag("friends"));
+                new SearchTagCommand(new Tag("friends"), false);
         assertParseSuccess(parser, "friends", expectedFindCommand);
     }
 }
