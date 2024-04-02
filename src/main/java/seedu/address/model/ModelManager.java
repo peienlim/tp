@@ -8,10 +8,12 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private EventTag currentEventTag;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        currentEventTag = null;
     }
 
     public ModelManager() {
@@ -134,6 +138,39 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public boolean hasEventTag(EventTag tag) {
+        requireNonNull(tag);
+        return addressBook.hasEventTag(tag);
+    }
+
+    @Override
+    public boolean hasEventTag(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.hasEventTag(tagName);
+    }
+
+    @Override
+    public void deleteEventTag(EventTag tag) {
+        addressBook.removeEventTag(tag);
+    }
+
+    @Override
+    public void deleteEventTag(String tagName) {
+        addressBook.removeEventTag(tagName);
+    }
+
+    @Override
+    public void addEventTag(EventTag tag) {
+        addressBook.addTag(tag);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public EventTag getEventTag(String tag) {
+        return addressBook.getEventTag(tag);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -154,8 +191,30 @@ public class ModelManager implements Model {
     @Override
     public void updateTagPersonList(Tag t) {
         requireNonNull(t);
-        filteredPersons.setPredicate(person -> person.containsTag(t));
+        if (currentEventTag != null) {
+            Predicate<Person> eventTagPredicate = person -> person.containsTag(currentEventTag);
+            Predicate<Person> normalTagPredicate = person -> person.containsTag(t);
+            filteredPersons.setPredicate(eventTagPredicate.and(normalTagPredicate));
+        } else {
+            filteredPersons.setPredicate(person -> person.containsTag(t));
+        }
     }
+
+    /**
+     * Sets the current event tag to filter by.
+     * @param eventTag The event tag to filter by.
+     */
+    public void setCurrentEventTag(EventTag eventTag) {
+        this.currentEventTag = eventTag;
+    }
+
+    /**
+     * Clears the current event tag.
+     */
+    public void clearCurrentEventTag() {
+        this.currentEventTag = null;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -171,6 +230,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Filtered Event List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code EventTag} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableSet<EventTag> getEventTagList() {
+        return addressBook.getEventTagList();
     }
 
 }

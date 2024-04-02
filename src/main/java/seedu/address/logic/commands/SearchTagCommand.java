@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,6 +17,9 @@ public class SearchTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "found all person with the tag";
 
+    public static final String MESSAGE_SUCCESS_EVENT_TAG = "displaying all persons in this event";
+    public static final String MESSAGE_NO_EVENT_TAG = "no such event found";
+
     public static final String MESSAGE_NO_TAG = "no person with this tag is found";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -26,24 +30,37 @@ public class SearchTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " school";
 
     private final Tag tag;
+    private final boolean isEventTag;
 
     /**
      * The constructor for SearchCommand
      * @param tag the tag that you want to search the list for
      */
-    public SearchTagCommand(Tag tag) {
+    public SearchTagCommand(Tag tag, boolean isEventTag) {
         requireAllNonNull(tag);
         this.tag = tag;
+        this.isEventTag = isEventTag;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasTag(tag)) {
-            throw new CommandException(MESSAGE_NO_TAG);
+        if (isEventTag) {
+            if (!model.hasEventTag(tag.tagName)) {
+                throw new CommandException(MESSAGE_NO_EVENT_TAG);
+            }
+            EventTag eventTag = model.getEventTag(tag.tagName);
+            model.setCurrentEventTag(eventTag);
+            model.updateTagPersonList(eventTag);
+            return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG);
+
+        } else {
+            if (!model.hasTag(tag)) {
+                throw new CommandException(MESSAGE_NO_TAG);
+            }
+            model.updateTagPersonList(tag);
+            return new CommandResult(MESSAGE_SUCCESS);
         }
-        model.updateTagPersonList(tag);
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
