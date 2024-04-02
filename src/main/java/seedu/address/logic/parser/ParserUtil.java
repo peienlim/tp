@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -24,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NAME = "Name is not a valid name in the contacts.";
     public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Index or Name is invalid.";
 
     /**
@@ -64,12 +67,14 @@ public class ParserUtil {
      */
     public static Object parseNameIndex(String input) throws ParseException {
         String trimmedInput = input.trim();
-        if (StringUtil.isNonZeroUnsignedInteger(trimmedInput)) {
+        if (trimmedInput.equals("0")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        } else if (StringUtil.isNonZeroUnsignedInteger(trimmedInput)) {
             return Index.fromOneBased(Integer.parseInt(trimmedInput));
         } else if (Name.isValidName(trimmedInput)) {
             return new Name(trimmedInput);
         } else {
-            throw new ParseException(MESSAGE_INVALID_INDEX_OR_NAME);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
     }
 

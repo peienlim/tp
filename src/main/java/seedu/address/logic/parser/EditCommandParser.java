@@ -17,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,10 +35,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        Index index;
+        Index index = null;
+        Name name = null;
+        String dummyName = " ";
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Object parsedObject = ParserUtil.parseNameIndex(argMultimap.getPreamble());
+            if (parsedObject instanceof Index) {
+                index = (Index) parsedObject;
+            } else if (parsedObject instanceof Name) {
+                name = (Name) parsedObject;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -63,8 +73,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editPersonDescriptor);
+        if (index != null) {
+            return new EditCommand(index, dummyName, editPersonDescriptor);
+        } else if (name != null) {
+            return new EditCommand(null, name.toString(), editPersonDescriptor);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
