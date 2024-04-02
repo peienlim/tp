@@ -178,8 +178,8 @@ public class EditCommandTest {
         String name = NAME_ALICE.toString();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(index, name, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", name=" + name + ", editPersonDescriptor="
-                + editPersonDescriptor + "}";
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", name="
+                + name + ", editPersonDescriptor=" + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 }

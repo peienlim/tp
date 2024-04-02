@@ -70,7 +70,7 @@ public class ParserUtil {
         if (trimmedInput.equals("0")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         } else if (StringUtil.isNonZeroUnsignedInteger(trimmedInput)) {
-                return Index.fromOneBased(Integer.parseInt(trimmedInput));
+            return Index.fromOneBased(Integer.parseInt(trimmedInput));
         } else if (Name.isValidName(trimmedInput)) {
             return new Name(trimmedInput);
         } else {
