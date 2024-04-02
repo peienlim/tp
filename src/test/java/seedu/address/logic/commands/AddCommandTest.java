@@ -164,10 +164,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public void deleteTag(String tagName) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void addTag(Tag tag) {

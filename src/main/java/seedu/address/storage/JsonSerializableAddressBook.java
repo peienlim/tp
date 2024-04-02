@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,9 +23,11 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT_TAG = "Events tag list contains duplicate event tag(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
+    private final List<JsonAdaptedEventTag> eventTagList = new ArrayList<>();
 
 
     /**
@@ -32,9 +35,11 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("tagList") List<JsonAdaptedTag> tags) {
+                                       @JsonProperty("tagList") List<JsonAdaptedTag> tags,
+                                       @JsonProperty("eventTagList") List<JsonAdaptedEventTag> eventTags) {
         this.persons.addAll(persons);
         this.tagList.addAll(tags);
+        this.eventTagList.addAll(eventTags);
     }
 
     /**
@@ -45,6 +50,9 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        eventTagList.addAll(source.getEventTagList().stream()
+                .map(JsonAdaptedEventTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +62,13 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        for (JsonAdaptedTag jsonAdaptedTag : tagList) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addTag(tag);
+        }
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -61,12 +76,12 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        for (JsonAdaptedTag jsonAdaptedTag : tagList) {
-            Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+        for (JsonAdaptedEventTag jsonAdaptedEventTag : eventTagList) {
+            EventTag eventTag = jsonAdaptedEventTag.toModelType();
+            if (addressBook.hasEventTag(eventTag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT_TAG);
             }
-            addressBook.addTag(tag);
+            addressBook.addEventTag(eventTag);
         }
         return addressBook;
     }
