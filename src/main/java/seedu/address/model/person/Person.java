@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Person {
 
@@ -72,6 +72,15 @@ public class Person {
             }
         }
         return false;
+    }
+
+    /**
+     * Removes a tag from the Person if it exists in the tags for this Person.
+     */
+    public void removeTag(Tag key) {
+        if (this.containsTag(key)) {
+            tags.remove(key);
+        }
     }
 
     /**

@@ -36,6 +36,12 @@ public class Tag {
         return otherTag != null
                 && otherTag.tagName.equals(tagName);
     }
+    /**
+     * Returns true if this tag has the given name.
+     */
+    public boolean hasName(String tagName) {
+        return this.tagName.equals(tagName);
+    }
 
     /**
      * Returns true if a given string is a valid tag name.

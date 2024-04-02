@@ -90,7 +90,6 @@ public interface Model {
      */
     void deleteTag(Tag tag);
 
-    void deleteTag(String tagName);
 
     /**
      * Adds the given tag.

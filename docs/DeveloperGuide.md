@@ -178,25 +178,25 @@ contacts in the EventBook.
 
 ### \[Proposed\] Importing and Exporting as .csv file
 
-As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook 
+As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook
 aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
 upload and sharing.
 
 The proposed mechanism is as follows:
-* Import: Facilitated by the `import` command that takes a path parameter. The file named `import.csv` at the given 
+* Import: Facilitated by the `import` command that takes a path parameter. The file named `import.csv` at the given
 path will be read in a set format. The contact details in the csv will then be imported into the address book following
 the format of the add command (Implication being that each field in the .csv should be compatible with the current
 implementation of the address book, and follow all conventions of the add command like formatting and non-duplicates)
-* Export: Facilitated by the `export` command that takes no parameters. The command will access the `UniquePersonList` 
+* Export: Facilitated by the `export` command that takes no parameters. The command will access the `UniquePersonList`
 found in the `1AddressBook` of the `Model` and parse through the relevant data, formatting it into the relevant fields.
 
-The .csv should be formatted with the first row having the non-case sensitive headers (separate cells marked with `|`): 
+The .csv should be formatted with the first row having the non-case sensitive headers (separate cells marked with `|`):
 * `Name | Number | Email | Address | Tag`
 
 An example usage scenario illustrates how the import feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list of contacts 
+1. The user launches the application. The application will be in its initial state showing the full list of contacts
 in the EventBook.
-2. The user executes `import ./import/import.csv` , with import.csv having 2 rows: 
+2. The user executes `import ./import/import.csv` , with import.csv having 2 rows:
    1. `Name | Number | Email | Address | Tag`
    2. `John | 94756383 | john@mail.com | NUS UTown | BestFriend`
 3. The contact `John` is imported into the address book, with parameters as above.
@@ -205,16 +205,16 @@ An example usage scenario illustrates how the export feature operates:
 1. The user launches the application. The application will be in its initial state showing the full list of contacts
    in the EventBook.
 2. The user executes `export` to export all contacts
-3. All contacts in the address book will be exported to ./export/export.csv according to the format 
+3. All contacts in the address book will be exported to ./export/export.csv according to the format
 `Name | Number | Email | Address | Tag`
 
-### \[Proposed\] Event switching feature 
+### \[Proposed\] Event switching feature
 
 As our target audience are student leaders, and they may be in-charge of multiple events throughout their course in NUS, we are proposing to implement a event-switching feature which allows them to switch between events and view contacts specific to each event.
 
 The proposed event switching feature introduces the concept of event-specific filtering to the existing EventBook. The key operations and components of the proposed implementation include:
 
-* Filtering Mechanism: filters contacts in the EventBook based on event tag, allowing for selective display of contacts based on event tag. 
+* Filtering Mechanism: filters contacts in the EventBook based on event tag, allowing for selective display of contacts based on event tag.
 * UI enhancements: allow users to see each event as a tab and after navigating to a particular tab, they will be able to view contacts of members under that event.
 
 An example usage scenario illustrates how the event switching feature operates:
@@ -234,7 +234,7 @@ Cons: Increases complexity by managing multiple address books, harder to impleme
 
 As our student leaders will be in-charge of multiple events, they will tend to encounter a large amount of contacts saved in the EventBook. As such, we are proposing to implement delete by name or index feature which allows them to delete the contacts by names. This saves their time of scrolling through the large amount of contacts before deleting them by index.
 
-This proposed delete name and index feature introduces the concept of deleting the contacts by either name or index. 
+This proposed delete name and index feature introduces the concept of deleting the contacts by either name or index.
 
 Given below is an example usage scenario and how delete mechanism behaves at each step.
 
@@ -494,8 +494,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. EventBook shows an error message.
 
     Use case ends.
-* 2a. The list is empty. 
-  
+* 2a. The list is empty.
+
     Use case ends.
 
 *{More to be added}*

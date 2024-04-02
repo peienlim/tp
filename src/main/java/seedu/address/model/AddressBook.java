@@ -125,6 +125,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        for (Tag tag:p.getTags()) {
+            if (!hasTag(tag)) {
+                addTag(tag);
+            }
+        }
     }
 
     /**
@@ -189,10 +194,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeTag(Tag key) {
-        tagList.remove(key);
-    }
-
-    public void removeTag(String key) {
+        for (Person p:persons) {
+            p.removeTag(key);
+        }
         tagList.remove(key);
     }
 

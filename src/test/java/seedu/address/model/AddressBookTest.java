@@ -161,10 +161,7 @@ public class AddressBookTest {
         assertThrows(TagNotFoundException.class, () -> addressBook.removeTag(FRIEND));
     }
 
-    @Test
-    public void removeTag_notExistingTagString_throwsTagNotFoundException() {
-        assertThrows(TagNotFoundException.class, () -> addressBook.removeTag("friends"));
-    }
+
 
     @Test
     public void removePerson_existingPerson_success() {
@@ -178,16 +175,11 @@ public class AddressBookTest {
         assertDoesNotThrow(() -> addressBook.removeTag(FRIEND));
     }
 
-    @Test
-    public void removeTag_existingTagString_success() {
-        addressBook.addTag(FRIEND);
-        assertDoesNotThrow(() -> addressBook.removeTag("friends"));
-    }
 
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", tags=" + addressBook.getTagList() + "}";
+                + ", tags=" + addressBook.getTagList() + ", event tags=" + addressBook.getEventTagList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
