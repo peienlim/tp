@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import jdk.jfr.Event;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +26,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<EventTag> eventTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<EventTag> eventTags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.eventTags.addAll(eventTags);
     }
 
     public Name getName() {
@@ -62,11 +66,32 @@ public class Person {
     }
 
     /**
+     * Returns an immutable event tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<EventTag> getEventTags() {
+        return Collections.unmodifiableSet(eventTags);
+    }
+
+    /**
      * Returns true if a person contains a tag, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public boolean containsTag(Tag tag) {
         for (Tag t: tags) {
+            if (t.isSameTag(tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a person contains a tag, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public boolean containsEventTag(EventTag tag) {
+        for (EventTag t: eventTags) {
             if (t.isSameTag(tag)) {
                 return true;
             }
@@ -107,7 +132,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && eventTags.equals(otherPerson.eventTags);
     }
 
     @Override
@@ -124,6 +150,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("eventTags", eventTags)
                 .toString();
     }
 
