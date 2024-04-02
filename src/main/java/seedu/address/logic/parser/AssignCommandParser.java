@@ -21,7 +21,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
     public AssignCommand parse(String userInput) throws ParseException {
         String[] args = userInput.trim().split("t/");
         String nameOrIndex = args[0];
-        String tags = " t/" + String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+        String tags = " t/" + String.join(" t/", Arrays.copyOfRange(args, 1, args.length));
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(tags, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
