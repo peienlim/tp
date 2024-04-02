@@ -84,6 +84,13 @@ public class Person {
     }
 
     /**
+     * Adds a tag to the Person.
+     */
+    public void addTags(Set<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

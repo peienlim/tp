@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -157,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTag(String tagName) {
+        public void assign(Person targetPerson, Set<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
 

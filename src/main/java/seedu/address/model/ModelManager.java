@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -121,11 +122,14 @@ public class ModelManager implements Model {
         requireNonNull(tag);
         return addressBook.hasTag(tag);
     }
+
     @Override
-    public boolean hasTag(String tagName) {
-        requireNonNull(tagName);
-        return addressBook.hasTag(tagName);
+    public void assign(Person targetPerson, Set<Tag> tags) {
+        requireAllNonNull(targetPerson, tags);
+        addressBook.assign(targetPerson, tags);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
     @Override
     public void deleteTag(Tag tag) {
         addressBook.removeTag(tag);

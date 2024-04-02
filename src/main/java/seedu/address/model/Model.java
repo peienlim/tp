@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,7 +85,12 @@ public interface Model {
      */
     boolean hasTag(Tag tag);
 
-    boolean hasTag(String tagName);
+    /**
+     * Assigns the given tags {@code tags} to {@code targetPerson}.
+     * {@code tags} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    void assign(Person targetPerson, Set<Tag> tags);
 
     /**
      * Deletes the given tag.
