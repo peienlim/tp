@@ -108,6 +108,15 @@ public class Person {
     }
 
     /**
+     * Removes a tag from the Person if it exists in the tags for this Person.
+     */
+    public void removeEventTag(EventTag key) {
+        if (this.containsTag(key)) {
+            eventTags.remove(key);
+        }
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
