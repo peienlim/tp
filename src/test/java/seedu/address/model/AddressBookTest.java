@@ -179,7 +179,7 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", tags=" + addressBook.getTagList() + "}";
+                + ", tags=" + addressBook.getTagList() + ", event tags=" + addressBook.getEventTagList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
