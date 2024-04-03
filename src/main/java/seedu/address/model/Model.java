@@ -124,5 +124,7 @@ public interface Model {
 
     ObservableSet<EventTag> getEventTagList();
 
+    void updateEventTagPersonList(EventTag t);
+
     void setCurrentEventTag(EventTag tagName);
 }

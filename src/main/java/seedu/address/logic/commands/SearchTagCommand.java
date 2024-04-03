@@ -50,8 +50,7 @@ public class SearchTagCommand extends Command {
                 throw new CommandException(MESSAGE_NO_EVENT_TAG);
             }
             EventTag eventTag = model.getEventTag(tag.tagName);
-            model.setCurrentEventTag(eventTag);
-            model.updateTagPersonList(eventTag);
+            model.updateEventTagPersonList(eventTag);
             return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG);
 
         } else {

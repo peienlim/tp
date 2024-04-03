@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +29,8 @@ public class SearchCommandParser implements Parser<SearchTagCommand> {
         }
 
         if (nameKeywords[0].startsWith("E-")) {
-            return new SearchTagCommand(new Tag(nameKeywords[0].substring(2)), true);
+            String eventTagName = nameKeywords[0].substring(2);
+            return new SearchTagCommand(new Tag(eventTagName), true);
         }
 
         return new SearchTagCommand(new Tag(nameKeywords[0]), false);
