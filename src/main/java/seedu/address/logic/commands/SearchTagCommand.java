@@ -51,7 +51,7 @@ public class SearchTagCommand extends Command {
             }
             EventTag eventTag = model.getEventTag(tag.tagName);
             model.updateEventTagPersonList(eventTag);
-            return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG);
+            return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG, eventTag);
 
         } else {
             if (!model.hasTag(tag)) {

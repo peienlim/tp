@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -17,6 +18,8 @@ import seedu.address.model.tag.EventTag;
  */
 public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "EventListPanel.fxml";
+    private static final EventTag DEFAULT_EVENT_TAG = new EventTag("All", "All contacts in EventBook",
+            LocalDateTime.now(), LocalDateTime.now());
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
@@ -27,10 +30,34 @@ public class EventListPanel extends UiPart<Region> {
      */
     public EventListPanel(ObservableSet<EventTag> eventSet) {
         super(FXML);
+        eventListView.setCellFactory(listView -> new EventListViewCell());
+        addDefaultEventCard();
+        addExistingTagEventCard(eventSet);
+
+        eventListView.getSelectionModel().select(DEFAULT_EVENT_TAG);
+    }
+
+    private void addDefaultEventCard() {
+        eventListView.getItems().add(DEFAULT_EVENT_TAG);
+    }
+
+    private void addExistingTagEventCard(ObservableSet<EventTag> eventSet) {
         List<EventTag> eventList = new ArrayList<>(eventSet);
         eventListView.getItems().addAll(eventList);
-        eventListView.setCellFactory(listView -> new EventListViewCell());
     }
+
+
+    //@@author {peienlim}-reused
+    //Reused from https://github.com/AY2324S1-CS2103T-F08-3/tp
+    //(src/main/java/seedu/address/ui/AnimalListPanel.java) Lines 45 to 51 with minor modifications
+    public void selectEvent(EventTag eventTag) {
+        eventListView.getSelectionModel().select(eventTag);
+    }
+
+    public void clearEventSelection() {
+        eventListView.getSelectionModel().select(DEFAULT_EVENT_TAG);
+    }
+    //@@author
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
@@ -44,7 +71,8 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(eventTag).getRoot());
+                EventCard eventCard = new EventCard(eventTag);
+                setGraphic(eventCard.getRoot());
             }
         }
     }

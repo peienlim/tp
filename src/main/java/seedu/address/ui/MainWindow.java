@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.EventTag;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -193,7 +195,19 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            //@@author {peienlim}-reused
+            //Reused from https://github.com/AY2324S1-CS2103T-F08-3/tp
+            //(src/main/java/seedu/address/ui/MainWindow.java) Lines 196 to 202 with minor modifications
+            Optional<EventTag> eventTag = commandResult.getEventTag();
+            if (eventTag.isPresent()) {
+                eventListPanel.selectEvent(eventTag.get());
+            } else {
+                eventListPanel.clearEventSelection();
+            }
+            //@@author {peienlim}
+
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
