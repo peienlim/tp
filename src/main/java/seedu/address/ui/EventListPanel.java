@@ -19,7 +19,7 @@ import seedu.address.model.tag.EventTag;
 public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "EventListPanel.fxml";
     private static final EventTag DEFAULT_EVENT_TAG = new EventTag("All", "All contacts in EventBook",
-            LocalDateTime.now(), LocalDateTime.now());
+            LocalDateTime.parse("2024-04-05T14:00:00"), LocalDateTime.parse("2024-04-05T14:00:00"));
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML

@@ -53,7 +53,7 @@ public class SearchTagCommand extends Command {
             model.updateEventTagPersonList(eventTag);
             return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG, eventTag);
 
-        } else {
+        } else { // normal tag
             if (!model.hasTag(tag)) {
                 throw new CommandException(MESSAGE_NO_TAG);
             }

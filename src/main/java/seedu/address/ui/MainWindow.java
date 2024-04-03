@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -26,6 +27,9 @@ import seedu.address.model.tag.EventTag;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+
+    private static final EventTag DEFAULT_EVENT_TAG = new EventTag("All", "All contacts in EventBook",
+            LocalDateTime.parse("2024-04-05T14:00:00"), LocalDateTime.parse("2024-04-05T14:00:00"));
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -199,10 +203,12 @@ public class MainWindow extends UiPart<Stage> {
             //Reused from https://github.com/AY2324S1-CS2103T-F08-3/tp
             //(src/main/java/seedu/address/ui/MainWindow.java) Lines 196 to 202 with minor modifications
             Optional<EventTag> eventTag = commandResult.getEventTag();
+
             if (eventTag.isPresent()) {
+                if (eventTag.get().equals(DEFAULT_EVENT_TAG)) { // list command, change back to all contacts tab
+                    eventListPanel.clearEventSelection();
+                }
                 eventListPanel.selectEvent(eventTag.get());
-            } else {
-                eventListPanel.clearEventSelection();
             }
             //@@author {peienlim}
 

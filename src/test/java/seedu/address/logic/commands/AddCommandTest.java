@@ -218,7 +218,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateEventTagPersonList(EventTag t) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCurrentEventTag(EventTag tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearCurrentEventTag() {
             throw new AssertionError("This method should not be called.");
         }
 
