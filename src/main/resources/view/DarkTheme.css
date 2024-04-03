@@ -340,6 +340,8 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-border-radius: 10;
+    -fx-padding: 2 0 2 0;
 }
 
 #tags .label {
@@ -354,6 +356,8 @@
 #eventTags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-border-radius: 10;
+    -fx-padding: 2 0 2 0;
 }
 
 #eventTags .label {

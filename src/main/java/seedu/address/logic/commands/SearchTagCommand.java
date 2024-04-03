@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.EventTag;
@@ -17,7 +19,7 @@ public class SearchTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "found all person with the tag";
 
-    public static final String MESSAGE_SUCCESS_EVENT_TAG = "displaying all persons in this event";
+    public static final String MESSAGE_SUCCESS_EVENT_TAG = "displaying all persons in the event: ";
     public static final String MESSAGE_NO_EVENT_TAG = "no such event found";
 
     public static final String MESSAGE_NO_TAG = "no person with this tag is found";
@@ -51,15 +53,23 @@ public class SearchTagCommand extends Command {
             }
             EventTag eventTag = model.getEventTag(tag.tagName);
             model.updateEventTagPersonList(eventTag);
-            return new CommandResult(MESSAGE_SUCCESS_EVENT_TAG, eventTag);
+            return new CommandResult(getEventTagDescription(eventTag), eventTag);
 
-        } else { // normal tag
+        } else {
             if (!model.hasTag(tag)) {
                 throw new CommandException(MESSAGE_NO_TAG);
             }
             model.updateTagPersonList(tag);
             return new CommandResult(MESSAGE_SUCCESS);
         }
+    }
+
+    private String getEventTagDescription(EventTag eventTag) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a");
+        return MESSAGE_SUCCESS_EVENT_TAG + eventTag.tagName + "\n"
+                + "description: " + eventTag.description + "\n"
+                + "starts on: " + eventTag.startDate.format(formatter) + "\n"
+                + "ends on: " + eventTag.endDate.format(formatter) + "\n";
     }
 
     @Override
