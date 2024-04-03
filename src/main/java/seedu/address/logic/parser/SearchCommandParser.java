@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
