@@ -34,10 +34,10 @@ public class DtagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasTag(tagName)) {
+        Tag dummyTag = new Tag(tagName);
+        if (!model.hasTag(dummyTag)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG);
         }
-        Tag dummyTag = new Tag(tagName);
         model.deleteTag(dummyTag);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagName));

@@ -138,6 +138,18 @@ Format: `dtag TAGNAME`
 Examples:
 * `dtag Friend` Deletes a tag named 'Friend'
 
+### Assigning a tag : `assign`
+
+Assigns a tag in the address book to a specified person.
+
+Format: `assign (NAME or INDEX) t/TAG…​`
+* The index must correspond to a person currently displayed.
+* If a name is used instead of an index, it must be the full name of the person.
+For example, `assign John Doe t/friends` instead of `assign John t/friends`.
+* The provided tag(s) have to exist in the EventBook.
+  Examples:
+* `assign 1 t/friends` Assigns the first person in the list a tag named 'Friends'
+
 ### Searching by tag : `search`
 
 Displays all the people that are tagged with TAGNAME.

@@ -96,11 +96,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a tag with name {@code tagName} exists in the address book.
+     * Assigns the given tags {@code tags} to {@code targetPerson}.
+     * {@code tags} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public boolean hasTag(String tagName) {
-        requireNonNull(tagName);
-        return tagList.contains(tagName);
+    public void assign(Person targetPerson, Set<Tag> tags) {
+        targetPerson.addTags(tags);
     }
 
     /**
