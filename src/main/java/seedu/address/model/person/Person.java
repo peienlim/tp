@@ -113,8 +113,9 @@ public class Person {
     public void addTags(Set<Tag> tags) {
         this.tags.addAll(tags);
     }
-    
-    /** Removes a tag from the Person if it exists in the tags for this Person.
+
+    /**
+     * Removes a tag from the Person if it exists in the tags for this Person.
      */
     public void removeEventTag(EventTag key) {
         if (this.containsTag(key)) {
