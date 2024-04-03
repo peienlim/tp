@@ -88,7 +88,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ImportCommand.COMMAND_WORD:
-            return new ImportCommand();
+            return new ImportCommandParser().parse(arguments);
 
         case SearchTagCommand.COMMAND_WORD:
             return new SearchCommandParser().parse(arguments);

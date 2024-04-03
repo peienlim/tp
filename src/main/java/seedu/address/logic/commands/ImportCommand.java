@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,20 +24,20 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contacts from csv have been added!";
     public static final String MESSAGE_FILE_NOT_FOUND = "File could not be found! Check import.csv exists at ./import";
     public static final String MESSAGE_FIELDS_FORMAT_ERROR = "An error occurred while parsing the csv! "
-            + "Check the fields!";
-    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while parsing the csv! "
             + "Check the values!";
-    public static final String MESSAGE_PARSE_FORMAT_ERROR = "An error occurred while adding persons to the csv! "
+    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while adding persons to the csv! "
             + "The values in the csv are converted to add command format\n"
             + "Make sure the values match the correct format for the add command!\n"
             + "The error with the add command occurred as follows:\n";
-    public static final String FILE_PATH = "./import/import.csv"; // Path to the .csv file to import
+    public static final String DEFAULT_PATH = "./import/import.csv";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the Address book with contacts from the "
-            + "csv file found at path: " + FILE_PATH
-            + "Parameters: None "
-            + "Example: " + COMMAND_WORD;
+            + "csv file found at given path."
+            + "If path not specified, default path is: " + DEFAULT_PATH + "\n"
+            + "Parameters: path to file (prefixed with /f)\n"
+            + "Example: " + COMMAND_WORD + " f/" + DEFAULT_PATH + "\n"
+            + "Example: " + COMMAND_WORD + " f/";
 
     private static final List<String> FIELDS = List.of(
             "NAME", "NUMBER", "EMAIL", "ADDRESS", "TAG"
@@ -49,6 +50,16 @@ public class ImportCommand extends Command {
             "ADDRESS", "a/",
             "TAG", "t/"
     ); // To format the data in the csv to command format
+    private final String path;
+
+    /**
+     * @param path of the import.csv file containing contacts to import
+     */
+    public ImportCommand(String path) {
+        requireAllNonNull(path);
+        System.out.println(path);
+        this.path = (path.isEmpty()) ? DEFAULT_PATH : path;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -65,9 +76,9 @@ public class ImportCommand extends Command {
         } catch (FileNotFoundException e) {
             throw new CommandException(MESSAGE_FILE_NOT_FOUND);
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(MESSAGE_VALUES_FORMAT_ERROR);
+            throw new CommandException(MESSAGE_FIELDS_FORMAT_ERROR);
         } catch (ParseException e) {
-            throw new CommandException(MESSAGE_PARSE_FORMAT_ERROR + e.getMessage());
+            throw new CommandException(MESSAGE_VALUES_FORMAT_ERROR + e.getMessage());
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
@@ -80,7 +91,7 @@ public class ImportCommand extends Command {
      */
     private void parse(List<String> list) throws FileNotFoundException, IndexOutOfBoundsException {
         StringBuilder currRow = new StringBuilder(); // To hold the current row data
-        Scanner sc = new Scanner(new File(FILE_PATH));
+        Scanner sc = new Scanner(new File(path));
         sc.useDelimiter(",|\r?\n");
         int count = 0; // holds an idx to keep track of the current field
 
