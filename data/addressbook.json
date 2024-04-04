@@ -4,25 +4,15 @@
     "phone" : "99999999",
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
-    "tags" : [ "operations" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "tags" : [ "operations", "fire" ],
+    "eventTags" : [ ]
   }, {
     "name" : "Bernice Yu",
     "phone" : "99272758",
     "email" : "berniceyu@example.com",
     "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
     "tags" : [ "marketing" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Charlotte Oliveiro",
     "phone" : "93210283",
@@ -77,96 +67,56 @@
     "email" : "hi@mail.com",
     "address" : "NUS",
     "tags" : [ "secretary" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "John",
     "phone" : "91232345",
     "email" : "john@john.com",
     "address" : "NTU",
     "tags" : [ "operations" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Ben",
     "phone" : "83478596",
     "email" : "ben@mail.com",
     "address" : "NA",
     "tags" : [ "operations" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Ann",
     "phone" : "82882919",
     "email" : "Ann@mail.com",
     "address" : "NA",
     "tags" : [ "head", "publicity" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Amy",
     "phone" : "82882919",
     "email" : "Amy@mail.com",
     "address" : "AMK Blk 91",
     "tags" : [ "head", "operations" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Betty",
     "phone" : "93882919",
     "email" : "Betty@mail.com",
     "address" : "AMK Blk 10",
     "tags" : [ "logistics" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Zack",
     "phone" : "82820119",
     "email" : "zack@mail.com",
     "address" : "AMK Blk 10",
     "tags" : [ "logistics" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Xan",
     "phone" : "82882919",
     "email" : "xan@mail.com",
     "address" : "Bishan Blk 10",
     "tags" : [ "logistics" ],
-    "eventTags" : [ {
-      "tagName" : "Flag",
-      "description" : "Flag event",
-      "startDate" : "2024-04-10T18:00:00",
-      "endDate" : "2024-04-10T22:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "John Doe",
     "phone" : "98765432",
@@ -175,13 +125,8 @@
     "tags" : [ ],
     "eventTags" : [ ]
   } ],
-  "tagList" : [ "head", "marketing", "orientation", "secretary", "operations", "t34", "1111", "logistics", "neighbours", "VPD", "publicity", "2eee" ],
+  "tagList" : [ "orientation", "logistics", "neighbours", "VPD", "2eee", "head", "marketing", "secretary", "operations", "t34", "1111", "fire", "publicity" ],
   "eventTagList" : [ {
-    "tagName" : "Flag",
-    "description" : "Flag event",
-    "startDate" : "2024-04-10T18:00:00",
-    "endDate" : "2024-04-10T22:00:00"
-  }, {
     "tagName" : "Rag",
     "description" : "Rag event",
     "startDate" : "2024-04-05T14:00:00",

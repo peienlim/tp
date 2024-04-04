@@ -84,13 +84,14 @@ public class CtagCommand extends Command {
         }
 
         CtagCommand e = (CtagCommand) other;
-        return toAdd.equals(e.toAdd);
+        return toAdd.equals(e.toAdd) && toAddEvent.equals(e.toAddEvent);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
+                .add("toAddEventTag", toAddEvent)
                 .toString();
     }
 }

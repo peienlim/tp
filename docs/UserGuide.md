@@ -35,8 +35,10 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `assign John t/tag1` : Assigns the contact named John in the current list with the tag named `tag1`.
    * `clear` : Deletes all contacts.
    * `ctag Friend` : Creates a tag name `Friend`.
+   * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02` : Creates an event tag.
    * `dtag Friend` : Deletes a tag named `Friend`.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `devent fire` : Deletes an event tag called fire
    * `delete John Doe` : Deletes the contact named John Doe shown in the current list.
    * `exit` : Exits the app.
    * `import` : Imports contacts from `.\import\import.csv`.
@@ -150,6 +152,17 @@ Format: `dtag TAGNAME`
 
 Examples:
 * `dtag Friend` Deletes a tag named `Friend`.
+
+### Delete an EventTag : `devent`
+
+Deletes an event tag in the address book.
+
+Format: `devent EVENTTAGNAME`
+
+* The provided name has to be a unique event tag name that already exist in the address book.
+
+Examples:
+* `devent bonfire` Deletes an EventTag named `bonfire`.
 
 ### Assigning a tag : `assign`
 
@@ -313,7 +326,9 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Create Tag** | `ctag TAGNAME` <br> e.g., `ctag Friend`
+**Create EventTag** | `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 **Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
+**Delete Event** | `devent EVENTTAGNAME` <br> e.g., `devent fire`
 **Import** | `import`
 **Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
 **Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
