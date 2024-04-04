@@ -23,6 +23,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchTagCommand;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -100,6 +101,9 @@ public class AddressBookParser {
 
         case AssignCommand.COMMAND_WORD:
             return new AssignCommandParser().parse(arguments);
+
+        case SwitchCommand.COMMAND_WORD:
+            return new SwitchCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
