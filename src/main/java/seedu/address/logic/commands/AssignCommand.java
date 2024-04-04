@@ -26,7 +26,8 @@ public class AssignCommand extends Command {
             + " the given tags.\n"
             + "Parameters: INDEX (must be a positive integer) or NAME (must be the exact full name), TAGS (t/TAGNAME)\n"
             + "Examples: " + COMMAND_WORD + " 1" + "t/friends"
-            + " or" + COMMAND_WORD + " John Doe" + "t/friends";
+            + " or" + COMMAND_WORD + " John Doe" + "t/friends"
+            + " or" + COMMAND_WORD + " 1" + "t/E-eventName";
 
     public static final String MESSAGE_ASSIGN_PERSON_MISSING = "Please provide either a name or index to delete.";
     public static final String MESSAGE_ASSIGN_TAG_MISSING = "Please ensure that all tag(s) provided exist.";
@@ -34,6 +35,7 @@ public class AssignCommand extends Command {
     private final Index targetIndex;
     private final String targetName;
     private final Set<Tag> targetTagList;
+    private final Set<Tag> targetEventTagList;
 
     /**
      * Constructs an AssignCommand with the specified target index, target name and target tag list.
@@ -42,10 +44,11 @@ public class AssignCommand extends Command {
      * @param targetName The name of the person to be deleted.
      * @param targetTagList The set of tags to be added to the person.
      */
-    public AssignCommand(Index targetIndex, String targetName, Set<Tag> targetTagList) {
+    public AssignCommand(Index targetIndex, String targetName, Set<Tag> targetTagList, Set<Tag> targetEventTagList) {
         this.targetIndex = targetIndex;
         this.targetName = targetName;
         this.targetTagList = targetTagList;
+        this.targetEventTagList = targetEventTagList;
     }
 
     @Override
@@ -60,12 +63,18 @@ public class AssignCommand extends Command {
             }
         }
 
+        for (Tag t : targetEventTagList) {
+            if (!model.hasEventTag(t.tagName)) {
+                throw new CommandException(MESSAGE_ASSIGN_TAG_MISSING);
+            }
+        }
+
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToAssign = lastShownList.get(targetIndex.getZeroBased());
-            model.assign(personToAssign, targetTagList);
+            model.assign(personToAssign, targetTagList, targetEventTagList);
             return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS, Messages.format(personToAssign)));
 
         } else if (targetName != dummyName) {
@@ -73,7 +82,7 @@ public class AssignCommand extends Command {
                     .toString().equals(targetName)).findFirst();
             if (personToFind.isPresent()) {
                 Person personToAssign = personToFind.get();
-                model.assign(personToAssign, targetTagList);
+                model.assign(personToAssign, targetTagList, targetEventTagList);
                 return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS, Messages.format(personToAssign)));
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
@@ -97,6 +106,7 @@ public class AssignCommand extends Command {
         AssignCommand otherAssignCommand = (AssignCommand) other;
         return (targetIndex.equals(otherAssignCommand.targetIndex)
                 && targetTagList.equals(otherAssignCommand.targetTagList)
+                && targetEventTagList.equals(otherAssignCommand.targetEventTagList)
                 && targetName.equals((otherAssignCommand.targetName)));
     }
 
@@ -106,6 +116,7 @@ public class AssignCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .add("targetName", targetName)
                 .add("targetTagList", targetTagList)
+                .add("targetTagList", targetEventTagList)
                 .toString();
     }
 }

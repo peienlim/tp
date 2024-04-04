@@ -124,6 +124,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String tag} into a {@code EventTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param tag The string representing the event tag.
+     * @return The parsed EventTag object.
+     * @throws ParseException If the tag string is invalid.
+     */
+    public static Tag parseEventTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *

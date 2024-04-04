@@ -94,7 +94,7 @@ public interface Model {
      * {@code tags} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void assign(Person targetPerson, Set<Tag> tags);
+    void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags);
 
     /**
      * Deletes the given tag.

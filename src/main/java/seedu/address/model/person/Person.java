@@ -108,6 +108,15 @@ public class Person {
     }
 
     /**
+     * Adds an event tag to the Person.
+     *
+     * @param eventTags The event tags to be added.
+     */
+    public void addEventTags(Set<EventTag> eventTags) {
+        this.eventTags.addAll(eventTags);
+    }
+
+    /**
      * Adds a tag to the Person.
      */
     public void addTags(Set<Tag> tags) {
