@@ -3,11 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.format.DateTimeFormatter;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,9 +15,6 @@ public class SearchTagCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_SUCCESS = "found all person with the tag";
-
-    public static final String MESSAGE_SUCCESS_EVENT_TAG = "displaying all persons in the event: ";
-    public static final String MESSAGE_NO_EVENT_TAG = "no such event found";
 
     public static final String MESSAGE_NO_TAG = "no person with this tag is found";
 
