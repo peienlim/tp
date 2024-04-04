@@ -42,9 +42,9 @@ public class DeventCommand extends Command {
         //get event tag to be used for checking
         EventTag et = model.getEventTag(tagName);
         model.clearCurrentEventTag();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateTagPersonList(et);
         model.deleteEventTag(et);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS_DELETE, et));
     }
 

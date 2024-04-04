@@ -4,7 +4,7 @@
     "phone" : "99999999",
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
-    "tags" : [ "operations", "fire" ],
+    "tags" : [ "operations" ],
     "eventTags" : [ ]
   }, {
     "name" : "Bernice Yu",
@@ -19,48 +19,28 @@
     "email" : "charlotte@example.com",
     "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
     "tags" : [ "logistics" ],
-    "eventTags" : [ {
-      "tagName" : "Rag",
-      "description" : "Rag event",
-      "startDate" : "2024-04-05T14:00:00",
-      "endDate" : "2024-04-05T16:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "David Li",
     "phone" : "91031282",
     "email" : "lidavid@example.com",
     "address" : "Blk 436 Serangoon Gardens Street 26, #16-43",
     "tags" : [ "publicity" ],
-    "eventTags" : [ {
-      "tagName" : "Rag",
-      "description" : "Rag event",
-      "startDate" : "2024-04-05T14:00:00",
-      "endDate" : "2024-04-05T16:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
     "email" : "irfan@example.com",
     "address" : "Blk 47 Tampines Street 20, #17-35",
     "tags" : [ "publicity" ],
-    "eventTags" : [ {
-      "tagName" : "Rag",
-      "description" : "Rag event",
-      "startDate" : "2024-04-05T14:00:00",
-      "endDate" : "2024-04-05T16:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Roy Balakrishnan",
     "phone" : "92624417",
     "email" : "royb@example.com",
     "address" : "Blk 45 Aljunied Street 85, #11-31",
     "tags" : [ "VPD" ],
-    "eventTags" : [ {
-      "tagName" : "Rag",
-      "description" : "Rag event",
-      "startDate" : "2024-04-05T14:00:00",
-      "endDate" : "2024-04-05T16:00:00"
-    } ]
+    "eventTags" : [ ]
   }, {
     "name" : "Tom",
     "phone" : "91234812",
@@ -125,11 +105,6 @@
     "tags" : [ ],
     "eventTags" : [ ]
   } ],
-  "tagList" : [ "orientation", "logistics", "neighbours", "VPD", "2eee", "head", "marketing", "secretary", "operations", "t34", "1111", "fire", "publicity" ],
-  "eventTagList" : [ {
-    "tagName" : "Rag",
-    "description" : "Rag event",
-    "startDate" : "2024-04-05T14:00:00",
-    "endDate" : "2024-04-05T16:00:00"
-  } ]
+  "tagList" : [ "head", "marketing", "orientation", "secretary", "operations", "t34", "1111", "logistics", "neighbours", "VPD", "2eee", "publicity" ],
+  "eventTagList" : [ ]
 }
