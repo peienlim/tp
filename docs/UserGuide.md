@@ -41,7 +41,7 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `exit` : Exits the app.
    * `import` : Imports contacts from `.\import\import.csv`.
    * `search Friend` : Displays all contacts with the tag 'Friend'.
-   * `switch Flag` : Switches to 'Flag' event tab to show contacts. 
+   * `switch Flag` : Switches to 'Flag' event tab to show contacts.
 
 1. Refer to the [Features](#features) below for details of each command.
 

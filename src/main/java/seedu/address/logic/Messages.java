@@ -47,6 +47,17 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        builder.append("; EventTags: ");
+        if (!person.getEventTags().isEmpty()) {
+            builder.append("[");
+            person.getEventTags().forEach(eventTag -> builder.append(eventTag.tagName).append(", "));
+            builder.delete(builder.length() - 2, builder.length());
+            builder.append("]");
+        } else {
+            builder.append("[]");
+        }
+
         return builder.toString();
     }
 
