@@ -128,7 +128,7 @@ Format: `ctag TAGNAME`
 Examples:
 * `ctag Friend` Creates a tag named 'Friend'
 
-Format: `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss Example: ctag `
+Format: `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
