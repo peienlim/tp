@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.CtagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -28,6 +29,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_NAME = "Name is not a valid name in the contacts.";
     public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Index or Name is invalid.";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Format of time is must be of YYYY-MM-DD";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -157,11 +159,15 @@ public class ParserUtil {
      *
      * @throws DateTimeParseException if the given {@code tag} is invalid.
      */
-    public static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedTime = dateTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime time = LocalDateTime.parse(trimmedTime, formatter);
-        return time;
+        try {
+            LocalDateTime time = LocalDateTime.parse(trimmedTime, formatter);
+            return time;
+        } catch (Exception e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
     }
 }

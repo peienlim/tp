@@ -1,7 +1,7 @@
 {
   "persons" : [ {
     "name" : "Alex Yeoh",
-    "phone" : "87438807",
+    "phone" : "99999999",
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
     "tags" : [ "operations" ],
@@ -175,7 +175,7 @@
     "tags" : [ ],
     "eventTags" : [ ]
   } ],
-  "tagList" : [ "head", "marketing", "secretary", "operations", "logistics", "neighbours", "VPD", "publicity" ],
+  "tagList" : [ "head", "marketing", "secretary", "operations", "t34", "1111", "logistics", "neighbours", "VPD", "publicity" ],
   "eventTagList" : [ {
     "tagName" : "Flag",
     "description" : "flag event",
@@ -187,5 +187,4 @@
     "startDate" : "2024-05-05T00:00:00",
     "endDate" : "2024-08-16T00:00:00"
   } ]
-
 }
