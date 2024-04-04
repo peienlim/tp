@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# EventBook User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,7 +17,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `EventBook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -31,15 +31,14 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `delete John` : Deletes the person named John from the EventBook.
-
+   * `assign 1 t/E-event1` : Assigns the 1st contact shown in the current list with the event tag named `event1`.
+   * `assign John t/tag1` : Assigns the contact named John in the current list with the tag named `tag1`.
    * `clear` : Deletes all contacts.
-
+   * `ctag Friend` : Creates a tag name `Friend`.
+   * `dtag Friend` : Deletes a tag named `Friend`.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the contact named John Doe shown in the current list.
    * `exit` : Exits the app.
-   * `ctag Friend` : Creates a tag name 'Friend'.
-   * `dtag Friend` : Deletes a tag named 'Friend'.
    * `import` : Imports contacts from `.\import\import.csv`.
    * `search Friend` : Displays all contacts with the tag 'Friend'.
    * `switch Flag` : Switches to 'Flag' event tab to show contacts. 
@@ -106,9 +105,12 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit (NAME or INDEX) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX` or `NAME`. 
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* For example, `edit John Doe t/friends` instead of `edit John t/friends`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -117,6 +119,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Ben n/Betsy Crower t/` Edits the person named Ben to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Creating a tag : `ctag`
@@ -124,32 +127,38 @@ Examples:
 Creates a tag in the address book.
 
 Format: `ctag TAGNAME`
+
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
-* `ctag Friend` Creates a tag named 'Friend'
+* `ctag Friend` Creates a tag named `Friend`.
 
 ### Delete a tag : `dtag`
 
 Deletes a tag in the address book.
 
 Format: `dtag TAGNAME`
+
 * The provided name has to be a unique tag name that does not already exist in the address book.
 * The provided tag has to exist in the EventBook.
+
 Examples:
-* `dtag Friend` Deletes a tag named 'Friend'
+* `dtag Friend` Deletes a tag named `Friend`.
 
 ### Assigning a tag : `assign`
 
 Assigns a tag in the address book to a specified person.
 
-Format: `assign (NAME or INDEX) t/TAG…​`
-* The index must correspond to a person currently displayed.
-* If a name is used instead of an index, it must be the full name of the person.
-For example, `assign John Doe t/friends` instead of `assign John t/friends`.
-* The provided tag(s) have to exist in the EventBook.
-  Examples:
-* `assign 1 t/friends` Assigns the first person in the list a tag named 'Friends'
+Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​`
+* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENTTAG`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* For example, `assign John Doe t/friends` instead of `assign John t/friends`.
+* The provided tag(s) and event tag(s) have to exist in the EventBook.
+
+Examples:
+* `assign 1 t/friends` Assigns the first person in the list to a tag named `Friends`.
+* `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
 
 ### Searching by tag : `search`
 
@@ -160,7 +169,8 @@ Format: `search TAGNAME`
 * The search is case-sensitive.
 
 Examples:
-* `search Friend` Displays all people tagged as Friend.
+* `search Friend` Displays all people tagged as `Friend`.
+
 
 ### Switching between events : `switch`
 
@@ -173,7 +183,6 @@ Switches to tab with EVENTTAGNAME.
 
 Examples:
 * `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
-
 
 ### Locating persons by name: `find`
 
@@ -197,17 +206,16 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX or NAME`
+Format: `delete (NAME or INDEX)`
 
 * Deletes the person at the specified `INDEX` or `NAME`.
-* The name provided is case-sensitive.
-* The name provided must be the full name of the person.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
+* For example, `delete John Doe` instead of `delete John`.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete John Doe` deletes the 2nd person in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -271,9 +279,10 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Assign** | `assign (NAME or INDEX) [t/TAG]…​` or `assign (NAME or INDEX) [t/E-TAG]…​` <br> e.g.,`assign 2 t/tag1` or `assign John Doe t/E-event1`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete (NAME or INDEX)` <br> e.g., `delete 3` or `delete John Doe`
+**Edit**   | `edit (NAME or INDEX) [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com` or`edit John Doe n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
