@@ -217,14 +217,34 @@ Format: `clear`
 
 ### Importing contacts from .csv : `import`
 
-Imports all contacts from ./import/import.csv
-Format: `import`
-* Requires a file named import.csv to be present at `./import`
+Imports all contacts from given file path (default ./import/import.csv)
+
+Format: `import f/PATH`
+
+* Requires a valid file to be given in the PATH variable
+* If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
-  NAME | NUMBER | EMAIL | ADDRESS | TAG
-  with no spacing. The titles are non-caps sensitive.
-* The format of each subsequent line should follow the appropriate add command format.
+  `NAME | NUMBER | EMAIL | ADDRESS | TAG`
+  Here the `|` character specifies a new cell.
+* There should be no trailing empty characters (' ') in any cell. 
+* The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
+* The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
+* The `TAG` portion accepts multiple tags delimited by the `|` character (e.g. Friend|Colleague)
+
+Examples:
+* `import f/./import/import.csv` imports the contacts from the specified file
+
+### Exporting contacts from address book : `export`
+
+Exports all contacts to ./export/export.csv
+
+Format: `export`
+
+* If a file export.csv is already present at ./export, it will be overwritten with the
+  current address book data
+* The export file format is the same as the output format given in `import`
+
 
 ### Exiting the program : `exit`
 
