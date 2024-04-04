@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -197,6 +196,6 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_stringWithInvalidTime_throwsException() {
-        assertThrows(DateTimeParseException.class, () -> ParserUtil.parseDateTime("2020-2-3 15:03:03"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2020-2-3 15:03:03"));
     }
 }

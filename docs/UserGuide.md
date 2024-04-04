@@ -124,14 +124,20 @@ Examples:
 
 ### Creating a tag : `ctag`
 
-Creates a tag in the address book.
+Creates a tag in the address book or an event tag.
 
-Format: `ctag TAGNAME`
-
+Format 1: `ctag TAGNAME`
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
 * `ctag Friend` Creates a tag named `Friend`.
+
+Format 2: `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+* The provided name has to be a unique tag name that does not already exist in the address book.
+
+Examples:
+* `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
+* Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
 
 ### Delete a tag : `dtag`
 
