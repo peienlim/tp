@@ -28,7 +28,8 @@ public class SearchCommandParser implements Parser<SearchTagCommand> {
         }
 
         if (nameKeywords[0].startsWith("E-")) {
-            return new SearchTagCommand(new Tag(nameKeywords[0].substring(2)), true);
+            String eventTagName = nameKeywords[0].substring(2);
+            return new SearchTagCommand(new Tag(eventTagName), true);
         }
 
         return new SearchTagCommand(new Tag(nameKeywords[0]), false);

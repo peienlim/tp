@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.EventTag;
 
 /**
  * Represents the result of a command execution.
@@ -19,13 +21,23 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final Optional<EventTag> eventTag;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, EventTag eventTag) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.eventTag = Optional.ofNullable(eventTag);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields, with eventTag set to null.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, null);
     }
 
     /**
@@ -33,7 +45,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code eventTag},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, EventTag eventTag) {
+        this(feedbackToUser, false, false, eventTag);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +66,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public Optional<EventTag> getEventTag() {
+        return eventTag;
     }
 
     @Override

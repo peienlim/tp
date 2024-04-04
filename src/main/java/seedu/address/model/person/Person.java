@@ -127,7 +127,7 @@ public class Person {
      * Removes a tag from the Person if it exists in the tags for this Person.
      */
     public void removeEventTag(EventTag key) {
-        if (this.containsTag(key)) {
+        if (this.containsEventTag(key)) {
             eventTags.remove(key);
         }
     }

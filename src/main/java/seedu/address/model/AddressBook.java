@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+
 import java.util.HashSet;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -21,6 +23,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+
+    public static final EventTag DEFAULT_EVENT_TAG = new EventTag("All", "All contacts in EventBook",
+            LocalDateTime.parse("2024-04-05T14:00:00"), LocalDateTime.parse("2024-04-05T14:00:00"));
 
     private final UniquePersonList persons;
     private final UniqueTagList<Tag> tagList;
