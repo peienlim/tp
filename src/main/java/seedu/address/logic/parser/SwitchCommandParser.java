@@ -12,8 +12,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SwitchCommandParser implements Parser<SwitchCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the SearchCommand
-     * and returns a SearchCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SwitchCommand
+     * and returns a SwitchCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SwitchCommand parse(String args) throws ParseException {
