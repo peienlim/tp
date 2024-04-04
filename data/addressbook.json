@@ -76,7 +76,7 @@
     "phone" : "91234812",
     "email" : "hi@mail.com",
     "address" : "NUS",
-    "tags" : [ "secretary" ],
+    "tags" : [ "notcool", "fine", "interesting" ],
     "eventTags" : [ {
       "tagName" : "Flag",
       "description" : "Flag Event 2024",
@@ -88,7 +88,7 @@
     "phone" : "91232345",
     "email" : "john@john.com",
     "address" : "NTU",
-    "tags" : [ "operations" ],
+    "tags" : [ "notcool" ],
     "eventTags" : [ {
       "tagName" : "Flag",
       "description" : "Flag Event 2024",
@@ -100,7 +100,7 @@
     "phone" : "83478596",
     "email" : "ben@mail.com",
     "address" : "NA",
-    "tags" : [ "operations" ],
+    "tags" : [ "s" ],
     "eventTags" : [ {
       "tagName" : "Flag",
       "description" : "Flag Event 2024",
@@ -185,7 +185,7 @@
       "endDate" : "2024-04-10T22:00:00"
     } ]
   } ],
-  "tagList" : [ "head", "marketing", "orientation", "secretary", "operations", "t34", "1111", "logistics", "neighbours", "VPD", "publicity", "2eee" ],
+  "tagList" : [ "s", "notcool", "fine", "interesting" ],
   "eventTagList" : [ {
     "tagName" : "Rag",
     "description" : "Rag Event 2024",

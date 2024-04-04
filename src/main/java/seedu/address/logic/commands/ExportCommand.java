@@ -7,11 +7,16 @@ import static seedu.address.logic.commands.ImportExportSyntax.NUMBER_OF_FIELDS;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.EventTag;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Exports contacts from address book
@@ -22,7 +27,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contacts from address book have been exported!";
     public static final String MESSAGE_FAILURE = "Something went wrong! Make sure export.csv is not open!";
     public static final String EXPORT_PATH = "./export/export.csv";
-
+    private Set<EventTag> exported = new HashSet<>();
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -61,11 +66,33 @@ public class ExportCommand extends Command {
                 fw.write(",");
                 fw.write(person.getAddress().toString());
                 fw.write(",");
-                fw.write(""); //placeholder for tag
+
+                Set<EventTag> eTags = person.getEventTags();
+                StringBuilder eTagsString = new StringBuilder();
+                for (EventTag eTag : eTags) {
+                    if (exported.contains(eTag)) {
+                        eTagsString.append(eTag.tagName).append("|");
+                    } else {
+                        exported.add(eTag);
+                        eTagsString.append(eTag.getCodeFormat()).append("|");
+                    }
+                }
+                eTagsString.deleteCharAt(eTagsString.length() - 1);
+                fw.write(eTagsString.toString());
+                fw.write(",");
+
+                Set<Tag> tags = person.getTags();
+                StringBuilder tagsString = new StringBuilder();
+                for (Tag tag : tags) {
+                    tagsString.append(tag.tagName).append("|");
+                }
+                tagsString.deleteCharAt(tagsString.length() - 1);
+                fw.write(tagsString.toString());
+                fw.write(",");
                 fw.write("\n");
             }
-
             fw.close();
+
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }

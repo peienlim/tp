@@ -109,9 +109,9 @@ Edits an existing person in the address book.
 
 Format: `edit (NAME or INDEX) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or `NAME`. 
+* Edits the person at the specified `INDEX` or `NAME`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
 * For example, `edit John Doe t/friends` instead of `edit John t/friends`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -171,7 +171,7 @@ Assigns a tag in the address book to a specified person.
 Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​`
 * Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENTTAG`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
 * For example, `assign John Doe t/friends` instead of `assign John t/friends`.
 * The provided tag(s) and event tag(s) have to exist in the EventBook.
 
@@ -195,13 +195,13 @@ Examples:
 
 Format: `switch EVENTTAGNAME`
 
-Switches to tab with EVENTTAGNAME. 
+Switches to tab with EVENTTAGNAME.
 
 * The search is case-sensitive.
 * The default tab is the `All` tab with full list of contacts displayed.
 
 Examples:
-* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
+* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag.
 
 ### Locating persons by name: `find`
 
@@ -251,13 +251,20 @@ Format: `import f/PATH`
 * Requires a valid file to be given in the PATH variable
 * If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
-  `NAME | NUMBER | EMAIL | ADDRESS | TAG`
+  `NAME | NUMBER | EMAIL | ADDRESS | EVENTS | TAGS`
   Here the `|` character specifies a new cell.
-* There should be no trailing empty characters (' ') in any cell. 
+* There should be no trailing empty characters (' ') in any cell.
 * The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
 * The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
-* The `TAG` portion accepts multiple tags delimited by the `|` character (e.g. Friend|Colleague)
+* The `EVENTS` portion must have satisfy some format requirements:
+  * `N/A` if the contact is not in any events, else a field error will occur
+  * The first instance of each unique event must follow the arguments of the cTag command:
+    `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+  * Further instances of the same event may simply use the event name portion `t/E-eventName`
+  * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
+    then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
+* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague)
 
 Examples:
 * `import f/./import/import.csv` imports the contacts from the specified file
@@ -329,6 +336,7 @@ Action     | Format, Examples
 **Create EventTag** | `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 **Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
 **Delete Event** | `devent EVENTTAGNAME` <br> e.g., `devent fire`
-**Import** | `import`
+**Import** | `import f/PATH` <br> e.g., `import f/./import/import.csv`
+**Export** | `export`
 **Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
 **Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
