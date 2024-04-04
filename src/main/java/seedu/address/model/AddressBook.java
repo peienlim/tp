@@ -135,6 +135,11 @@ public class AddressBook implements ReadOnlyAddressBook {
                 addTag(tag);
             }
         }
+        for (EventTag eventTag:p.getEventTags()) {
+            if (!hasEventTag(eventTag)) {
+                addEventTag(eventTag);
+            }
+        }
     }
 
     /**
