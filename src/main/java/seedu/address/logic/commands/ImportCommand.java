@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.ImportExportSyntax.FIELDS;
+import static seedu.address.logic.commands.ImportExportSyntax.NUMBER_OF_FIELDS;
+import static seedu.address.logic.commands.ImportExportSyntax.PREFIX_MAP;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,7 +27,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_FILE_NOT_FOUND = "File could not be found! Check import.csv exists at ./import";
     public static final String MESSAGE_FIELDS_FORMAT_ERROR = "An error occurred while parsing the csv! "
             + "Check the values!";
-    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while adding persons to the csv! "
+    public static final String MESSAGE_VALUES_FORMAT_ERROR = "An error occurred while adding persons to the csv!\n "
             + "The values in the csv are converted to add command format\n"
             + "Make sure the values match the correct format for the add command!\n"
             + "The error with the add command occurred as follows:\n";
@@ -39,17 +41,6 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " f/" + DEFAULT_PATH + "\n"
             + "Example: " + COMMAND_WORD + " f/";
 
-    private static final List<String> FIELDS = List.of(
-            "NAME", "NUMBER", "EMAIL", "ADDRESS", "TAG"
-    ); // TO hold the fields present in the csv
-    private static final int NUMBER_OF_FIELDS = FIELDS.size();
-    private static final Map<String, String> PREFIX_MAP = Map.of(
-            "NAME", "n/",
-            "NUMBER", "p/",
-            "EMAIL", "e/",
-            "ADDRESS", "a/",
-            "TAG", "t/"
-    ); // To format the data in the csv to command format
     private final String path;
 
     /**
@@ -57,7 +48,6 @@ public class ImportCommand extends Command {
      */
     public ImportCommand(String path) {
         requireAllNonNull(path);
-        System.out.println(path);
         this.path = (path.isEmpty()) ? DEFAULT_PATH : path;
     }
 
