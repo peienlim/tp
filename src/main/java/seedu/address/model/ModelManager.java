@@ -196,12 +196,19 @@ public class ModelManager implements Model {
     public void updateTagPersonList(Tag t) {
         requireNonNull(t);
         if (currentEventTag != null) {
-            Predicate<Person> eventTagPredicate = person -> person.containsTag(currentEventTag);
+            Predicate<Person> eventTagPredicate = person -> person.containsEventTag(currentEventTag);
             Predicate<Person> normalTagPredicate = person -> person.containsTag(t);
             filteredPersons.setPredicate(eventTagPredicate.and(normalTagPredicate));
         } else {
             filteredPersons.setPredicate(person -> person.containsTag(t));
         }
+    }
+
+    @Override
+    public void updateEventTagPersonList(EventTag t) {
+        requireNonNull(t);
+        setCurrentEventTag(t);
+        filteredPersons.setPredicate(person -> person.containsEventTag(currentEventTag));
     }
 
     /**
