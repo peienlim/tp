@@ -2,18 +2,20 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+
+import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CtagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
-
-import java.time.LocalDateTime;
-import java.util.stream.Stream;
-
 /**
- * Parses input arguments and creates a new CtagCommand object
+ * Parses input arguments and creates a new CtagCommand object.
  */
 public class CtagCommandParser implements Parser<CtagCommand> {
 
@@ -43,13 +45,14 @@ public class CtagCommandParser implements Parser<CtagCommand> {
             //if we have an event tag
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                     PREFIX_EVENT_TAG, PREFIX_DESCRIPTION, PREFIX_START_DATE, PREFIX_END_DATE);
-            if (!containsAllPrefix(argMultimap, PREFIX_EVENT_TAG, PREFIX_DESCRIPTION, PREFIX_START_DATE, PREFIX_END_DATE)
+            if (!containsAllPrefix(argMultimap,
+                    PREFIX_EVENT_TAG, PREFIX_DESCRIPTION, PREFIX_START_DATE, PREFIX_END_DATE)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CtagCommand.MESSAGE_USAGE));
             }
             argMultimap.verifyNoDuplicatePrefixesFor(
                     PREFIX_EVENT_TAG, PREFIX_DESCRIPTION, PREFIX_START_DATE, PREFIX_END_DATE);
-            String name =  argMultimap.getValue(PREFIX_EVENT_TAG).get();
+            String name = argMultimap.getValue(PREFIX_EVENT_TAG).get();
             LocalDateTime sd = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START_DATE).get());
             LocalDateTime ed = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATE).get());
             String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
