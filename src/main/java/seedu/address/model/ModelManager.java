@@ -166,7 +166,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addEventTag(EventTag tag) {
-        addressBook.addTag(tag);
+        addressBook.addEventTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

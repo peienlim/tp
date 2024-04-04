@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class ImportExportSyntax {
     public static final List<String> FIELDS = List.of(
-            "NAME", "NUMBER", "EMAIL", "ADDRESS", "TAG"
+            "NAME", "NUMBER", "EMAIL", "ADDRESS", "EVENTS", "TAGS"
     ); // TO hold the fields present in the csv
     public static final int NUMBER_OF_FIELDS = FIELDS.size();
 
@@ -17,6 +17,7 @@ public class ImportExportSyntax {
             "NUMBER", "p/",
             "EMAIL", "e/",
             "ADDRESS", "a/",
-            "TAG", "t/"
+            "TAGS", "t/",
+            "EVENTS", ""
     ); // To format the data in the csv to command format
 }

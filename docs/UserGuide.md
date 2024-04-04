@@ -238,13 +238,20 @@ Format: `import f/PATH`
 * Requires a valid file to be given in the PATH variable
 * If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
-  `NAME | NUMBER | EMAIL | ADDRESS | TAG`
+  `NAME | NUMBER | EMAIL | ADDRESS | EVENTS | TAGS`
   Here the `|` character specifies a new cell.
 * There should be no trailing empty characters (' ') in any cell. 
 * The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
 * The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
-* The `TAG` portion accepts multiple tags delimited by the `|` character (e.g. Friend|Colleague)
+* The `EVENTS` portion must have satisfy some format requirements:
+  * `N/A` if the contact is not in any events, else a field error will occur
+  * The first instance of each unique event must follow the arguments of the cTag command:
+    `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+  * Further instances of the same event may simply use the event name portion `t/E-eventName`
+  * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
+    then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
+* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague)
 
 Examples:
 * `import f/./import/import.csv` imports the contacts from the specified file
@@ -314,6 +321,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **Create Tag** | `ctag TAGNAME` <br> e.g., `ctag Friend`
 **Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
-**Import** | `import`
+**Import** | `import f/PATH` <br> e.g., `import f/./import/import.csv`
+**Export** | `export`
 **Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
 **Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
