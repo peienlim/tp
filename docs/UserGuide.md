@@ -41,8 +41,7 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `exit` : Exits the app.
    * `import` : Imports contacts from `.\import\import.csv`.
    * `search Friend` : Displays all contacts with the tag `Friend`.
-   * `switch Flag` : Switches to `Flag` event tab to show contacts. 
-
+   * `switch Flag` : Switches to `Flag` event tab to show contacts.
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -149,8 +148,7 @@ Examples:
 
 Assigns a tag in the address book to a specified person.
 
-Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​` 
-
+Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​`
 * Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENTTAG`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
@@ -183,7 +181,6 @@ Switches to tab with EVENTTAGNAME.
 
 Examples:
 * `search Flag` Switches to `Flag` event tab and shows all members tagged with `Flag` event tag. 
-
 
 ### Locating persons by name: `find`
 
