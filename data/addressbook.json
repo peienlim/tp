@@ -4,10 +4,10 @@
     "phone" : "99999999",
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
-    "tags" : [ "operations" ],
+    "tags" : [ "operations", "logistics" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -19,7 +19,7 @@
     "tags" : [ "marketing" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -31,7 +31,7 @@
     "tags" : [ "logistics" ],
     "eventTags" : [ {
       "tagName" : "Rag",
-      "description" : "Rag event",
+      "description" : "Rag Event 2024",
       "startDate" : "2024-04-05T14:00:00",
       "endDate" : "2024-04-05T16:00:00"
     } ]
@@ -43,7 +43,7 @@
     "tags" : [ "publicity" ],
     "eventTags" : [ {
       "tagName" : "Rag",
-      "description" : "Rag event",
+      "description" : "Rag Event 2024",
       "startDate" : "2024-04-05T14:00:00",
       "endDate" : "2024-04-05T16:00:00"
     } ]
@@ -55,7 +55,7 @@
     "tags" : [ "publicity" ],
     "eventTags" : [ {
       "tagName" : "Rag",
-      "description" : "Rag event",
+      "description" : "Rag Event 2024",
       "startDate" : "2024-04-05T14:00:00",
       "endDate" : "2024-04-05T16:00:00"
     } ]
@@ -67,7 +67,7 @@
     "tags" : [ "VPD" ],
     "eventTags" : [ {
       "tagName" : "Rag",
-      "description" : "Rag event",
+      "description" : "Rag Event 2024",
       "startDate" : "2024-04-05T14:00:00",
       "endDate" : "2024-04-05T16:00:00"
     } ]
@@ -79,7 +79,7 @@
     "tags" : [ "secretary" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -91,7 +91,7 @@
     "tags" : [ "operations" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -103,7 +103,7 @@
     "tags" : [ "operations" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -115,7 +115,7 @@
     "tags" : [ "head", "publicity" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -127,7 +127,7 @@
     "tags" : [ "head", "operations" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -139,7 +139,7 @@
     "tags" : [ "logistics" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -151,7 +151,7 @@
     "tags" : [ "logistics" ],
     "eventTags" : [ {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -162,8 +162,13 @@
     "address" : "Bishan Blk 10",
     "tags" : [ "logistics" ],
     "eventTags" : [ {
+      "tagName" : "Rag",
+      "description" : "Rag Event 2024",
+      "startDate" : "2024-04-05T14:00:00",
+      "endDate" : "2024-04-05T16:00:00"
+    }, {
       "tagName" : "Flag",
-      "description" : "Flag event",
+      "description" : "Flag Event 2024",
       "startDate" : "2024-04-10T18:00:00",
       "endDate" : "2024-04-10T22:00:00"
     } ]
@@ -173,18 +178,23 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ ],
-    "eventTags" : [ ]
+    "eventTags" : [ {
+      "tagName" : "Flag",
+      "description" : "Flag Event 2024",
+      "startDate" : "2024-04-10T18:00:00",
+      "endDate" : "2024-04-10T22:00:00"
+    } ]
   } ],
   "tagList" : [ "head", "marketing", "orientation", "secretary", "operations", "t34", "1111", "logistics", "neighbours", "VPD", "publicity", "2eee" ],
   "eventTagList" : [ {
-    "tagName" : "Flag",
-    "description" : "Flag event",
-    "startDate" : "2024-04-10T18:00:00",
-    "endDate" : "2024-04-10T22:00:00"
-  }, {
     "tagName" : "Rag",
-    "description" : "Rag event",
+    "description" : "Rag Event 2024",
     "startDate" : "2024-04-05T14:00:00",
     "endDate" : "2024-04-05T16:00:00"
+  }, {
+    "tagName" : "Flag",
+    "description" : "Flag Event 2024",
+    "startDate" : "2024-04-10T18:00:00",
+    "endDate" : "2024-04-10T22:00:00"
   } ]
 }

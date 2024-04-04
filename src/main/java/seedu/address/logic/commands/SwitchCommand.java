@@ -11,21 +11,19 @@ import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 
 /**
- * Format search instructions for every command for display.
+ * Switch command to toggle between different events.
  */
 public class SwitchCommand extends Command {
 
     public static final String COMMAND_WORD = "switch";
 
-    public static final String MESSAGE_SUCCESS = "found all person with the tag";
+    public static final String MESSAGE_SUCCESS = "Found all persons with the tag.";
 
-    public static final String MESSAGE_SUCCESS_EVENT_TAG = "displaying all persons in the event: ";
-    public static final String MESSAGE_NO_EVENT_TAG = "no such event found";
-
-    public static final String MESSAGE_NO_TAG = "no person with this tag is found";
+    public static final String MESSAGE_SUCCESS_EVENT_TAG = "Displaying all persons in the event: ";
+    public static final String MESSAGE_NO_EVENT_TAG = "No such event found.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Search people who are associated with this tag "
+            + ": Finds people who are associated with this tag "
             + "by listing the person that it is associated with.\n"
             + "Parameters: TAG (must be an existing tag) "
             + "[TAG]\n"
@@ -34,7 +32,7 @@ public class SwitchCommand extends Command {
     private final Tag tag;
 
     /**
-     * The constructor for SearchCommand
+     * The constructor for SwitchCommand
      * @param tag the tag that you want to search the list for
      */
     public SwitchCommand(Tag tag) {
@@ -56,9 +54,9 @@ public class SwitchCommand extends Command {
     private String getEventTagDescription(EventTag eventTag) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a");
         return MESSAGE_SUCCESS_EVENT_TAG + eventTag.tagName + "\n"
-                + "description: " + eventTag.description + "\n"
-                + "starts on: " + eventTag.startDate.format(formatter) + "\n"
-                + "ends on: " + eventTag.endDate.format(formatter) + "\n";
+                + "Description: " + eventTag.description + "\n"
+                + "Start Date: " + eventTag.startDate.format(formatter) + "\n"
+                + "End Date: " + eventTag.endDate.format(formatter) + "\n";
     }
 
     @Override
