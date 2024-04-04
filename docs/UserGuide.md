@@ -42,6 +42,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `dtag Friend` : Deletes a tag named 'Friend'.
    * `import` : Imports contacts from `.\import\import.csv`.
    * `search Friend` : Displays all contacts with the tag 'Friend'.
+   * `switch Flag` : Switches to 'Flag' event tab to show contacts. 
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -161,6 +162,18 @@ Format: `search TAGNAME`
 Examples:
 * `search Friend` Displays all people tagged as Friend.
 
+### Switching between events : `switch`
+
+Format: `switch EVENTTAGNAME`
+
+Switches to tab with EVENTTAGNAME. 
+
+* The search is case-sensitive.
+* The default tab is the `All` tab with full list of contacts displayed.
+
+Examples:
+* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
+
 
 ### Locating persons by name: `find`
 
@@ -268,3 +281,4 @@ Action     | Format, Examples
 **Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
 **Import** | `import`
 **Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
+**Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
