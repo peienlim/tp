@@ -26,7 +26,7 @@ public class SearchCommandParser implements Parser<SearchTagCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchTagCommand.MESSAGE_USAGE));
         }
-
-        return new SearchTagCommand(new Tag(nameKeywords[0]));
+        Tag tag = ParserUtil.parseTag(nameKeywords[0]);
+        return new SearchTagCommand(tag);
     }
 }
