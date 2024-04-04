@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -104,8 +105,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code tags} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void assign(Person targetPerson, Set<Tag> tags) {
+    public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
         targetPerson.addTags(tags);
+        Set<EventTag> eventsToAdd = new HashSet<>();
+        for (Tag t : eventTags) {
+            EventTag eventTag = getEventTag(t.tagName);
+            eventsToAdd.add(eventTag);
+        }
+        targetPerson.addEventTags(eventsToAdd);
     }
 
     /**
@@ -133,6 +140,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Tag tag:p.getTags()) {
             if (!hasTag(tag)) {
                 addTag(tag);
+            }
+        }
+        for (EventTag eventTag:p.getEventTags()) {
+            if (!hasEventTag(eventTag)) {
+                addEventTag(eventTag);
             }
         }
     }

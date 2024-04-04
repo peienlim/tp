@@ -23,14 +23,14 @@ public class SearchTagCommandTest {
 
     @Test
     public void execute_friendTagSearch_showSuccess() throws CommandException {
-        SearchTagCommand sc = new SearchTagCommand(new Tag("friends"), false);
+        SearchTagCommand sc = new SearchTagCommand(new Tag("friends"));
         CommandResult result = sc.execute(model);
         assertEquals(SearchTagCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
     }
 
     @Test
     public void execute_unknownTagSearch_throws() {
-        SearchTagCommand sc = new SearchTagCommand(new Tag("Uzuzuzuz"), false);
+        SearchTagCommand sc = new SearchTagCommand(new Tag("Uzuzuzuz"));
         assertThrows(CommandException.class, () -> sc.execute(model));
     }
 }

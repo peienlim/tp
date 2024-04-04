@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -25,21 +26,33 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(tags, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || userInput.equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
 
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = new HashSet<>();
+        Set<Tag> eventTagList = new HashSet<>();
+
+        for (String tagValue : argMultimap.getAllValues(PREFIX_TAG)) {
+            if (tagValue.startsWith("E-")) {
+                Tag eventTag = ParserUtil.parseEventTag(tagValue.substring(2));
+                eventTagList.add(eventTag);
+            } else {
+                Tag normalTag = ParserUtil.parseTag(tagValue);
+                tagList.add(normalTag);
+            }
+        }
+
         try {
             Object parsedObject = ParserUtil.parseNameIndex(nameOrIndex);
             if (parsedObject instanceof Index) {
                 Index index = (Index) parsedObject;
                 String dummyName = " ";
-                return new AssignCommand(index, dummyName, tagList);
+                return new AssignCommand(index, dummyName, tagList, eventTagList);
             } else if (parsedObject instanceof Name) {
                 Name name = (Name) parsedObject;
                 String nameString = name.toString();
-                return new AssignCommand(null, nameString, tagList);
+                return new AssignCommand(null, nameString, tagList, eventTagList);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
             }

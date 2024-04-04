@@ -3,19 +3,20 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SearchTagCommand;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parser for the search command.
+ * Parser for the switch command.
  */
-public class SearchCommandParser implements Parser<SearchTagCommand> {
+public class SwitchCommandParser implements Parser<SwitchCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SearchCommand
      * and returns a SearchCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SearchTagCommand parse(String args) throws ParseException {
+    public SwitchCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -26,7 +27,7 @@ public class SearchCommandParser implements Parser<SearchTagCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchTagCommand.MESSAGE_USAGE));
         }
-        Tag tag = ParserUtil.parseTag(nameKeywords[0]);
-        return new SearchTagCommand(tag);
+
+        return new SwitchCommand(new Tag(nameKeywords[0]));
     }
 }
