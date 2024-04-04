@@ -167,7 +167,7 @@ public class ParserUtil {
             LocalDateTime time = LocalDateTime.parse(trimmedTime, formatter);
             return time;
         } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CtagCommand.MESSAGE_USAGE));
         }
     }
 }

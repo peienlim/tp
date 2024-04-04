@@ -20,7 +20,7 @@ public class CtagCommand extends Command {
 
     public static final String COMMAND_WORD = "ctag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag or event tag to the address book. "
             + "Parameters: "
             + "tagName\n"
             + "Example: " + COMMAND_WORD + " "
@@ -63,7 +63,7 @@ public class CtagCommand extends Command {
         }
 
         if (isEventTag) {
-            if (model.hasEventTag(toAddEvent)) {
+            if (model.hasEventTag(toAddEvent.tagName)) {
                 throw new CommandException(MESSAGE_DUPLICATE_EVENT_TAG);
             }
             model.addEventTag(toAddEvent);
