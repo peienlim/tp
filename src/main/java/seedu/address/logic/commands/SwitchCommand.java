@@ -13,9 +13,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Format search instructions for every command for display.
  */
-public class SearchTagCommand extends Command {
+public class SwitchCommand extends Command {
 
-    public static final String COMMAND_WORD = "search";
+    public static final String COMMAND_WORD = "switch";
 
     public static final String MESSAGE_SUCCESS = "found all person with the tag";
 
@@ -37,7 +37,7 @@ public class SearchTagCommand extends Command {
      * The constructor for SearchCommand
      * @param tag the tag that you want to search the list for
      */
-    public SearchTagCommand(Tag tag) {
+    public SwitchCommand(Tag tag) {
         requireAllNonNull(tag);
         this.tag = tag;
     }
@@ -45,11 +45,20 @@ public class SearchTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasTag(tag)) {
-            throw new CommandException(MESSAGE_NO_TAG);
+        if (!model.hasEventTag(tag.tagName)) {
+            throw new CommandException(MESSAGE_NO_EVENT_TAG);
         }
-        model.updateTagPersonList(tag);
-        return new CommandResult(MESSAGE_SUCCESS);
+        EventTag eventTag = model.getEventTag(tag.tagName);
+        model.updateEventTagPersonList(eventTag);
+        return new CommandResult(getEventTagDescription(eventTag), eventTag);
+    }
+
+    private String getEventTagDescription(EventTag eventTag) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a");
+        return MESSAGE_SUCCESS_EVENT_TAG + eventTag.tagName + "\n"
+                + "description: " + eventTag.description + "\n"
+                + "starts on: " + eventTag.startDate.format(formatter) + "\n"
+                + "ends on: " + eventTag.endDate.format(formatter) + "\n";
     }
 
     @Override
@@ -59,11 +68,11 @@ public class SearchTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SearchTagCommand)) {
+        if (!(other instanceof SwitchCommand)) {
             return false;
         }
 
-        SearchTagCommand e = (SearchTagCommand) other;
+        SwitchCommand e = (SwitchCommand) other;
         return tag.equals(e.tag);
     }
 }
