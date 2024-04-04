@@ -107,9 +107,9 @@ Edits an existing person in the address book.
 
 Format: `edit (NAME or INDEX) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or `NAME`. 
+* Edits the person at the specified `INDEX` or `NAME`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
 * For example, `edit John Doe t/friends` instead of `edit John t/friends`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -158,7 +158,7 @@ Assigns a tag in the address book to a specified person.
 Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​`
 * Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENTTAG`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
 * For example, `assign John Doe t/friends` instead of `assign John t/friends`.
 * The provided tag(s) and event tag(s) have to exist in the EventBook.
 
@@ -182,13 +182,13 @@ Examples:
 
 Format: `switch EVENTTAGNAME`
 
-Switches to tab with EVENTTAGNAME. 
+Switches to tab with EVENTTAGNAME.
 
 * The search is case-sensitive.
 * The default tab is the `All` tab with full list of contacts displayed.
 
 Examples:
-* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
+* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag.
 
 ### Locating persons by name: `find`
 
@@ -240,7 +240,7 @@ Format: `import f/PATH`
 * The format of the first line of the csv should be:
   `NAME | NUMBER | EMAIL | ADDRESS | EVENTS | TAGS`
   Here the `|` character specifies a new cell.
-* There should be no trailing empty characters (' ') in any cell. 
+* There should be no trailing empty characters (' ') in any cell.
 * The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
 * The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
