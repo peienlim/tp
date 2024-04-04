@@ -25,7 +25,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(tags, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || userInput.equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
 
