@@ -40,8 +40,9 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `delete John Doe` : Deletes the contact named John Doe shown in the current list.
    * `exit` : Exits the app.
    * `import` : Imports contacts from `.\import\import.csv`.
-   * `search Friend` : Displays all contacts with the tag `Friend`.
-   * `switch Flag` : Switches to `Flag` event tab to show contacts.
+   * `search Friend` : Displays all contacts with the tag 'Friend'.
+   * `switch Flag` : Switches to 'Flag' event tab to show contacts. 
+
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -170,6 +171,7 @@ Format: `search TAGNAME`
 Examples:
 * `search Friend` Displays all people tagged as `Friend`.
 
+
 ### Switching between events : `switch`
 
 Format: `switch EVENTTAGNAME`
@@ -180,7 +182,7 @@ Switches to tab with EVENTTAGNAME.
 * The default tab is the `All` tab with full list of contacts displayed.
 
 Examples:
-* `search Flag` Switches to `Flag` event tab and shows all members tagged with `Flag` event tag. 
+* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
 
 ### Locating persons by name: `find`
 
