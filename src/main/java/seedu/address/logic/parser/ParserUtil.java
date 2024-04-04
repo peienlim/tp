@@ -29,7 +29,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_NAME = "Name is not a valid name in the contacts.";
     public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Index or Name is invalid.";
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Format of time is must be of YYYY-MM-DD";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Format of time is must be of YYYY-MM-DD HH:mm:ss";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
