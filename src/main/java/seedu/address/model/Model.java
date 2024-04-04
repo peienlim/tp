@@ -115,8 +115,6 @@ public interface Model {
 
     void deleteEventTag(EventTag tag);
 
-    void deleteEventTag(String tagName);
-
     void addEventTag(EventTag tag);
 
     EventTag getEventTag(String tag);

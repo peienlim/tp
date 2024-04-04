@@ -166,7 +166,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an event tag to the address book.
+     * Gets an event tag to the address book.
      * The event tag must not already exist in the address book.
      */
     public EventTag getEventTag(String t) {
@@ -225,11 +225,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         tagList.remove(key);
     }
 
+    /**
+     * Removes {@code key} event tag from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeEventTag(EventTag key) {
-        eventTagList.remove(key);
-    }
-
-    public void removeEventTag(String key) {
+        for (Person p:persons) {
+            p.removeEventTag(key);
+        }
         eventTagList.remove(key);
     }
 

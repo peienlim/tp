@@ -160,11 +160,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteEventTag(String tagName) {
-        addressBook.removeEventTag(tagName);
-    }
-
-    @Override
     public void addEventTag(EventTag tag) {
         addressBook.addEventTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
