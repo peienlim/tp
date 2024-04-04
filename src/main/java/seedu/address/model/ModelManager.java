@@ -124,9 +124,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void assign(Person targetPerson, Set<Tag> tags) {
-        requireAllNonNull(targetPerson, tags);
-        addressBook.assign(targetPerson, tags);
+    public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
+        requireAllNonNull(targetPerson, tags, eventTags);
+        addressBook.assign(targetPerson, tags, eventTags);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

@@ -158,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void assign(Person targetPerson, Set<Tag> tags) {
+        public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
             throw new AssertionError("This method should not be called.");
         }
 
