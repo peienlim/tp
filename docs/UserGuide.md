@@ -31,27 +31,16 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-   
    * `assign 1 t/E-event1` : Assigns the 1st contact shown in the current list with the event tag named `event1`.
-   
    * `assign John t/tag1` : Assigns the contact named John in the current list with the tag named `tag1`.
-   
    * `clear` : Deletes all contacts.
-
    * `ctag Friend` : Creates a tag name `Friend`.
-
    * `dtag Friend` : Deletes a tag named `Friend`.
-
    * `delete 3` : Deletes the 3rd contact shown in the current list.
-   
    * `delete John Doe` : Deletes the contact named John Doe shown in the current list.
-
    * `exit` : Exits the app.
-   
    * `import` : Imports contacts from `.\import\import.csv`.
-   
    * `search Friend` : Displays all contacts with the tag `Friend`.
-   
    * `switch Flag` : Switches to `Flag` event tab to show contacts. 
 
 1. Refer to the [Features](#features) below for details of each command.
