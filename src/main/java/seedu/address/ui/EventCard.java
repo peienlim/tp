@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import seedu.address.model.tag.EventTag;
 
 /**
@@ -28,6 +27,5 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.eventTag = eventTag;
         eventName.setText(eventTag.tagName);
-        eventName.setFont(Font.font( 10));
     }
 }
