@@ -213,6 +213,9 @@ public class MainWindow extends UiPart<Stage> {
             eventListPanel = new EventListPanel(logic.getEventTagList());
             eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
             return commandResult;
 
         } catch (CommandException | ParseException e) {
