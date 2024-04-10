@@ -251,20 +251,21 @@ Format: `import f/PATH`
 * Requires a valid file to be given in the PATH variable
 * If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
-  `NAME | NUMBER | EMAIL | ADDRESS | EVENTS | TAGS`
-  Here the `|` character specifies a new cell.
+  `NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS`
 * There should be no trailing empty characters (' ') in any cell.
 * The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
 * The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
-* The `EVENTS` portion must have satisfy some format requirements:
-  * `N/A` if the contact is not in any events, else a field error will occur
-  * The first instance of each unique event must follow the arguments of the cTag command:
-    `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
-  * Further instances of the same event may simply use the event name portion `t/E-eventName`
-  * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
-    then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
-* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague)
+* The `EVENTS` portion must satisfy one of the following format requirements:
+  1. `N/A` if the contact is not in any events, else a field error will occur
+  2. `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` for the first instance of each 
+      unique event, unless said tag already exists in the address book, in which case iii. can be used
+  3. `t/E-eventName` for existing events or previously declared events
+     * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
+       then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
+* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
+  consequence of this is that tags containing `|` in their name cannot be imported
+* The default download contains a sample .csv file that one can refer to 
 
 Examples:
 * `import f/./import/import.csv` imports the contacts from the specified file
