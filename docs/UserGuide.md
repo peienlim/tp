@@ -252,7 +252,6 @@ Format: `import f/PATH`
 * If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
   `NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS`
-  Here the `|` character specifies a new cell.
 * There should be no trailing empty characters (' ') in any cell.
 * The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
 * The format of each parameter should follow the appropriate add command format.

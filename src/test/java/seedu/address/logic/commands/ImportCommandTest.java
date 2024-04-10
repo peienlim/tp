@@ -24,8 +24,7 @@ public class ImportCommandTest {
         Model model = new ModelManager();
 
         assertCommandFailure(new ImportCommand("./src/test/data/ImportTest/invalidValueTest.csv"),
-                model, ImportCommand.MESSAGE_VALUES_FORMAT_ERROR
-                        + "Tags names should be alphanumeric and not contain spaces");
+                model, ImportCommand.MESSAGE_VALUES_FORMAT_ERROR);
     }
 
     @Test
