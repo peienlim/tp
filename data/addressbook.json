@@ -185,7 +185,7 @@
       "endDate" : "2024-04-10T22:00:00"
     } ]
   } ],
-  "tagList" : [ "head", "marketing", "s", "operations", "interesting", "logistics", "publicity", "VPD" ],
+  "tagList" : [ "head", "marketing", "s", "operations", "notcool", "fine", "interesting", "logistics", "publicity", "VPD" ],
   "eventTagList" : [ {
     "tagName" : "Rag",
     "description" : "Rag Event 2024",

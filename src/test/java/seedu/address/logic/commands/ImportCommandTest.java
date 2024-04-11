@@ -19,14 +19,13 @@ public class ImportCommandTest {
         assertCommandFailure(new ImportCommand("xxx"), model, ImportCommand.MESSAGE_FILE_NOT_FOUND);
     }
 
-    //    @Test
-    //    public void execute_invalidFileValues_failure() {
-    //        Model model = new ModelManager();
-    //
-    //        assertCommandFailure(new ImportCommand("./src/test/data/ImportTest/invalidValueTest.csv"),
-    //                model, ImportCommand.MESSAGE_VALUES_FORMAT_ERROR
-    //                        + "Tags names should be alphanumeric and not contain spaces");
-    //    }
+    @Test
+    public void execute_invalidFileValues_failure() {
+        Model model = new ModelManager();
+
+        assertCommandFailure(new ImportCommand("./src/test/data/ImportTest/invalidValueTest.csv"),
+                model, ImportCommand.MESSAGE_VALUES_FORMAT_ERROR);
+    }
 
     @Test
     public void execute_invalidFieldValues_failure() {
