@@ -258,14 +258,14 @@ Format: `import f/PATH`
 * There should be no blank lines, and no conflicts with contacts in the existing address book
 * The `EVENTS` portion must satisfy one of the following format requirements:
   1. `N/A` if the contact is not in any events, else a field error will occur
-  2. `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` for the first instance of each 
+  2. `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` for the first instance of each
       unique event, unless said tag already exists in the address book, in which case iii. can be used
   3. `t/E-eventName` for existing events or previously declared events
      * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
        then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
 * The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
   consequence of this is that tags containing `|` in their name cannot be imported
-* The default download contains a sample .csv file that one can refer to 
+* The default download contains a sample .csv file that one can refer to
 
 Examples:
 * `import f/./import/import.csv` imports the contacts from the specified file
