@@ -71,7 +71,7 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
         requireAllNonNull(oldTag, newTag);
 
         if (!internalSet.contains(oldTag)) {
-            throw new PersonNotFoundException();
+            throw new TagNotFoundException();
         }
 
         if (!oldTag.isSameTag(newTag) && contains(newTag)) {
@@ -149,6 +149,7 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
         requireNonNull(eventTagName);
         for (T tag : internalSet) {
             if (tag instanceof EventTag && tag.tagName.equals(eventTagName)) {
+                internalSet.removeIf(t -> t.equals(tag));
                 return (EventTag) tag;
             }
         }
