@@ -265,6 +265,7 @@ Format: `import f/PATH`
        then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
 * The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
   consequence of this is that tags containing `|` in their name cannot be imported
+* Ensure that the file provided is saved before used as an import file
 * The default download contains a sample .csv file that one can refer to
 
 Examples:
