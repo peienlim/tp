@@ -1,16 +1,4 @@
 NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS
-Alex Yeoh,99999999,alexyeoh@example.com,Blk 30 Geylang Street 29, #06-40,t/E-Flag dc/Flag Event 2024 sd/2024-04-10 18:00:00 ed/2024-04-10 22:00:00,operations|logistics,
-Bernice Yu,99272758,berniceyu@example.com,Blk 30 Lorong 3 Serangoon Gardens, #07-18,Flag,marketing,
-Charlotte Oliveiro,93210283,charlotte@example.com,Blk 11 Ang Mo Kio Street 74, #11-04,t/E-Rag dc/Rag Event 2024 sd/2024-04-05 14:00:00 ed/2024-04-05 16:00:00,logistics,
-David Li,91031282,lidavid@example.com,Blk 436 Serangoon Gardens Street 26, #16-43,Rag,publicity,
-Irfan Ibrahim,92492021,irfan@example.com,Blk 47 Tampines Street 20, #17-35,Rag,publicity,
-Roy Balakrishnan,92624417,royb@example.com,Blk 45 Aljunied Street 85, #11-31,Rag,VPD,
-Tom,91234812,hi@mail.com,NUS,Flag,notcool|fine|interesting,
-John,91232345,john@john.com,NTU,Flag,notcool,
-Ben,83478596,ben@mail.com,NA,Flag,s,
-Ann,82882919,Ann@mail.com,NA,Flag,head|publicity,
-Amy,82882919,Amy@mail.com,AMK Blk 91,Flag,head|operations,
-Betty,93882919,Betty@mail.com,AMK Blk 10,Flag,logistics,
-Zack,82820119,zack@mail.com,AMK Blk 10,Flag,logistics,
-Xan,82882919,xan@mail.com,Bishan Blk 10,Rag|Flag,logistics,
-John Doe,98765432,johnd@example.com,311, Clementi Ave 2, #02-25,Flag,,
+Tom,91234812,hi@mail.com,NUS,t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02|t/E-camping dc/CAMP!! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02,notcool|fine|interesting
+John,91232345,john@john.com,NTU,orientation,notcool
+Ben,83478596,ben@mail.com,NA,camping,friendly
