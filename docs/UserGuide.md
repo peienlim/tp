@@ -6,7 +6,7 @@
 
 # EventBook User Guide
 
-EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
+EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -19,7 +19,7 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
 
 1. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your EventBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -75,7 +75,7 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -128,24 +128,24 @@ Examples:
 
 Creates a tag in the address book or an event tag.
 
-Format 1: `ctag TAGNAME`
+Format 1: `ctag TAG_NAME`
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
 * `ctag Friend` Creates a tag named `Friend`.
 
-Format 2: `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+Format 2: `ctag t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
 * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 * Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
 
-### Delete a tag : `dtag`
+### Deleting a tag : `dtag`
 
 Deletes a tag in the address book.
 
-Format: `dtag TAGNAME`
+Format: `dtag TAG_NAME`
 
 * The provided name has to be a unique tag name that does not already exist in the address book.
 * The provided tag has to exist in the EventBook.
@@ -153,11 +153,11 @@ Format: `dtag TAGNAME`
 Examples:
 * `dtag Friend` Deletes a tag named `Friend`.
 
-### Delete an EventTag : `devent`
+### Deleting an EventTag : `devent`
 
 Deletes an event tag in the address book.
 
-Format: `devent EVENTTAGNAME`
+Format: `devent EVENT_TAG_NAME`
 
 * The provided name has to be a unique event tag name that already exist in the address book.
 
@@ -168,8 +168,8 @@ Examples:
 
 Assigns a tag in the address book to a specified person.
 
-Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENTTAG…​`
-* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENTTAG`.
+Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENT_TAG…​`
+* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENT_TAG`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
 * For example, `assign John Doe t/friends` instead of `assign John t/friends`.
@@ -181,9 +181,9 @@ Examples:
 
 ### Searching by tag : `search`
 
-Displays all the people that are tagged with TAGNAME.
+Displays all the people that are tagged with `TAG_NAME`.
 
-Format: `search TAGNAME`
+Format: `search TAG_NAME`
 
 * The search is case-sensitive.
 
@@ -193,9 +193,9 @@ Examples:
 
 ### Switching between events : `switch`
 
-Format: `switch EVENTTAGNAME`
+Format: `switch EVENT_TAG_NAME`
 
-Switches to tab with EVENTTAGNAME.
+Switches to tab with EVENT_TAG_NAME.
 
 * The search is case-sensitive.
 * The default tab is the `All` tab with full list of contacts displayed.
@@ -234,7 +234,7 @@ Format: `delete (NAME or INDEX)`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `list` followed by `delete John Doe` deletes the 2nd person in the address book.
+* `list` followed by `delete John Doe` deletes the person named 'John Doe' in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -288,17 +288,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EventBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -332,11 +332,11 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Create Tag** | `ctag TAGNAME` <br> e.g., `ctag Friend`
-**Create EventTag** | `ctag t/E- eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
-**Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
-**Delete Event** | `devent EVENTTAGNAME` <br> e.g., `devent fire`
+**Create Tag** | `ctag TAG_NAME` <br> e.g., `ctag Friend`
+**Create EventTag** | `ctag t/E-eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
+**Delete Tag** | `dtag TAG_NAME` <br> e.g., `dtag Friend`
+**Delete Event** | `devent EVENT_TAG_NAME` <br> e.g., `devent fire`
 **Import** | `import f/PATH` <br> e.g., `import f/./import/import.csv`
 **Export** | `export`
-**Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
-**Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
+**Search Tag** | `search TAG_NAME` <br> e.g., `search Friend`
+**Switch** | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`
