@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
             + ": Updates the Address book with contacts from the "
             + "csv file found at given path."
             + "If path not specified, default path is: " + DEFAULT_PATH + "\n"
-            + "Parameters: path to file (prefixed with /f)\n"
+            + "Parameters: path to file (prefixed with f/)\n"
             + "Example: " + COMMAND_WORD + " f/" + DEFAULT_PATH + "\n"
             + "Example: " + COMMAND_WORD + " f/";
 
