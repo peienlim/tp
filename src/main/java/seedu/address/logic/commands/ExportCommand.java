@@ -78,7 +78,9 @@ public class ExportCommand extends Command {
                         eTagsString.append(eTag.getCodeFormat()).append("|");
                     }
                 }
-                if (eTagsString.length() != 0) eTagsString.deleteCharAt(eTagsString.length() - 1);
+                if (eTagsString.length() != 0) {
+                    eTagsString.deleteCharAt(eTagsString.length() - 1);
+                }
                 fw.write(eTagsString.toString());
                 fw.write(",");
 
@@ -87,7 +89,9 @@ public class ExportCommand extends Command {
                 for (Tag tag : tags) {
                     tagsString.append(tag.tagName).append("|");
                 }
-                if (tagsString.length() != 0) tagsString.deleteCharAt(tagsString.length() - 1);
+                if (tagsString.length() != 0) {
+                    tagsString.deleteCharAt(tagsString.length() - 1);
+                }
                 fw.write(tagsString.toString());
                 fw.write(",");
                 fw.write("\n");
