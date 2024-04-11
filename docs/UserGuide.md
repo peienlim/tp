@@ -276,6 +276,8 @@ Exports all contacts to ./export/export.csv
 
 Format: `export`
 
+* Note that moving files around may cause export to fail. If one relocates the source files, one must
+  ensure that the ./export directory exists for the export.csv to generate at
 * If a file export.csv is already present at ./export, it will be overwritten with the
   current address book data
 * The export file format is the same as the output format given in `import`
