@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CtagCommand.*;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CtagCommand.MESSAGE_SUCCESS_EVENT_TAG;
+import static seedu.address.logic.commands.CtagCommand.MESSAGE_SUCCESS_TAG;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
-
-import java.time.LocalDateTime;
-
 //
 public class CtagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
