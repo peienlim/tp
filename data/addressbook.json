@@ -76,7 +76,7 @@
     "phone" : "91234812",
     "email" : "hi@mail.com",
     "address" : "NUS",
-    "tags" : [ "notcool", "fine", "interesting" ],
+    "tags" : [ "interesting" ],
     "eventTags" : [ {
       "tagName" : "Flag",
       "description" : "Flag Event 2024",
@@ -88,7 +88,7 @@
     "phone" : "91232345",
     "email" : "john@john.com",
     "address" : "NTU",
-    "tags" : [ "notcool" ],
+    "tags" : [ ],
     "eventTags" : [ {
       "tagName" : "Flag",
       "description" : "Flag Event 2024",
