@@ -49,7 +49,8 @@ public class SwitchCommandTest {
                         + "Start Date: %s\n"
                         + "End Date: %s\n", TAG_NAME, DESCRIPTION,
                 START_DATE.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a")),
-                END_DATE.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a"))), commandResult.getFeedbackToUser());
+                END_DATE.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm a"))),
+                    commandResult.getFeedbackToUser());
     }
 
     @Test
