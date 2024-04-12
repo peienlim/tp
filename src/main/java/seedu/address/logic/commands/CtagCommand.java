@@ -28,8 +28,9 @@ public class CtagCommand extends Command {
             + "or " + COMMAND_WORD + " " + PREFIX_EVENT_TAG + " eventName" + " "
             + PREFIX_DESCRIPTION + " Description" + " "
             + PREFIX_START_DATE + "yyyy-MM-dd HH:mm:ss" + " "
-            + PREFIX_END_DATE + "yyyy-MM-dd HH:mm:ss" + " "
-            + "Example: " + COMMAND_WORD + " ";
+            + PREFIX_END_DATE + "yyyy-MM-dd HH:mm:ss" + " \n"
+            + "Example: " + COMMAND_WORD + " "
+            + "t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02";
 
     public static final String MESSAGE_SUCCESS_TAG = "New tag added: %1$s";
     public static final String MESSAGE_SUCCESS_EVENT_TAG = "New event tag added: %1$s";
@@ -84,7 +85,17 @@ public class CtagCommand extends Command {
         }
 
         CtagCommand e = (CtagCommand) other;
-        return toAdd.equals(e.toAdd) && toAddEvent.equals(e.toAddEvent);
+        boolean tagType = toAddEvent == null && e.toAddEvent == null
+                && toAdd != null && e.toAdd != null;
+        if (tagType) {
+            return toAdd.equals(e.toAdd);
+        }
+        boolean eTagType = toAddEvent != null && e.toAddEvent != null
+                && toAdd == null && e.toAdd == null;
+        if (eTagType) {
+            return toAddEvent.equals(e.toAddEvent);
+        }
+        return false;
     }
 
     @Override
