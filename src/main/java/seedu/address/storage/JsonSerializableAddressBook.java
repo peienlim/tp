@@ -69,19 +69,19 @@ class JsonSerializableAddressBook {
             }
             addressBook.addTag(tag);
         }
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            addressBook.addPerson(person);
-        }
         for (JsonAdaptedEventTag jsonAdaptedEventTag : eventTagList) {
             EventTag eventTag = jsonAdaptedEventTag.toModelType();
             if (addressBook.hasEventTag(eventTag)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT_TAG);
             }
             addressBook.addEventTag(eventTag);
+        }
+        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            addressBook.addPerson(person);
         }
         return addressBook;
     }

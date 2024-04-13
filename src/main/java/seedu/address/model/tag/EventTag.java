@@ -31,6 +31,12 @@ public class EventTag extends Tag {
         this.endDate = endDate;
     }
 
+    public String getCodeFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return "t/E-" + tagName + " dc/" + description + " sd/" + startDate.format(formatter)
+                + " ed/" + endDate.format(formatter);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

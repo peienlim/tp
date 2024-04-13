@@ -158,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void assign(Person targetPerson, Set<Tag> tags) {
+        public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -189,11 +189,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteEventTag(String tagName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addEventTag(EventTag tag) {
             throw new AssertionError("This method should not be called.");
         }
@@ -219,7 +214,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateEventTagPersonList(EventTag t) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCurrentEventTag(EventTag tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearCurrentEventTag() {
             throw new AssertionError("This method should not be called.");
         }
 

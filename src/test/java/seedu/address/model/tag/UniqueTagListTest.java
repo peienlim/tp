@@ -2,9 +2,13 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -65,6 +69,27 @@ public class UniqueTagListTest {
     public void add_duplicateTag_throwsDuplicateTagException() {
         uniqueTagList.add(new Tag("friends"));
         assertThrows(DuplicateTagException.class, () -> uniqueTagList.add(new Tag("friends")));
+    }
+
+    @Test
+    public void replace_validTags_replacesTag() {
+        Tag oldTag = new Tag("old");
+        Tag newTag = new Tag("new");
+        uniqueTagList.add(oldTag);
+        uniqueTagList.replace(oldTag, newTag);
+        assertTrue(uniqueTagList.contains(newTag) && !uniqueTagList.contains(oldTag));
+    }
+
+    @Test
+    public void replace_nonExistingOldTag_throwsTagNotFoundException() {
+        assertThrows(TagNotFoundException.class, () -> uniqueTagList.replace(new Tag("old"), new Tag("new")));
+    }
+
+    @Test
+    public void replace_existingNewTag_throwsDuplicateTagException() {
+        uniqueTagList.add(new Tag("old"));
+        uniqueTagList.add(new Tag("new"));
+        assertThrows(DuplicateTagException.class, () -> uniqueTagList.replace(new Tag("old"), new Tag("new")));
     }
 
     @Test
@@ -130,6 +155,33 @@ public class UniqueTagListTest {
         expectedUniqueTagList.add(new Tag("colleagues"));
         expectedUniqueTagList.add(new Tag("family"));
         assertEquals(expectedUniqueTagList, uniqueTagList);
+    }
+
+    @Test
+    public void getEventTag_existingEventTag_returnsEventTag() {
+        EventTag eventTag = new EventTag("event", "get event tag test",
+                LocalDateTime.now(), LocalDateTime.now());
+        uniqueTagList.add(eventTag);
+        assertSame(eventTag, uniqueTagList.getEventTag("event"));
+    }
+
+    @Test
+    public void getEventTag_nonExistingEventTag_returnsNull() {
+        assertNull(uniqueTagList.getEventTag("nonExistingEvent"));
+    }
+
+    @Test
+    public void removeEvent_existingEventTag_removesEventTag() {
+        EventTag eventTag = new EventTag("event", "get event tag test",
+                LocalDateTime.now(), LocalDateTime.now());
+        uniqueTagList.add(eventTag);
+        assertNotNull(uniqueTagList.removeEvent("event"));
+        assertFalse(uniqueTagList.contains(eventTag));
+    }
+
+    @Test
+    public void removeEvent_nonExistingEventTag_returnsNull() {
+        assertNull(uniqueTagList.removeEvent("nonExistingEvent"));
     }
 
     @Test

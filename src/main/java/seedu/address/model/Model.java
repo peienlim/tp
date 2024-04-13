@@ -15,7 +15,9 @@ import seedu.address.model.tag.Tag;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -53,7 +55,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -90,7 +94,7 @@ public interface Model {
      * {@code tags} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void assign(Person targetPerson, Set<Tag> tags);
+    void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags);
 
     /**
      * Deletes the given tag.
@@ -111,24 +115,29 @@ public interface Model {
 
     void deleteEventTag(EventTag tag);
 
-    void deleteEventTag(String tagName);
-
     void addEventTag(EventTag tag);
 
     EventTag getEventTag(String tag);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     void updateTagPersonList(Tag t);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     ObservableSet<EventTag> getEventTagList();
 
+    void updateEventTagPersonList(EventTag t);
+
     void setCurrentEventTag(EventTag tagName);
+
+    void clearCurrentEventTag();
 }

@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -71,7 +70,7 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
         requireAllNonNull(oldTag, newTag);
 
         if (!internalSet.contains(oldTag)) {
-            throw new PersonNotFoundException();
+            throw new TagNotFoundException();
         }
 
         if (!oldTag.isSameTag(newTag) && contains(newTag)) {
@@ -133,6 +132,23 @@ public class UniqueTagList<T extends Tag> implements Iterable<T> {
         requireNonNull(eventTagName);
         for (T tag : internalSet) {
             if (tag instanceof EventTag && tag.tagName.equals(eventTagName)) {
+                return (EventTag) tag;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Removes all the event tags given a specified event tag name, if it exists in the list.
+     * Returns null if no such event tag is found.
+     * @param eventTagName The name of the event tag to retrieve.
+     * @return The event tag with the specified event tag name, or null if not found.
+     */
+    public EventTag removeEvent(String eventTagName) {
+        requireNonNull(eventTagName);
+        for (T tag : internalSet) {
+            if (tag instanceof EventTag && tag.tagName.equals(eventTagName)) {
+                internalSet.removeIf(t -> t.equals(tag));
                 return (EventTag) tag;
             }
         }

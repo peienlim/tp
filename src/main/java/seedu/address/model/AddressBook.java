@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -20,6 +22,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+
+    public static final EventTag DEFAULT_EVENT_TAG = new EventTag("All", "All contacts in EventBook",
+            LocalDateTime.parse("2024-04-05T14:00:00"), LocalDateTime.parse("2024-04-05T14:00:00"));
 
     private final UniquePersonList persons;
     private final UniqueTagList<Tag> tagList;
@@ -100,8 +105,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code tags} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void assign(Person targetPerson, Set<Tag> tags) {
+    public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
         targetPerson.addTags(tags);
+        Set<EventTag> eventsToAdd = new HashSet<>();
+        for (Tag t : eventTags) {
+            EventTag eventTag = getEventTag(t.tagName);
+            eventsToAdd.add(eventTag);
+        }
+        targetPerson.addEventTags(eventsToAdd);
     }
 
     /**
@@ -131,6 +142,11 @@ public class AddressBook implements ReadOnlyAddressBook {
                 addTag(tag);
             }
         }
+        for (EventTag eventTag:p.getEventTags()) {
+            if (!hasEventTag(eventTag)) {
+                addEventTag(eventTag);
+            }
+        }
     }
 
     /**
@@ -150,7 +166,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an event tag to the address book.
+     * Gets an event tag to the address book.
      * The event tag must not already exist in the address book.
      */
     public EventTag getEventTag(String t) {
@@ -209,11 +225,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         tagList.remove(key);
     }
 
+    /**
+     * Removes {@code key} event tag from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeEventTag(EventTag key) {
-        eventTagList.remove(key);
-    }
-
-    public void removeEventTag(String key) {
+        for (Person p:persons) {
+            p.removeEventTag(key);
+        }
         eventTagList.remove(key);
     }
 

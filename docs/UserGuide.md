@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# EventBook User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -18,9 +18,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `EventBook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your EventBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -32,18 +32,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `delete John` : Deletes the person named John from the EventBook.
-
+   * `assign 1 t/E-event1` : Assigns the 1st contact shown in the current list with the event tag named `event1`.
+   * `assign John t/tag1` : Assigns the contact named John in the current list with the tag named `tag1`.
    * `clear` : Deletes all contacts.
-
+   * `ctag Friend` : Creates a tag name `Friend`.
+   * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02` : Creates an event tag.
+   * `dtag Friend` : Deletes a tag named `Friend`.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `devent fire` : Deletes an event tag called fire
+   * `delete John Doe` : Deletes the contact named John Doe shown in the current list.
    * `exit` : Exits the app.
-   * `ctag Friend` : Creates a tag name 'Friend'.
-   * `dtag Friend` : Deletes a tag named 'Friend'.
    * `import` : Imports contacts from `.\import\import.csv`.
    * `search Friend` : Displays all contacts with the tag 'Friend'.
-   * `switch Flag` : Switches to 'Flag' event tab to show contacts. 
+   * `switch Flag` : Switches to 'Flag' event tab to show contacts.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -81,7 +82,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -113,9 +114,12 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit (NAME or INDEX) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX` or `NAME`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
+* For example, `edit John Doe t/friends` instead of `edit John t/friends`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -124,63 +128,87 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Ben n/Betsy Crower t/` Edits the person named Ben to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Creating a tag : `ctag`
 
-Creates a tag in the address book.
+Creates a tag in the address book or an event tag.
 
-Format: `ctag TAGNAME`
+Format 1: `ctag TAG_NAME`
 * The provided name has to be a unique tag name that does not already exist in the address book.
 
 Examples:
-* `ctag Friend` Creates a tag named 'Friend'
+* `ctag Friend` Creates a tag named `Friend`.
 
-### Delete a tag : `dtag`
+Format 2: `ctag t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+* The provided name has to be a unique tag name that does not already exist in the address book.
+
+Examples:
+* `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
+* Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
+
+### Deleting a tag : `dtag`
 
 Deletes a tag in the address book.
 
-Format: `dtag TAGNAME`
+Format: `dtag TAG_NAME`
+
 * The provided name has to be a unique tag name that does not already exist in the address book.
 * The provided tag has to exist in the EventBook.
+
 Examples:
-* `dtag Friend` Deletes a tag named 'Friend'
+* `dtag Friend` Deletes a tag named `Friend`.
+
+### Deleting an EventTag : `devent`
+
+Deletes an event tag in the address book.
+
+Format: `devent EVENT_TAG_NAME`
+
+* The provided name has to be a unique event tag name that already exist in the address book.
+
+Examples:
+* `devent bonfire` Deletes an EventTag named `bonfire`.
 
 ### Assigning a tag : `assign`
 
 Assigns a tag in the address book to a specified person.
 
-Format: `assign (NAME or INDEX) t/TAG…​`
-* The index must correspond to a person currently displayed.
-* If a name is used instead of an index, it must be the full name of the person.
-For example, `assign John Doe t/friends` instead of `assign John t/friends`.
-* The provided tag(s) have to exist in the EventBook.
-  Examples:
-* `assign 1 t/friends` Assigns the first person in the list a tag named 'Friends'
+Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENT_TAG…​`
+* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENT_TAG`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
+* For example, `assign John Doe t/friends` instead of `assign John t/friends`.
+* The provided tag(s) and event tag(s) have to exist in the EventBook.
+
+Examples:
+* `assign 1 t/friends` Assigns the first person in the list to a tag named `Friends`.
+* `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
 
 ### Searching by tag : `search`
 
-Displays all the people that are tagged with TAGNAME.
+Displays all the people that are tagged with `TAG_NAME`.
 
-Format: `search TAGNAME`
+Format: `search TAG_NAME`
 
 * The search is case-sensitive.
 
 Examples:
-* `search Friend` Displays all people tagged as Friend.
+* `search Friend` Displays all people tagged as `Friend`.
+
 
 ### Switching between events : `switch`
 
-Format: `switch EVENTTAGNAME`
+Format: `switch EVENT_TAG_NAME`
 
-Switches to tab with EVENTTAGNAME. 
+Switches to tab with EVENT_TAG_NAME.
 
 * The search is case-sensitive.
 * The default tab is the `All` tab with full list of contacts displayed.
 
 Examples:
-* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag. 
-
+* `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag.
 
 ### Locating persons by name: `find`
 
@@ -204,17 +232,16 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX or NAME`
+Format: `delete (NAME or INDEX)`
 
 * Deletes the person at the specified `INDEX` or `NAME`.
-* The name provided is case-sensitive.
-* The name provided must be the full name of the person.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
+* For example, `delete John Doe` instead of `delete John`.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete John Doe` deletes the person named 'John Doe' in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -224,14 +251,42 @@ Format: `clear`
 
 ### Importing contacts from .csv : `import`
 
-Imports all contacts from ./import/import.csv
-Format: `import`
-* Requires a file named import.csv to be present at `./import`
+Imports all contacts from given file path (default ./import/import.csv)
+
+Format: `import f/PATH`
+
+* Requires a valid file to be given in the PATH variable
+* If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
 * The format of the first line of the csv should be:
-  NAME | NUMBER | EMAIL | ADDRESS | TAG
-  with no spacing. The titles are non-caps sensitive.
-* The format of each subsequent line should follow the appropriate add command format.
+  `NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS`
+* There should be no trailing empty characters (' ') in any cell.
+* The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
+* The format of each parameter should follow the appropriate add command format.
 * There should be no blank lines, and no conflicts with contacts in the existing address book
+* The `EVENTS` portion must satisfy one of the following format requirements:
+  1. `N/A` if the contact is not in any events, else a field error will occur
+  2. `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` for the first instance of each
+      unique event, unless said tag already exists in the address book, in which case iii. can be used
+  3. `t/E-eventName` for existing events or previously declared events
+     * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
+       then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
+* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
+  consequence of this is that tags containing `|` in their name cannot be imported
+* The default download contains a sample .csv file that one can refer to
+
+Examples:
+* `import f/./import/import.csv` imports the contacts from the specified file
+
+### Exporting contacts from address book : `export`
+
+Exports all contacts to ./export/export.csv
+
+Format: `export`
+
+* If a file export.csv is already present at ./export, it will be overwritten with the
+  current address book data
+* The export file format is the same as the output format given in `import`
+
 
 ### Exiting the program : `exit`
 
@@ -241,17 +296,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EventBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -278,14 +333,18 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Assign** | `assign (NAME or INDEX) [t/TAG]…​` or `assign (NAME or INDEX) [t/E-TAG]…​` <br> e.g.,`assign 2 t/tag1` or `assign John Doe t/E-event1`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete (NAME or INDEX)` <br> e.g., `delete 3` or `delete John Doe`
+**Edit**   | `edit (NAME or INDEX) [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com` or`edit John Doe n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Create Tag** | `ctag TAGNAME` <br> e.g., `ctag Friend`
-**Delete Tag** | `dtag TAGNAME` <br> e.g., `dtag Friend`
-**Import** | `import`
-**Search Tag** | `search TAGNAME` <br> e.g., `search Friend`
-**Switch** | `switch EVENTTAGNAME` <br> e.g. `switch Flag`
+**Create Tag** | `ctag TAG_NAME` <br> e.g., `ctag Friend`
+**Create EventTag** | `ctag t/E-eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
+**Delete Tag** | `dtag TAG_NAME` <br> e.g., `dtag Friend`
+**Delete Event** | `devent EVENT_TAG_NAME` <br> e.g., `devent fire`
+**Import** | `import f/PATH` <br> e.g., `import f/./import/import.csv`
+**Export** | `export`
+**Search Tag** | `search TAG_NAME` <br> e.g., `search Friend`
+**Switch** | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`

@@ -124,9 +124,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void assign(Person targetPerson, Set<Tag> tags) {
-        requireAllNonNull(targetPerson, tags);
-        addressBook.assign(targetPerson, tags);
+    public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
+        requireAllNonNull(targetPerson, tags, eventTags);
+        addressBook.assign(targetPerson, tags, eventTags);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -160,13 +160,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteEventTag(String tagName) {
-        addressBook.removeEventTag(tagName);
-    }
-
-    @Override
     public void addEventTag(EventTag tag) {
-        addressBook.addTag(tag);
+        addressBook.addEventTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -196,12 +191,19 @@ public class ModelManager implements Model {
     public void updateTagPersonList(Tag t) {
         requireNonNull(t);
         if (currentEventTag != null) {
-            Predicate<Person> eventTagPredicate = person -> person.containsTag(currentEventTag);
+            Predicate<Person> eventTagPredicate = person -> person.containsEventTag(currentEventTag);
             Predicate<Person> normalTagPredicate = person -> person.containsTag(t);
             filteredPersons.setPredicate(eventTagPredicate.and(normalTagPredicate));
         } else {
             filteredPersons.setPredicate(person -> person.containsTag(t));
         }
+    }
+
+    @Override
+    public void updateEventTagPersonList(EventTag t) {
+        requireNonNull(t);
+        setCurrentEventTag(t);
+        filteredPersons.setPredicate(person -> person.containsEventTag(currentEventTag));
     }
 
     /**
