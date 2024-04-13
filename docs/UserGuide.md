@@ -14,7 +14,7 @@ Thank you for downloading EventBook as your project management software of choic
 Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
 guides on how to use EventBook.
 <!-- * Table of Contents -->
-<page-nav-print />
+<page-nav-print></page-nav-print>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Product Overview 
@@ -49,7 +49,7 @@ correctly.
 
 4. Open a command terminal (`Terminal` for MacOS, `Windows Terminal` for Windows OS)
     * MacOS
-      1. Right click your _home folder_
+      1. Right-click your _home folder_
       2. Left click on `Services`
       3. Select `New Terminal at Folder`
     * Windows OS
@@ -84,22 +84,38 @@ correctly.
 7. Refer to the [Features](#features) below for details of each command or to [Command Summary](#command-summary)
 for a quick summary.
 
---------------------------------------------------------------------------------------------------------------------
+## Graphical User Interface (GUI)
+![GUI](images/GUI_breakdown.png)
 
-## Features
+EventBook's GUI consists of 5 main components:
+1. Menu Bar
+2. Command Box - enter the command you would like to execute here.
+3. Command Result Box - displays command success/error messages after commands are executed.
+4. Event Tabs Panel - displays all existing Events.
+5. Result Panel - displays contact details of members in the particular Event.
+
+### Person
+The following details are displayed for each contact in EventBook:
+![GUI](images/Person.png)
+This detailed overview enables users to quickly access essential contact information of their event members.
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Note:**<br>
+The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
+</box>
+## Command Format
+
+**Things to take note of before you write your first command:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend` (i.e. 1 time), `t/friend t/family` (i.e. multiple times) etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -107,8 +123,16 @@ for a quick summary.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<box type="info" seamless>
+
+**Note:**<br>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
 
 ### Viewing help : `help`
 
@@ -152,7 +176,7 @@ Format: `edit (NAME or INDEX) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]�
 * For example, `edit John Doe t/friends` instead of `edit John t/friends`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -246,7 +270,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -336,8 +360,7 @@ EventBook data are saved in the hard disk automatically after any command that c
 EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -363,21 +386,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Assign** | `assign (NAME or INDEX) [t/TAG]…​` or `assign (NAME or INDEX) [t/E-TAG]…​` <br> e.g.,`assign 2 t/tag1` or `assign John Doe t/E-event1`
-**Clear**  | `clear`
-**Delete** | `delete (NAME or INDEX)` <br> e.g., `delete 3` or `delete John Doe`
-**Edit**   | `edit (NAME or INDEX) [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com` or`edit John Doe n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Create Tag** | `ctag TAG_NAME` <br> e.g., `ctag Friend`
-**Create EventTag** | `ctag t/E-eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
-**Delete Tag** | `dtag TAG_NAME` <br> e.g., `dtag Friend`
-**Delete Event** | `devent EVENT_TAG_NAME` <br> e.g., `devent fire`
-**Import** | `import f/PATH` <br> e.g., `import f/./import/import.csv`
-**Export** | `export`
-**Search Tag** | `search TAG_NAME` <br> e.g., `search Friend`
-**Switch** | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`
+| Action              | Format, Examples                                                                                                                                                                             |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                        |
+| **Assign**          | `assign (NAME or INDEX) [t/TAG]…​` or `assign (NAME or INDEX) [t/E-TAG]…​` <br> e.g.,`assign 2 t/tag1` or `assign John Doe t/E-event1`                                                       |
+| **Clear**           | `clear`                                                                                                                                                                                      |
+| **Delete**          | `delete (NAME or INDEX)` <br> e.g., `delete 3` or `delete John Doe`                                                                                                                          |
+| **Edit**            | `edit (NAME or INDEX) [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com` or`edit John Doe n/James Lee e/jameslee@example.com` |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
+| **List**            | `list`                                                                                                                                                                                       |
+| **Help**            | `help`                                                                                                                                                                                       |
+| **Create Tag**      | `ctag TAG_NAME` <br> e.g., `ctag Friend`                                                                                                                                                     |
+| **Create EventTag** | `ctag t/E-eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`           |
+| **Delete Tag**      | `dtag TAG_NAME` <br> e.g., `dtag Friend`                                                                                                                                                     |
+| **Delete Event**    | `devent EVENT_TAG_NAME` <br> e.g., `devent fire`                                                                                                                                             |
+| **Import**          | `import f/PATH` <br> e.g., `import f/./import/import.csv`                                                                                                                                    |
+| **Export**          | `export`                                                                                                                                                                                     |
+| **Search Tag**      | `search TAG_NAME` <br> e.g., `search Friend`                                                                                                                                                 |
+| **Switch**          | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`                                                                                                                                              |
