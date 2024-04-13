@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_ALICE;
+import static seedu.address.testutil.TypicalNames.NAME_BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -150,26 +151,36 @@ public class EditCommandTest {
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DUMMY_NAME, DESC_AMY);
+        final EditCommand standardCommand2 = new EditCommand(null, NAME_ALICE.toString(), DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, DUMMY_NAME, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
+        EditCommand commandWithSameValuesByName = new EditCommand(null, NAME_ALICE.toString(), copyDescriptor);
+        assertTrue(standardCommand2.equals(commandWithSameValuesByName));
+
+
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
+        assertTrue(standardCommand2.equals(standardCommand2));
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
+        assertFalse(standardCommand2.equals(null));
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand2.equals(new ClearCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DUMMY_NAME, DESC_AMY)));
+        assertFalse(standardCommand2.equals(new EditCommand(null, NAME_BOB.toString(), DESC_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DUMMY_NAME, DESC_BOB)));
+        assertFalse(standardCommand2.equals(new EditCommand(null, NAME_BOB.toString(), DESC_BOB)));
     }
 
     @Test

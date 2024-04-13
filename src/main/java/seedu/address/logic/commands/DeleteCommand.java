@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -81,7 +82,8 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex) && targetName.equals(otherDeleteCommand.targetName);
+        return Objects.equals(targetIndex, otherDeleteCommand.targetIndex)
+                && Objects.equals(targetName, otherDeleteCommand.targetName);
     }
 
     @Override

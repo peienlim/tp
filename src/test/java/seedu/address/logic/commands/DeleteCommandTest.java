@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_ALICE;
+import static seedu.address.testutil.TypicalNames.NAME_BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,13 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_invalidNameUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(null, "InvalidName");
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+    }
+
+    @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -85,22 +93,29 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, DUMMY_NAME);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, DUMMY_NAME);
+        DeleteCommand deleteThirdCommand = new DeleteCommand(null, NAME_ALICE.toString());
+        DeleteCommand deleteFourthCommand = new DeleteCommand(null, NAME_BOB.toString());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteThirdCommand.equals(deleteThirdCommand));
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON, DUMMY_NAME);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        DeleteCommand deleteThirdCommandCopy = new DeleteCommand(null, NAME_ALICE.toString());
+        assertTrue(deleteThirdCommand.equals(deleteThirdCommandCopy));
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteThirdCommand.equals(null));
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(deleteThirdCommand.equals(deleteFourthCommand));
     }
 
     @Test
