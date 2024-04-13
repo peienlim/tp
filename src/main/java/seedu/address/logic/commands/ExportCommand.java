@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.ImportExportSyntax.NUMBER_OF_FIELDS;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,7 +48,7 @@ public class ExportCommand extends Command {
 
         try {
             File exportFile = new File(EXPORT_PATH);
-            FileWriter fw = new FileWriter(exportFile);
+            FileWriter fw = new FileWriter(exportFile, StandardCharsets.UTF_8);
 
             for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
                 fw.write(FIELDS.get(i));
@@ -77,7 +78,9 @@ public class ExportCommand extends Command {
                         eTagsString.append(eTag.getCodeFormat()).append("|");
                     }
                 }
-                eTagsString.deleteCharAt(eTagsString.length() - 1);
+                if (eTagsString.length() != 0) {
+                    eTagsString.deleteCharAt(eTagsString.length() - 1);
+                }
                 fw.write(eTagsString.toString());
                 fw.write(",");
 
@@ -86,7 +89,9 @@ public class ExportCommand extends Command {
                 for (Tag tag : tags) {
                     tagsString.append(tag.tagName).append("|");
                 }
-                tagsString.deleteCharAt(tagsString.length() - 1);
+                if (tagsString.length() != 0) {
+                    tagsString.deleteCharAt(tagsString.length() - 1);
+                }
                 fw.write(tagsString.toString());
                 fw.write(",");
                 fw.write("\n");
