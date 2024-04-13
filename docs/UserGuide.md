@@ -6,26 +6,62 @@
 
 # EventBook User Guide
 
-EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
+## Welcome to EventBook!
 
+Thank you for downloading EventBook as your project management software of choice! 
+
+
+Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
+guides on how to use EventBook.
 <!-- * Table of Contents -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+## Product Overview 
+
+EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Using This User Guide
+
+This user guide provides in-depth summaries of all the commands available to you. To make it easier to find the information you need, you can either:
+1. Refer to the Table of Contents above
+2. Search within the guide with the following steps:
+   1. Press Ctrl + F (Windows OS) or Cmd + F (MacOS)
+   2. A search box or dialogue should appear on your screen
+   3. Type the keyword or phrase that you want to find into the search box and press enter
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
+Before we can begin using EventBook, we advise you to follow the simple steps below to ensure that EventBook is set up
+correctly.
+
 1. Ensure you have Java `11` or above installed in your Computer.
+   * MacOS: [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
+   * Windows OS: [link](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx#zulu)
 
-1. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
+2. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your EventBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your EventBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventBook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal (`Terminal` for MacOS, `Windows Terminal` for Windows OS)
+    * MacOS
+      1. Right click your _home folder_
+      2. Left click on `Services`
+      3. Select `New Terminal at Folder`
+    * Windows OS
+      1. Using `Windows Explorer`, navigate to your _home folder_
+      2. Right click anywhere in the folder
+      3. Left click on `Open in Windows Terminal`
+    
+5. Use the `java -jar EventBook.jar` command to run the application.<br>
+      A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+      ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -45,7 +81,8 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
    * `search Friend` : Displays all contacts with the tag 'Friend'.
    * `switch Flag` : Switches to 'Flag' event tab to show contacts.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command or to [Command Summary](#command-summary)
+for a quick summary.
 
 --------------------------------------------------------------------------------------------------------------------
 
