@@ -12,7 +12,26 @@ EventBook is a **desktop app for Student Leaders to manage the contacts from dif
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-## Graphical User Interface
+## Graphical User Interface (GUI)
+![GUI](images/GUI_breakdown.png)
+
+EventBook's GUI consists of 5 main components:
+1. Menu Bar 
+2. Command Box - enter the command you would like to execute here. 
+3. Command Result Box - displays command success/error messages after commands are executed.
+4. Event Tabs Panel - displays all existing Events. 
+5. Result Panel - displays contact details of members in the particular Event.
+
+### Person
+The following details are displayed for each contact in EventBook:
+![GUI](images/Person.png)
+This detailed overview enables users to quickly access essential contact information of their event members.
+
+<box type="info" seamless>
+
+**Note:**<br>
+The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel. 
+</box>
 
 ## Quick start
 
@@ -77,8 +96,6 @@ If you are using a PDF version of this document, be careful when copying and pas
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
-
 
 ### Viewing help : `help`
 
