@@ -265,6 +265,7 @@ Format: `import f/PATH`
        then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
 * The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
   consequence of this is that tags containing `|` in their name cannot be imported
+* Ensure that the file provided is saved before used as an import file
 * The default download contains a sample .csv file that one can refer to
 
 Examples:
@@ -276,6 +277,8 @@ Exports all contacts to ./export/export.csv
 
 Format: `export`
 
+* Note that moving files around may cause export to fail. If one relocates the source files, one must
+  ensure that the ./export directory exists for the export.csv to generate at
 * If a file export.csv is already present at ./export, it will be overwritten with the
   current address book data
 * The export file format is the same as the output format given in `import`
