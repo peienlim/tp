@@ -19,7 +19,7 @@ public class DtagCommandParser implements Parser<DtagCommand> {
     public DtagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String tagName = args.trim();
-        if (tagName.isEmpty()) {
+        if (tagName.isEmpty() || tagName.contains(" ")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DtagCommand.MESSAGE_USAGE));
         }
