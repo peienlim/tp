@@ -8,8 +8,7 @@
 
 ## Welcome to EventBook!
 
-Thank you for downloading EventBook as your project management software of choice! 
-
+Thank you for downloading EventBook as your project management software of choice!
 
 Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
 guides on how to use EventBook.
@@ -17,6 +16,7 @@ guides on how to use EventBook.
 <page-nav-print></page-nav-print>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Product Overview 
 
 EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
