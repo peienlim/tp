@@ -143,8 +143,13 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index) && name.equals(otherEditCommand.name)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        boolean indexEquals = (index == null && otherEditCommand.index == null)
+                || (index != null && index.equals(otherEditCommand.index));
+        boolean nameEquals = (name == null && otherEditCommand.name == null)
+                || (name != null && name.equals(otherEditCommand.name));
+        boolean descriptorEquals = editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+
+        return indexEquals && nameEquals && descriptorEquals;
     }
 
     @Override
