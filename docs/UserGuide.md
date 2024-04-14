@@ -13,7 +13,7 @@ Thank you for downloading EventBook as your project management software of choic
 Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
 guides on how to use EventBook.
 <!-- * Table of Contents -->
-<page-nav-print></page-nav-print>
+<page-nav-print>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -104,9 +104,40 @@ This detailed overview enables users to quickly access essential contact informa
 **Note:**<br>
 The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
 </box>
+
+
+
+## Try Out Your First Commands! 
+Ready to dive in? Let's try out a few commands to get you started with EventBook:
+1. Open EventBook if you haven't already done so by following the steps outlined in the [Quick Start](#quick-start) section.
+2. First, let's start with **adding a new contact**. In the command box, type the following command: <br>
+```
+add n/Xavier Tan p/98765432 e/xavt@example.com a/Ang Mo Kio street 2, Block 123, #01-01
+``` 
+* This command will add a new contact named "Xavier Tan" with the provided phone number, email address, and address details. 
+* Scroll to the bottom of the list of contacts, you will find that Xavier Tan has been successfully added to your contacts!
+3. Now, let's **tag** Xavier as the vice-project director `VPD` of the `Flag` event. Enter the following command in the command box:
+```
+assign Xavier Tan t/VPD t/E-Flag
+```
+* You will see Xavier has been assigned two new tags: a blue `VPD` tag and a purple `Flag` event tag.
+4. Next, let's try **switching to the Flag event tab** to view its members. In the command box, type the following command: <br> 
+```
+switch Flag
+```
+* Notice that the highlighted tab on the left switches from the `All` tab to the `Flag` tab, and all listed contacts have the `Flag` event tag. 
+5. To **switch back to the `All` tab** to view all your contacts, enter the following command:
+```
+list
+```
+6. Experiment with other basic commands that we have listed in the [Quick Start](#quick-start) section the to get a feel for how EventBook works! <br> 
+
+Now that you are all warmed up, let's delve deeper into the details of each command and how you can use them to supercharge your event management in the next section!
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command Format
 
-**Things to take note of before you write your first command:**<br>
+**Things to take note of before about the format of commands:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -130,9 +161,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 </box>
 
---------------------------------------------------------------------------------------------------------------------
-
-## Features
+## Commands
 
 The EventBook app feature can be broken down into roughly 3 categories - managing events and tags, managing contacts and general functions, which are all listed below.
 
@@ -436,6 +465,7 @@ EventBook data are saved in the hard disk automatically after any command that c
 EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
+
 **Caution:**
 If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
