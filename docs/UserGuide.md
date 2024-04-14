@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # EventBook User Guide
@@ -13,11 +13,11 @@ Thank you for downloading EventBook as your project management software of choic
 Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
 guides on how to use EventBook.
 <!-- * Table of Contents -->
-<page-nav-print></page-nav-print>
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Product Overview 
+## Product Overview
 
 EventBook is a **desktop application for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
 
@@ -25,12 +25,14 @@ EventBook is a **desktop application for Student Leaders to manage the contacts 
 
 ## Using This User Guide
 
-This user guide provides in-depth summaries of all the commands available to you. To make it easier to find the information you need, you can either:
+This user guide provides in-depth summaries of all the commands available to you. To make it easier to find the
+information you need, you can either:
+
 1. Refer to the Table of Contents above
 2. Search within the guide with the following steps:
-   1. Press Ctrl + F (Windows OS) or Cmd + F (MacOS)
-   2. A search box or dialogue should appear on your screen
-   3. Type the keyword or phrase that you want to find into the search box and press enter
+    1. Press Ctrl + F (Windows OS) or Cmd + F (MacOS)
+    2. A search box or dialogue should appear on your screen
+    3. Type the keyword or phrase that you want to find into the search box and press enter
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -40,8 +42,9 @@ Before we can begin to use EventBook, we advise you to follow the simple steps b
 correctly.
 
 1. Ensure you have Java `11` or above installed in your Computer.
-   * MacOS: [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
-   * Windows OS: [link](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx#zulu)
+    * MacOS: [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
+    * Windows
+      OS: [link](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx#zulu)
 
 2. Download the latest `EventBook.jar` from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases).
 
@@ -49,19 +52,20 @@ correctly.
 
 4. Open a command terminal (`Terminal` for MacOS, `Windows Terminal` for Windows OS)
     * MacOS
-      1. Right-click your _home folder_
-      2. Left click on `Services`
-      3. Select `New Terminal at Folder`
+        1. Right-click your _home folder_
+        2. Left click on `Services`
+        3. Select `New Terminal at Folder`
     * Windows OS
-      1. Using `Windows Explorer`, navigate to your _home folder_
-      2. Right click anywhere in the folder
-      3. Left click on `Open in Windows Terminal`
-    
-5. Use the `java -jar EventBook.jar` command to run the application.<br>
-      A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-      ![Ui](images/Ui.png)
+        1. Using `Windows Explorer`, navigate to your _home folder_
+        2. Right click anywhere in the folder
+        3. Left click on `Open in Windows Terminal`
 
-6. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Use the `java -jar EventBook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+6. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open
+   the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -84,9 +88,11 @@ correctly.
 for a quick summary.
 
 ## Graphical User Interface (GUI)
+
 ![GUI](images/GUI_breakdown.png)
 
 EventBook's GUI consists of 5 main components:
+
 1. Menu Bar
 2. Command Box - enter the command you would like to execute here.
 3. Command Result Box - displays command success/error messages after commands are executed.
@@ -94,11 +100,63 @@ EventBook's GUI consists of 5 main components:
 5. Result Panel - displays contact details of members in the particular Event.
 
 ### Person
+
 The following details are displayed for each contact in EventBook:
 ![GUI](images/Person.png)
 This detailed overview enables users to quickly access essential contact information of their event members.
 
-<box type="info" seamless>
+> [Note]
+> The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
+
+## Try Out Your First Commands!
+
+Ready to dive in? Let's try out a few commands to get you started with EventBook:
+
+1. Open EventBook if you haven't already done so by following the steps outlined in the [Quick Start](#quick-start)
+   section.
+2. First, let's start with **adding a new contact**. In the command box, type the following command: <br>
+
+```
+add n/Xavier Tan p/98765432 e/xavt@example.com a/Ang Mo Kio street 2, Block 123, #01-01
+``` 
+
+* This command will add a new contact named "Xavier Tan" with the provided phone number, email address, and address
+  details.
+* Scroll to the bottom of the list of contacts, you will find that Xavier Tan has been successfully added to your
+  contacts!
+
+3. Now, let's **tag** Xavier as the vice-project director `VPD` of the `Flag` event. Enter the following command in the
+   command box:
+
+```
+assign Xavier Tan t/VPD t/E-Flag
+```
+
+* You will see Xavier has been assigned two new tags: a blue `VPD` tag and a purple `Flag` event tag.
+
+4. Next, let's try **switching to the Flag event tab** to view its members. In the command box, type the following
+   command: <br>
+
+```
+switch Flag
+```
+
+* Notice that the highlighted tab on the left switches from the `All` tab to the `Flag` tab, and all listed contacts
+  have the `Flag` event tag.
+
+5. To **switch back to the `All` tab** to view all your contacts, enter the following command:
+
+```
+list
+```
+
+6. Experiment with other basic commands that we have listed in the [Quick Start](#quick-start) section the to get a feel
+   for how EventBook works! <br>
+
+Now that you are all warmed up, let's delve deeper into the details of each command and how you can use them to
+supercharge your event management in the next section!
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Note:**<br>
 The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
@@ -106,7 +164,7 @@ The default tab on entering the app is the `All` tab, with all contacts in Event
 
 ## Command Format
 
-**Things to take note of before you write your first command:**<br>
+**Things to take note of before about the format of commands:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -115,20 +173,19 @@ The default tab on entering the app is the `All` tab, with all contacts in Event
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend` (i.e. 1 time), `t/friend t/family` (i.e. multiple times) etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend` (i.e. 1 time), `t/friend t/family` (i.e. multiple
+  times) etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-<box type="info" seamless>
-
-**Note:**<br>
-If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-</box>
+> [Note]
+> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+> as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,6 +312,7 @@ Format: `export`
 > There should be an empty folder named `export` inside the folder with `EventBook.jar` to ensure that export function works.
 > 
 ## Managing Events and Tags
+
 ### Creating a tag : `ctag`
 
 This command allows you to create a tag or an event tag in the EventBook. You are able to manage or search for people with the specified tags after creation.
@@ -264,6 +322,7 @@ The `ctag` function allows you to create tags and events tags separately based o
 Format 1: `ctag TAG_NAME`
 
 This format allows you to create tags that you can tag your contacts with!
+
 * The provided name has to be a **_unique_** `tag` name that does not already exist in the EventBook.
 * The field "TAG_NAME" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`.
 * The tag must be a single word. (e.g. `Friends` is allowed but `Good Friends` is forbidden)
@@ -277,26 +336,31 @@ Example: `ctag Friend` creates a tag named `Friend`.
 > 3. Make sure your TAG_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
 > [!TIP]
-> 1. If you want to create a tag with 2 words, consider grouping them together into a single word. For example: "SchoolFriends"
+> 1. If you want to create a tag with 2 words, consider grouping them together into a single word. For example: "
+     SchoolFriends"
 
 Format 2: `ctag t/E-EVENT_NAME dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
 
 This format allows you to create event tags that you can tag your contacts with! How cool!
+
 * The provided name has to be a **_unique_** `EVENT_NAME` name that does not already exist in the EventBook.
 * The field "EVENT_NAME" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`. For instance, `ctag t/E-E-event1 sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02` is not allowed.
 * The tag must be a single word.(e.g. `Meeting` is allowed but `Friends Meeting` is forbidden)
 * No trailing or extra whitespaces are allowed.
 
 Examples:
+
 * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 * Creates an EventTag named orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
 
 > [!TIP]
-> 1. If you want to create an event with 2 words, consider grouping them together into a single word. For example: "SchoolEvent"
+> 1. If you want to create an event with 2 words, consider grouping them together into a single word. For example: "
+     SchoolEvent"
 
 > [!WARNING]
 > 1. All input fields are necessary.
-> 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected, or you will get an incorrect result.
+> 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected, or you
+     will get an incorrect result.
 > 3. Make sure your EVENT_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
 ### Deleting a tag : `dtag`
@@ -314,13 +378,15 @@ Format: `dtag TAG_NAME`
 * The provided tag has to exist in the EventBook.
 
 Examples:
+
 * `dtag Friend` Deletes a tag named `Friend`.
 
 > [!TIP]
 > 1. You can check who is associated with the tag you are deleting by using the [Search](#searching-by-tag--search) command.
 
 > [!NOTE]  
-> If you delete a tag that does not exist, you will get notified by a warning that it does not exist. You will get a success message when you delete an existing tag too.
+> If you delete a tag that does not exist, you will get notified by a warning that it does not exist. You will get a
+> success message when you delete an existing tag too.
 
 > [!WARNING]
 > All input fields are necessary.
@@ -350,7 +416,8 @@ Examples:
 > Make sure your `EVENT_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
 > [!NOTE]  
-> If you delete an event tag that does not exist, you will get notified by a warning that says it does not exist. You will get a success message after deleting an existing tag.
+> If you delete an event tag that does not exist, you will get notified by a warning that says it does not exist. You
+> will get a success message after deleting an existing tag.
 > The event GUI on the left of the screen will update when you delete an existing event.
 > This event tag will be removed from **every** contact tagged with it. This action is also **not** reversible.
 
@@ -359,8 +426,10 @@ Examples:
 This command allows you to assign someone to a tag and group them conveniently! For example, you can assign a person with a tag named `Logistics` or assign a person with an event tag named `Rag`.
 
 Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENT_TAG…​`
+
 * Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENT_TAG`.
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1,
+  2, 3, …​
 * The provided tag(s) and event tag(s) have to exist in the EventBook.
 * No trailing or extra whitespaces are allowed.
 
@@ -369,11 +438,13 @@ Examples:
 * `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
 
 > [!TIP]
-> If you do not have the tag or event tag you are assigning a person with, you can create them with the [ctag](#creating-a-tag--ctag) command.
+> If you do not have the tag or event tag you are assigning a person with, you can create them with
+> the [ctag](#creating-a-tag--ctag) command.
 
 > [!Warning]
-> The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
-For example, `assign John Doe t/friends` instead of `assign John t/friends`.
+> The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the
+> displayed person list.
+> For example, `assign John Doe t/friends` instead of `assign John t/friends`.
 
 ### Searching by tag : `search`
 
@@ -386,6 +457,7 @@ Format: `search TAG_NAME`
 * The provided tag has to exist in the EventBook.
 
 Examples:
+
 * `search Friend` Displays all people tagged as `Friend`.
 
 > [!TIP]
@@ -438,28 +510,32 @@ Format: `exit`
 
 ### Saving the data
 
-EventBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EventBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+save manually.
 
 ### Editing the data file
 
-EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+> [!Caution]
+> If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty
+> data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+> Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside
+> the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Try out your first command!
 
 This section gives you a detailed overview of how to use some basic commands of our EventBook.
 
 ### Clear sample data
 
-To start, if you want to remove the sample contacts in the EventBook, you can use the `clear` command to clear everything!
-Simply type `clear` in the text box at the top of the app! (Do take note that throughout this tutorial, we will not clear the 
+To start, if you want to remove the sample contacts in the EventBook, you can use the `clear` command to clear
+everything!
+Simply type `clear` in the text box at the top of the app! (Do take note that throughout this tutorial, we will not
+clear the
 sample contacts for the convenience doing demo.)
 
 1. Input `clear`.
@@ -469,7 +545,6 @@ sample contacts for the convenience doing demo.)
 
 To tag a person as a friend or any tag you want, you need to first create the tag.
 To start, create a tag called `dummytag`. Do take not tags are alphanumerical, so you cannot do `pen-pal` unfortunately.
-
 
 1. Input `ctag dummytag`.
 2. Success! ![](images/UG/ctagtag_after.png)
@@ -504,7 +579,6 @@ No worries, you can use the search command to find out!
 Oh no, what if I want to delete a tag that I no longer use? No worries, you can use the `dtag` command!
 This command removes the tag you delete for all your contacts so be careful!
 
-
 1. Delete the existing `dummytag` tag using the dtag command `dtag dummytag`.
 2. Success! ![](images/UG/dtag_after.png)
 
@@ -522,7 +596,6 @@ the command `ctag t/E-Orientation dc/SoC Orientation 2024 sd/2024-02-09 20:00:00
 Now you want to assign a person to the Orientation. You can do it with the
 `assign` command.
 
-
 1. Assign John with meeting using `assign Alex Yeoh t/Rag`.
 2. Success! ![](images/UG/assign_e_after.png)
 
@@ -536,6 +609,7 @@ Now you want to assign a person to the Orientation. You can do it with the
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
+
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. When giving enormously long inputs such as long tag/event tag names, the tag will not get fully displayed by the app. 

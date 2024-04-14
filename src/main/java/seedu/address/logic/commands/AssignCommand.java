@@ -25,9 +25,9 @@ public class AssignCommand extends Command {
             + ": Assigns the person identified by the index number or full name used in the displayed person list with"
             + " the given tags.\n"
             + "Parameters: INDEX (must be a positive integer) or NAME (must be the exact full name), TAGS (t/TAGNAME)\n"
-            + "Examples: " + COMMAND_WORD + " 1" + "t/friends"
-            + " or" + COMMAND_WORD + " John Doe" + "t/friends"
-            + " or" + COMMAND_WORD + " 1" + "t/E-eventName";
+            + "Examples: " + COMMAND_WORD + " 1" + " t/friends"
+            + " or " + COMMAND_WORD + " John Doe" + " t/friends"
+            + " or " + COMMAND_WORD + " 1 " + "t/E-eventName";
 
     public static final String MESSAGE_ASSIGN_PERSON_MISSING = "Please provide either a name or index to delete.";
     public static final String MESSAGE_ASSIGN_TAG_MISSING = "Please ensure that all tag(s) provided exist.";
