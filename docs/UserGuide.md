@@ -109,8 +109,9 @@ The following details are displayed for each contact in EventBook:
 ![GUI](images/Person.png)
 This detailed overview enables users to quickly access essential contact information of their event members.
 
-> [Note]
-> The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
+> [**Note**]
+> <br>The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result
+> Panel.
 
 ## Try Out Your First Commands!
 
@@ -183,8 +184,9 @@ supercharge your event management in the next section!
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-> [Note]
-> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+> [**Note**]
+> <br>If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
+> lines
 > as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ## Commands
@@ -211,15 +213,13 @@ This format allows you to create tags that you can tag your contacts with!
 
 Example: `ctag Friend` creates a tag named `Friend`.
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > 1. All input fields are necessary.
-> 2. 2.If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected or you
+> 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected or you
      will get an incorrect result.
-> 3.
+> 3. Make sure your TAG_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
-3. Make sure your TAG_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
-
-> [!TIP]
+> [**💡TIP💡**]
 > 1. If you want to create a tag with 2 words, consider grouping them together into a single word. For example: "
      SchoolFriends"
 
@@ -237,11 +237,11 @@ Examples:
 * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 * Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. If you want to create an event with 2 words, consider grouping them together into a single word. For example: "
      SchoolEvent"
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > 1. All input fields are necessary.
 > 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected, or you
      will get an incorrect result.
@@ -265,15 +265,15 @@ Examples:
 
 * `dtag Friend` Deletes a tag named `Friend`.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. You can check who is the associated with the tag you are deleting by using the [Search](#searching-by-tag--search)
      command.
 
-> [!NOTE]  
+> [**NOTE**]  
 > If you delete a tag that does not exist, you will get notified by a warning that it does not exist. You will get a
 > success message when you delete an existing tag too.
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > All input fields are necessary.
 > This tag will be removed from **every** contact tagged with it. This action is also **not** reversible.
 > Make sure your `TAG_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
@@ -295,14 +295,14 @@ Examples:
 
 * `devent bonfire` Deletes an EventTag named `bonfire`.
 
-> [!TIP]
+> [**💡TIP💡**]
 > You can do a quick check of who is using the event by using the [Switch](#switching-between-events--switch), do take
 > note that the event panel at the left of the GUI is not clickable.
 
-> [!Warning]
+> [**❗WARNING❗**]
 > Make sure your `EVENT_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
-> [!NOTE]  
+> [**NOTE**]  
 > If you delete an event tag that does not exist, you will get notified by a warning that says it does not exist. You
 > will get a success message after deleting an existing tag.
 > The event GUI on the left of the screen will update when you delete an existing event.
@@ -327,12 +327,12 @@ Examples:
 * `assign 1 t/friends` Assigns the first person in the list to a tag named `Friends`.
 * `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
 
-> [!TIP]
-> If you do not have the tag or event tag you are assigning a person with, you can create them with
+> [**💡TIP💡**]
+> <br>If you do not have the tag or event tag you are assigning a person with, you can create them with
 > the [ctag](#creating-a-tag--ctag) command.
 
-> [!Warning]
-> The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the
+> [**❗WARNING❗**]
+> <br>The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the
 > displayed person list.
 > For example, `assign John Doe t/friends` instead of `assign John t/friends`.
 
@@ -351,8 +351,8 @@ Examples:
 
 * `search Friend` Displays all people tagged as `Friend`.
 
-> [!TIP]
-> After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
+> [**💡TIP💡**]
+> <br>After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
 > command by typing list in the command box.
 
 ### Switching between events : `switch`
@@ -364,8 +364,8 @@ Switches to tab with EVENT_TAG_NAME.
 * The search is case-sensitive.
 * The default tab is the `All` tab with full list of contacts displayed.
 
-> [!TIP]
-> After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
+> [**💡TIP💡**]
+> <br>After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
 > command by typing list in the command box.
 
 ### Viewing help : `help`
@@ -382,8 +382,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-> [!Tip]
-> A person can have any number of tags (including 0)
+> [**💡TIP💡**]
+> <br>A person can have any number of tags (including 0)
 
 
 Examples:
@@ -529,8 +529,8 @@ welcome to update data directly by editing that data file.
 
 
 
-> [!Caution]
-> If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty
+> [**❗WARNING❗**]
+> <br>If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty
 > data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 > Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside
 > the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -541,9 +541,10 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Try out your first command!
+## Setting Up Your First Event!
 
-This section would guide you through some basic commands of EventBook, and how to use them.
+This section would guide you through some basic commands of EventBook, and how to use them to set up your first event
+with contacts and tags.
 
 ### Clear sample data
 
@@ -553,7 +554,7 @@ Simply type `clear` in the text box at the top of the app! (Do take note that th
 clear the
 sample contacts for the convenience doing demo.)
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Input `clear`. ![](images/UG/clear_before.png)
 > 2. Success! ![](images/UG/clear_after.png)
 
@@ -561,14 +562,14 @@ sample contacts for the convenience doing demo.)
 
 To tag a person as a friend or any tag you want, you need to first create the tag.
 To start, create a tag called `penpal`. Do take not tags are alphanumerical, so you cannot do `pen-pal` unfortunately.
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Input `ctag penpal`. ![](images/UG/ctagtag_before.png)
 > 2. Success! ![](images/UG/ctagtag_after.png)
 
 ### Tag a person with assign
 
 To finally tag the person who is your pen-pal, we use the assign command.
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Assign the person of interest with your tag! For this example,
      we assign John as our pen-pal with `assign penpal`. ![](images/UG/assign_before.png)
 > 2. Success! ![](images/UG/assign_after.png)
@@ -578,7 +579,7 @@ To finally tag the person who is your pen-pal, we use the assign command.
 You may want to say, what if I don't remember how many pen-pal, or, how many friends I have in my contact?
 No worries, you can use the search command to find out!
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Search for pen-pals using the search command `search penpal`. ![](images/UG/assign_before.png)
 > 2. Success! ![](images/UG/assign_after.png)
 > 3. To see all the existing contacts again, type `list` in the input box to reset everything!
@@ -588,7 +589,7 @@ No worries, you can use the search command to find out!
 Oh no, what if I want to delete a tag that I no longer use? No worries, you can use the `dtag` command!
 This command removes the tag you delete for all your contacts so be careful!
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Delete the existing `penpal` tag using the dtag command `dtag penpal`. ![](images/UG/dtag_before.png)
 > 2. Success! ![](images/UG/dtag_after.png)
 
@@ -598,7 +599,7 @@ Ok, what if you have an event that you need to group people to, like a meeting o
 can assign people to events
 and manage them as well. But first, you should create an event first with `ctag`.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Create an event called **meeting** from 9 Feb 8p.m to 9p.m with
      the
      command `ctag t/E-meeting dc/meeting for work! sd/2024-02-09 20:00:00 ed/2024-02-09 20:00:00`. ![](images/UG/cetag_before.png)
@@ -609,7 +610,7 @@ and manage them as well. But first, you should create an event first with `ctag`
 Now you want to assign a person to the event meeting.(A.k.a a person is in the meeting). You can do it with the
 `assign` command.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Assign John with meeting using `assign John t/E-meeting`. ![](images/UG/assign_e_before.png)
 > 2. Success! ![](images/UG/assign_e_after.png)
 
@@ -618,7 +619,7 @@ Now you want to assign a person to the event meeting.(A.k.a a person is in the m
 Ok, I want to check who is in an event or the event details, how can I do it?
 No worries pal, we got you covered. To figure out who is in any event, use the `switch` command.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. Figure out who is in the event **meeting** and the time and description of meeting,
      use `switch meeting`. ![](images/UG/switch_before.png)
 > 2. Success! ![](images/UG/switch_after.png)
