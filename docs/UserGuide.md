@@ -173,6 +173,9 @@ The default tab on entering the app is the `All` tab, with all contacts in Event
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items in round brackets specify two possible parameter types
+  e.g. `(NAME or INDEX)` means that either `NAME` or `INDEX` should fill that parameter
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend` (i.e. 1 time), `t/friend t/family` (i.e. multiple
   times) etc.
@@ -273,28 +276,36 @@ This command allows you to imports all contacts from given file path (default ./
 
 Format: `import f/PATH`
 
-* Requires a valid file to be given in the PATH variable
-* If PATH is left empty (i.e. `import f/`) the default file referenced is ./import/import.csv
-* The format of the first line of the csv should be:
-  `NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS`
-* There should be no trailing empty characters (' ') in any cell.
-* The titles are non-caps sensitive (`Name` pr `NaME` would also be valid)
-* The format of each parameter should follow the appropriate add command format.
-* There should be no blank lines, and no conflicts with contacts in the existing EventBook.
-* The `EVENTS` portion must satisfy one of the following format requirements:
+* Requires a valid file to be given in the `PATH` parameter
+* If PATH is left empty (i.e. `import f/`) the default file referenced is `./import/import.csv`
+* A sample is provided below. Note the fields in the first row and the data in subsequent rows.
+  ![result for 'find alex david'](images/ImportSample.jpg)
+
+* Fields:
+  * The format of the first line of the csv should contain the fields:
+    `NAME,NUMBER,EMAIL,ADDRESS,EVENTS,TAGS` as above (.csv is comma delimited, so that means 
+    each field should be in their own cell)
+  * The fields are non-caps sensitive (`Name` pr `NaME` would also be valid)
+* Parameters:
+  * The format of each parameter should follow the same format as in the add command format.
+  * There should be no blank lines, and no conflicts with contacts in the existing EventBook (e.g. You cannot
+    import a contact if EventBook already contains a contact with the exact same name)
+  * There should be no trailing empty characters (' ') in any cell.
+* The `EVENTS` parameter must satisfy one of the following format requirements:
     1. `N/A` if the contact is not in any events, else a field error will occur
     2. `t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` for the first instance of each
        unique event, unless said tag already exists in the EventBook, in which case iii. can be used
     3. `t/E-eventName` for existing events or previously declared events
         * e.g. If the first contact has `t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`,
           then further contacts may simply have `t/E-orientation` under the `EVENTS` fields
-* The `TAGS` and `EVENTS` portion accept multiple tags delimited by the `|` character (e.g. Friend|Colleague). A
+* The `TAGS` and `EVENTS` portion accept multiple arguments delimited by the `|` character (e.g. Friend|Colleague). A
   consequence of this is that tags containing `|` in their name cannot be imported
 * Ensure that the file provided is saved before used as an import file
 * The default download contains a sample .csv file that one can refer to
 
 Examples:
 * `import f/./import/import.csv` imports the contacts from the specified file
+* `import f/` is identical to running the above command
 
 ### Exporting contacts from EventBook : `export`
 
@@ -310,7 +321,8 @@ Format: `export`
 
 > [**❗WARNING❗**]
 > There should be an empty folder named `export` inside the folder with `EventBook.jar` to ensure that export function works.
-> 
+>
+
 ## Managing Events and Tags
 
 ### Creating a tag : `ctag`
