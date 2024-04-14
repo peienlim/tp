@@ -105,8 +105,9 @@ The following details are displayed for each contact in EventBook:
 ![GUI](images/Person.png)
 This detailed overview enables users to quickly access essential contact information of their event members.
 
-> [Note]
-> The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
+> [**Note**]
+> <br>The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result
+> Panel.
 
 ## Try Out Your First Commands!
 
@@ -183,8 +184,9 @@ The default tab on entering the app is the `All` tab, with all contacts in Event
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-> [Note]
-> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+> [**Note**]
+> <br>If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
+> lines
 > as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -200,14 +202,12 @@ This command allows you to add a person to the EventBook.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > Names must consist **solely** of alphabetic characters; any inclusion of numbers or symbols is not permitted.
 > This is to ensure that `delete 2` does not create an ambiguity on whether to delete the person with the name `2` or the person at index `2`.
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0).
-</box>
+> [**💡TIP💡**]
+> <br>A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -308,7 +308,7 @@ Format: `export`
   current EventBook data
 * The export file format is the same as the output format given in `import`
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > There should be an empty folder named `export` inside the folder with `EventBook.jar` to ensure that export function works.
 > 
 ## Managing Events and Tags
@@ -330,12 +330,12 @@ This format allows you to create tags that you can tag your contacts with!
 
 Example: `ctag Friend` creates a tag named `Friend`.
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > 1. All input fields are necessary.
 > 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected or you will get an incorrect result.
 > 3. Make sure your TAG_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. If you want to create a tag with 2 words, consider grouping them together into a single word. For example: "
      SchoolFriends"
 
@@ -353,11 +353,11 @@ Examples:
 * `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
 * Creates an EventTag named orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. If you want to create an event with 2 words, consider grouping them together into a single word. For example: "
      SchoolEvent"
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > 1. All input fields are necessary.
 > 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected, or you
      will get an incorrect result.
@@ -381,14 +381,14 @@ Examples:
 
 * `dtag Friend` Deletes a tag named `Friend`.
 
-> [!TIP]
+> [**💡TIP💡**]
 > 1. You can check who is associated with the tag you are deleting by using the [Search](#searching-by-tag--search) command.
 
-> [!NOTE]  
+> [**NOTE**]  
 > If you delete a tag that does not exist, you will get notified by a warning that it does not exist. You will get a
 > success message when you delete an existing tag too.
 
-> [!WARNING]
+> [**❗WARNING❗**]
 > All input fields are necessary.
 > This tag will be removed from **every** contact tagged with it. This action is also **not** reversible.
 > Make sure your `TAG_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
@@ -409,13 +409,13 @@ Format: `devent EVENT_TAG`
 Examples:
 * `devent orientation` Deletes an EventTag named `orientation`.
 
-> [!TIP]
+> [**💡TIP💡**]
 > You can do a quick check of who is in the event by using the [Switch](#switching-between-events--switch), do take note that the event panel at the left of the GUI is not clickable.
 
-> [!Warning]
+> [**❗WARNING❗**]
 > Make sure your `EVENT_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
 
-> [!NOTE]  
+> [**NOTE**]  
 > If you delete an event tag that does not exist, you will get notified by a warning that says it does not exist. You
 > will get a success message after deleting an existing tag.
 > The event GUI on the left of the screen will update when you delete an existing event.
@@ -437,12 +437,12 @@ Examples:
 * `assign 1 t/Logistics` Assigns the first person in the list to a tag named `Logistics`.
 * `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
 
-> [!TIP]
-> If you do not have the tag or event tag you are assigning a person with, you can create them with
+> [**💡TIP💡**]
+> <br>If you do not have the tag or event tag you are assigning a person with, you can create them with
 > the [ctag](#creating-a-tag--ctag) command.
 
-> [!Warning]
-> The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the
+> [**❗WARNING❗**]
+> <br>The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the
 > displayed person list.
 > For example, `assign John Doe t/friends` instead of `assign John t/friends`.
 
@@ -460,9 +460,9 @@ Examples:
 
 * `search Friend` Displays all people tagged as `Friend`.
 
-> [!TIP]
-> After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list) 
-command.
+> [**💡TIP💡**]
+> <br>After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
+> command.
 
 ### Switching between events : `switch`
 
@@ -476,7 +476,7 @@ Format: `switch EVENT_TAG_NAME`
 Examples:
 * `switch Flag` Switches to `Flag` event tab and shows all members tagged with `Flag` event tag.
 
-> [!TIP]
+> [**💡TIP💡**]
 > After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
 command.
 
@@ -518,17 +518,18 @@ save manually.
 EventBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
-> [!Caution]
-> If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty
+> [**❗WARNING❗**]
+> <br>If your changes to the data file makes its format invalid, EventBook will discard all data and start with an empty
 > data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 > Furthermore, certain edits can cause the EventBook to behave in unexpected ways (e.g., if a value entered is outside
 > the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Try out your first command!
+## Setting Up Your First Event!
 
-This section gives you a detailed overview of how to use some basic commands of our EventBook.
+This section would guide you through some basic commands of EventBook, and how to use them to set up your first event
+with contacts and tags.
 
 ### Clear sample data
 
@@ -587,13 +588,13 @@ This command removes the tag you delete for all your contacts so be careful!
 Ok, what if you have an event that you need to group people to, like a Orientation for 9 Feb 2024 8pm? No worries, you can assign people to events
 and manage them as well. But first, you should create an event first with `ctag`.
 
-1. Create an event called **meeting** from 9 Feb 8p.m to 9p.m with 
+1. Create an event called **Orientation** for 9 Feb 8pm with 
 the command `ctag t/E-Orientation dc/SoC Orientation 2024 sd/2024-02-09 20:00:00 ed/2024-02-09 20:00:00`.
 2. Success! ![](images/UG/cetag_after.png)
 
 ### Assign a person to the event with `assign`
 
-Now you want to assign a person to the Orientation. You can do it with the
+Now you want to assign a person to the Rag. You can do it with the
 `assign` command.
 
 1. Assign John with meeting using `assign Alex Yeoh t/Rag`.
