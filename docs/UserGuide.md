@@ -8,8 +8,7 @@
 
 ## Welcome to EventBook!
 
-Thank you for downloading EventBook as your project management software of choice! 
-
+Thank you for downloading EventBook as your project management software of choice!
 
 Choose a topic from the table of contents below / or in the sidebar to find answers, or step-by-step
 guides on how to use EventBook.
@@ -17,6 +16,7 @@ guides on how to use EventBook.
 <page-nav-print></page-nav-print>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Product Overview 
 
 EventBook is a **desktop app for Student Leaders to manage the contacts from different events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EventBook can get your contact management tasks done faster than traditional GUI apps.
@@ -134,6 +134,159 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ## Features
 
+The EventBook app feature can be broken down into roughly 3 categories - managing events and tags, managing contacts and general functions, which are all listed below.
+
+## Managing Events and Tags
+### Creating a tag : `ctag`
+
+Creates a tag in the address book or an event tag, this allows you to manage or search for people using such tags or event tags.
+The `ctag` function allows you to create tags and events tags separately based on different input formats listed below.
+
+Format 1: `ctag TAG_NAME`
+
+This format allows you to create tags that you can tag your contacts with!
+* The provided name has to be a **_unique_** `tag` name that does not already exist in the EventBook.
+* The field "TAG_NAME" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`.
+* The tag must be a single word.(e.g. `Friends` is allowed but `Good Friends` is forbidden)
+* No trailing or extra whitespaces are allowed.
+
+Example: `ctag Friend` creates a tag named `Friend`.
+
+> [!WARNING]
+> 1. All input fields are necessary.
+> 2. 2.If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected or you will get an incorrect result.
+> 3. 3. Make sure your TAG_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
+
+> [!TIP]
+> 1. If you want to create a tag with 2 words, consider grouping them together into a single word. For example: "SchoolFriends"
+
+Format 2: `ctag t/E-EVENT_NAME dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
+
+This format allows you to create event tags that you can tag your contacts with! How cool!
+* The provided name has to be a **_unique_** `EVENT_NAME` name that does not already exist in the EventBook.
+* The field "EVENT_NAME" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`.
+* The tag must be a single word.(e.g. `Meeting` is allowed but `Friends Meeting` is forbidden)
+* No trailing or extra whitespaces are allowed.
+
+Examples:
+* `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
+* Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
+
+> [!TIP]
+> 1. If you want to create an event with 2 words, consider grouping them together into a single word. For example: "SchoolEvent"
+
+> [!WARNING]
+> 1. All input fields are necessary.
+> 2. If you miss out any of the mandatory fields, or has input the wrong format, your input will get rejected, or you will get an incorrect result.
+> 3. Make sure your EVENT_NAME is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
+
+### Deleting a tag : `dtag`
+
+`dtag` deletes an existing tag in the EventBook. This is done to allow you to free up memory space by 
+deleting tags that you will no longer use, how thoughtful of us:). 
+This command also deletes this tag from all the contacts in your list.
+
+Format: `dtag TAG_NAME`
+
+* The provided name has to be a  `TAG_NAME` name that already exists in the EventBook.
+* The field "TAG_NAME" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`.
+* The tag must be a single word.(In fact, you can only create tags with single word inputs.)
+* No trailing or extra whitespaces are allowed.
+* The provided tag has to exist in the EventBook.
+
+Examples:
+* `dtag Friend` Deletes a tag named `Friend`.
+
+> [!TIP]
+> 1. You can check who is the associated with the tag you are deleting by using the [Search](#searching-by-tag--search) command.
+
+> [!NOTE]  
+> If you delete a tag that does not exist, you will get notified by a warning that it does not exist. You will get a success message when you delete an existing tag too.
+
+> [!WARNING]
+> All input fields are necessary.
+> This tag will be removed from **every** contact tagged with it. This action is also **not** reversible.
+> Make sure your `TAG_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
+
+### Deleting an EventTag : `devent`
+
+This command Deletes an event tag for you. Convenient to do so what an event is over, right? 
+Take note that this command also deletes this event tag from all the contacts that are associated with it.
+
+Format: `devent EVENT_TAG`
+
+* The provided name has to be an `EVENT_TAG` name that already exists in the EventBook.
+* The field "EVENT_TAG" allows only alphanumerical inputs, eg. `0-9`,`a-z,A-Z`.
+* The event tag must be a single word.(In fact, you can only create event tags with single word inputs.)
+* No trailing or extra whitespaces are allowed.
+* The provided event tag has to exist in the EventBook.
+
+Examples:
+* `devent bonfire` Deletes an EventTag named `bonfire`.
+
+> [!TIP]
+> You can do a quick check of who is using the event by using the [Switch](#switching-between-events--switch), do take note that the event panel at the left of the GUI is not clickable.
+
+> [!Warning]
+> Make sure your `EVENT_NAME` is alphanumerical(`0-9`,`a-z,A-Z`) with no whitespaces in between them.
+
+> [!NOTE]  
+> If you delete an event tag that does not exist, you will get notified by a warning that says it does not exist. You will get a success message after deleting an existing tag.
+> The event GUI on the left of the screen will update when you delete an existing event.
+> This event tag will be removed from **every** contact tagged with it. This action is also **not** reversible.
+
+### Assigning a tag : `assign`
+
+Assign someone with a tag so to group them conveniently! For example, you can assign a new friend you meet in school with
+the tags 'school' and 'friend'!
+
+Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENT_TAG…​`
+* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENT_TAG`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The provided tag(s) and event tag(s) have to exist in the EventBook.
+* No trailing or extra whitespaces are allowed.
+
+Examples:
+* `assign 1 t/friends` Assigns the first person in the list to a tag named `Friends`.
+* `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
+
+> [!TIP]
+> If you do not have the tag or event tag you are assigning a person with, you can create them with the [ctag](#creating-a-tag--ctag) command.
+
+> [!Warning]
+> The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list. 
+For example, `assign John Doe t/friends` instead of `assign John t/friends`.
+
+### Searching by tag : `search`
+
+Displays all the people that are tagged with `TAG_NAME`. We know that to search for a list people who are tagged as **Friend**,
+you are tempted to do `search Friends`, plural. However, this is not supported:(.
+
+Format: `search TAG_NAME`
+
+* The search is case-sensitive.
+* The provided tag has to exist in the EventBook.
+
+Examples:
+* `search Friend` Displays all people tagged as `Friend`.
+
+> [!TIP]
+> After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list) 
+command by typing list in the command box.
+
+### Switching between events : `switch`
+
+Format: `switch EVENT_NAME`
+
+Switches to tab with EVENT_TAG_NAME.
+
+* The search is case-sensitive.
+* The default tab is the `All` tab with full list of contacts displayed.
+
+> [!TIP]
+> After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
+command by typing list in the command box.
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -141,7 +294,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -184,82 +336,6 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit Ben n/Betsy Crower t/` Edits the person named Ben to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Creating a tag : `ctag`
-
-Creates a tag in the address book or an event tag.
-
-Format 1: `ctag TAG_NAME`
-* The provided name has to be a unique tag name that does not already exist in the address book.
-
-Examples:
-* `ctag Friend` Creates a tag named `Friend`.
-
-Format 2: `ctag t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss`
-* The provided name has to be a unique tag name that does not already exist in the address book.
-
-Examples:
-* `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`
-* Creates an EventTag called orientation that starts from 2024-04-04 02:02:02 to 2024-04-05 02:02:02.
-
-### Deleting a tag : `dtag`
-
-Deletes a tag in the address book.
-
-Format: `dtag TAG_NAME`
-
-* The provided name has to be a unique tag name that does not already exist in the address book.
-* The provided tag has to exist in the EventBook.
-
-Examples:
-* `dtag Friend` Deletes a tag named `Friend`.
-
-### Deleting an EventTag : `devent`
-
-Deletes an event tag in the address book.
-
-Format: `devent EVENT_TAG_NAME`
-
-* The provided name has to be a unique event tag name that already exist in the address book.
-
-Examples:
-* `devent bonfire` Deletes an EventTag named `bonfire`.
-
-### Assigning a tag : `assign`
-
-Assigns a tag in the address book to a specified person.
-
-Format: `assign (NAME or INDEX) t/TAG…​` or `assign (NAME or INDEX) t/E-EVENT_TAG…​`
-* Assign the person at the specified `INDEX` or `NAME` with the tag `TAG` or with the event tag `EVENT_TAG`.
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The name refers to the name shown in the displayed person list. The name must be **exactly** what is shown in the displayed person list.
-* For example, `assign John Doe t/friends` instead of `assign John t/friends`.
-* The provided tag(s) and event tag(s) have to exist in the EventBook.
-
-Examples:
-* `assign 1 t/friends` Assigns the first person in the list to a tag named `Friends`.
-* `assign John Doe t/E-event1` Assigns the person named John Doe in the list to an Event Tag named `event1`.
-
-### Searching by tag : `search`
-
-Displays all the people that are tagged with `TAG_NAME`.
-
-Format: `search TAG_NAME`
-
-* The search is case-sensitive.
-
-Examples:
-* `search Friend` Displays all people tagged as `Friend`.
-
-
-### Switching between events : `switch`
-
-Format: `switch EVENT_TAG_NAME`
-
-Switches to tab with EVENT_TAG_NAME.
-
-* The search is case-sensitive.
-* The default tab is the `All` tab with full list of contacts displayed.
 
 Examples:
 * `search Flag` Switches to 'Flag' event tab and shows all members tagged with 'Flag' event tag.
@@ -370,6 +446,87 @@ Furthermore, certain edits can cause the EventBook to behave in unexpected ways 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+## Try out your first command!
+
+This section would guide you through some basic commands of EventBook, and how to use them.
+
+### Clear sample data
+
+To start, if you want to remove the sample contacts in the EventBook, you can use the `clear` command to clear everything!
+Simply type `clear` in the text box at the top of the app! (Do take note that throughout this tutorial, we will not clear the 
+sample contacts for the convenience doing demo.)
+
+> [!TIP]
+> 1. Input `clear`. ![](images/UG/clear_before.png)
+> 2. Success! ![](images/UG/clear_after.png)
+
+### Create a tag with ctag
+
+To tag a person as a friend or any tag you want, you need to first create the tag.
+To start, create a tag called `penpal`. Do take not tags are alphanumerical, so you cannot do `pen-pal` unfortunately.
+> [!TIP]
+> 1. Input `ctag penpal`. ![](images/UG/ctagtag_before.png)
+> 2. Success! ![](images/UG/ctagtag_after.png)
+
+### Tag a person with assign
+
+To finally tag the person who is your pen-pal, we use the assign command.
+> [!TIP]
+> 1. Assign the person of interest with your tag! For this example,
+we assign John as our pen-pal with `assign penpal`. ![](images/UG/assign_before.png)
+> 2. Success! ![](images/UG/assign_after.png)
+
+### Search Tag
+
+You may want to say, what if I don't remember how many pen-pal, or, how many friends I have in my contact?
+No worries, you can use the search command to find out!
+
+> [!TIP]
+> 1. Search for pen-pals using the search command `search penpal`. ![](images/UG/assign_before.png)
+> 2. Success! ![](images/UG/assign_after.png)
+> 3. To see all the existing contacts again, type `list` in the input box to reset everything!
+
+### Delete Tag
+
+Oh no, what if I want to delete a tag that I no longer use? No worries, you can use the `dtag` command!
+This command removes the tag you delete for all your contacts so be careful!
+
+> [!TIP]
+> 1. Delete the existing `penpal` tag using the dtag command `dtag penpal`. ![](images/UG/dtag_before.png)
+> 2. Success! ![](images/UG/dtag_after.png)
+
+### Create an event
+
+Ok, what if you have an event that you need to group people to, like a meeting on 9 Feb from 8 to 9pm? No worries, you can assign people to events
+and manage them as well. But first, you should create an event first with `ctag`.
+
+> [!TIP]
+> 1. Create an event called **meeting** from 9 Feb 8p.m to 9p.m with 
+the command `ctag t/E-meeting dc/meeting for work! sd/2024-02-09 20:00:00 ed/2024-02-09 20:00:00`. ![](images/UG/cetag_before.png)
+> 2. Success! ![](images/UG/cetag_after.png)
+
+### Assign a person to the event
+
+Now you want to assign a person to the event meeting.(A.k.a a person is in the meeting). You can do it with the
+`assign` command.
+
+> [!TIP]
+> 1. Assign John with meeting using `assign John t/E-meeting`. ![](images/UG/assign_e_before.png)
+> 2. Success! ![](images/UG/assign_e_after.png)
+
+### To find particulars of an event.
+
+Ok, I want to check who is in an event or the event details, how can I do it?
+No worries pal, we got you covered. To figure out who is in any event, use the `switch` command.
+
+> [!TIP]
+> 1. Figure out who is in the event **meeting** and the time and description of meeting,
+use `switch meeting`. ![](images/UG/switch_before.png)
+> 2. Success! ![](images/UG/switch_after.png)
+> 3. To display all contacts again, use `list` by inputing `list` in the input box.
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
@@ -381,6 +538,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. When giving enormously long inputs such as long tag/event tag names, the tag will not get fully displayed by the app. 
 
 --------------------------------------------------------------------------------------------------------------------
 
