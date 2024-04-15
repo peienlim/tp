@@ -150,86 +150,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Creating and Deleting Tag Objects
-
-As part of the functionality of EventBook, a myriad of tag objects might be required to facilitate organisation of
-contacts within the program. EventBook aims to support this capability by providing the ability to create or delete
-standalone tags separate from people.
-
-The proposed mechanism is as follows:
-* `ctag`: Creates a Tag object that will be stored in a global Tag array within the `ModelManager` class.
-* `dtag`: Deletes a Tag object that is currently stored in the global Tag array within the `ModelManager` class. This
-will also delete all instances of the Tag object within the program.
-
-Each Tag object that exists in the program must exist within this global Tag array. Existing functions such as
-`add` will support the creation of Tag objects to be added to this global Tag array.
-
-An example usage scenario illustrates how the `ctag` feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list
-of contacts in the EventBook.
-2. The user executes `ctag Friend`, creating a new Tag object named `Friend`.
-3. The user can then tag people in the program with the new `Friend` tag.
-
-An example usage scenario illustrates how the `dtag` feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list of
-contacts in the EventBook.
-2. The user executes `dtag Friend`, deleting the Tag object named `Friend`.
-3. All instances of `Friend` will be deleted from the EventBook.
-
-### \[Proposed\] Importing and Exporting as .csv file
-
-As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook
-aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
-upload and sharing.
-
-The proposed mechanism is as follows:
-* Import: Facilitated by the `import` command that takes a path parameter. The file named `import.csv` at the given
-path will be read in a set format. The contact details in the csv will then be imported into the address book following
-the format of the add command (Implication being that each field in the .csv should be compatible with the current
-implementation of the address book, and follow all conventions of the add command like formatting and non-duplicates)
-* Export: Facilitated by the `export` command that takes no parameters. The command will access the `UniquePersonList`
-found in the `1AddressBook` of the `Model` and parse through the relevant data, formatting it into the relevant fields.
-
-The .csv should be formatted with the first row having the non-case sensitive headers (separate cells marked with `|`):
-* `Name | Number | Email | Address | Tag`
-
-An example usage scenario illustrates how the import feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list of contacts
-in the EventBook.
-2. The user executes `import ./import/import.csv` , with import.csv having 2 rows:
-   1. `Name | Number | Email | Address | Tag`
-   2. `John | 94756383 | john@mail.com | NUS UTown | BestFriend`
-3. The contact `John` is imported into the address book, with parameters as above.
-
-An example usage scenario illustrates how the export feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list of contacts
-   in the EventBook.
-2. The user executes `export` to export all contacts
-3. All contacts in the address book will be exported to ./export/export.csv according to the format
-`Name | Number | Email | Address | Tag`
-
-### \[Proposed\] Event switching feature
-
-As our target audience are student leaders, and they may be in-charge of multiple events throughout their course in NUS, we are proposing to implement a event-switching feature which allows them to switch between events and view contacts specific to each event.
-
-The proposed event switching feature introduces the concept of event-specific filtering to the existing EventBook. The key operations and components of the proposed implementation include:
-
-* Filtering Mechanism: filters contacts in the EventBook based on event tag, allowing for selective display of contacts based on event tag.
-* UI enhancements: allow users to see each event as a tab and after navigating to a particular tab, they will be able to view contacts of members under that event.
-
-An example usage scenario illustrates how the event switching feature operates:
-1. The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
-2. The user switches tabs to a particular event by executing `switch eventTagName`. The `filteredPersons` list in `Model` class will be updated and user will be able to see all contacts of members under this event.
-3. User can further filter contacts by executing `search tagName`. This displays users in this event with the specified tag.
-
-Alternative 1 (Proposed Choice): Extend the existing Tag class to accommodate event-specific tags, allowing for flexible filtering based on events.
-Pros: Utilizes existing data structure without introducing additional complexity, easier to implement.
-Cons: Requires modifications to the tagging system to support event-specific tags, less OOP
-
-Alternative 2: Introduce separate address books for each event, providing a clear separation of contacts by events.
-Pros: Offers a straightforward organization of data by events.
-Cons: Increases complexity by managing multiple address books, harder to implement.
-
 ### \[Proposed\] Deleting by Name and Index feature
 
 As our student leaders will be in-charge of multiple events, they will tend to encounter a large amount of contacts saved in the EventBook. As such, we are proposing to implement delete by name or index feature which allows them to delete the contacts by names. This saves their time of scrolling through the large amount of contacts before deleting them by index.
@@ -259,6 +179,109 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:**  Search for the name of the person and delete the index from the address book.
     * Pros: Able to see which name you want to delete by searching for their name.
     * Cons: Having to search and delete is slower than simply deleting the person by name.
+
+### Edit contact by Index/Name
+
+
+### \[Proposed\] Creating and Deleting Tag Objects
+
+As part of the functionality of EventBook, a myriad of tag objects might be required to facilitate organisation of
+contacts within the program. EventBook aims to support this capability by providing the ability to create or delete
+standalone tags separate from people.
+
+The proposed mechanism is as follows:
+* `ctag`: Creates a Tag object that will be stored in a global Tag array within the `ModelManager` class.
+* `dtag`: Deletes a Tag object that is currently stored in the global Tag array within the `ModelManager` class. This
+will also delete all instances of the Tag object within the program.
+
+Each Tag object that exists in the program must exist within this global Tag array. Existing functions such as
+`add` will support the creation of Tag objects to be added to this global Tag array.
+
+An example usage scenario illustrates how the `ctag` feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list
+of contacts in the EventBook.
+2. The user executes `ctag Friend`, creating a new Tag object named `Friend`.
+3. The user can then tag people in the program with the new `Friend` tag.
+
+An example usage scenario illustrates how the `dtag` feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of
+contacts in the EventBook.
+2. The user executes `dtag Friend`, deleting the Tag object named `Friend`.
+3. All instances of `Friend` will be deleted from the EventBook.
+
+### Assign Tag command
+
+
+### Search by Tags command
+
+
+### Switch Event command
+The event switching feature allows for easy switching between event tabs to view event members. This is achieved by the introducing event-specific filtering to EventBook.
+
+#### Implementation
+* The Switch feature is facilitated by the SwitchCommand class which extends the Command class. 
+* In `SwitchCommand::execute`, the input tag name provided by the user is checked to see whether it is an existing tag. 
+* If the tag already exists, the actual `EventTag` is retrieved and used to update the filteredPersons list of Model class. This allows the `filteredPersons` list to be updated to **show the correct contacts**. 
+* The `currentEventTag` field in Model class is also updated to the corresponding `EventTag`. This ensures that the highlighted tab in the EventPanelList switches to **highlight the correct Event**.
+
+The initial parsing of the switch command follows the standard parsing process for all commands. Refer to the [Logic component](#logic-component) for the sequence diagram and details. <br>
+<br>
+The following are the details of the execute method of SwitchCommand:
+1. LogicManager calls `SwitchCommand::execute`
+2. Within execute, `ModelManager::hasEventTag` is called to check whether an event tag with the given name already exists.
+3. If the event tag exists, `ModelManager::getEventTag` is called to retrieve the event tag required. 
+4. Next, `ModelManager::updateEventTagPersonList` is called with the event tag retrieved. This will update the `filteredPersons` field of ModelManager class to only contain contacts with the particular EventTag. 
+5. A new `CommandResult` object is created and this is returned by `SwitchCommand::execute`. The CommandResult object is called with the retrieved EventTag. 
+
+![](images/SwitchCommandExecute.png)
+
+#### Changes made to `CommandResult`:
+In implementing this feature, `CommandResult` was updated to take in an additional field `EventTag` to facilitate the update of highlighted tabs for the `EventListPanel`. The following are the varying inputs for this addtional field by different Commands: <br>
+* SwitchCommand creates a `CommandResult` with the **corresponding** `EventTag` to switch to. 
+* ListCommand creates a `CommandResult` with the **default** `EventTag`.
+* All other Commands creates a `CommandResult` with **null** for the `EventTag` field, since there is no need to change the highlighted tab when executing other commands. <br>
+<br>
+
+When `executeCommand::MainWindow` is called to update the UI after the execution of a command, it checks whether the `CommandResult` contains an `EventTag`: 
+* If the `EventTag` **does not exist**, the highlighted tab in EventListPanel does not change. 
+* If the `EventTag` **exists**, the eventListPanel is updated to highlight the correct tab:
+  1. DEFAULT_TAG: `list` command was executed, call `EventListPanel::clearEventSelection` to switch highlighted tab back to `All` tab. 
+  2. **Not** DEFAULT_TAG: `switch` command was executed, call `EventListPanel::selectEvent` with the EventTag to switch highlighted tab to corresponding Event tab. 
+
+### Delete Event Command
+
+### \[Proposed\] Importing and Exporting as .csv file
+
+As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook
+aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
+upload and sharing.
+
+The proposed mechanism is as follows:
+* Import: Facilitated by the `import` command that takes a path parameter. The file named `import.csv` at the given
+  path will be read in a set format. The contact details in the csv will then be imported into the address book following
+  the format of the add command (Implication being that each field in the .csv should be compatible with the current
+  implementation of the address book, and follow all conventions of the add command like formatting and non-duplicates)
+* Export: Facilitated by the `export` command that takes no parameters. The command will access the `UniquePersonList`
+  found in the `1AddressBook` of the `Model` and parse through the relevant data, formatting it into the relevant fields.
+
+The .csv should be formatted with the first row having the non-case sensitive headers (separate cells marked with `|`):
+* `Name | Number | Email | Address | Tag`
+
+An example usage scenario illustrates how the import feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of contacts
+   in the EventBook.
+2. The user executes `import ./import/import.csv` , with import.csv having 2 rows:
+    1. `Name | Number | Email | Address | Tag`
+    2. `John | 94756383 | john@mail.com | NUS UTown | BestFriend`
+3. The contact `John` is imported into the address book, with parameters as above.
+
+An example usage scenario illustrates how the export feature operates:
+1. The user launches the application. The application will be in its initial state showing the full list of contacts
+   in the EventBook.
+2. The user executes `export` to export all contacts
+3. All contacts in the address book will be exported to ./export/export.csv according to the format
+   `Name | Number | Email | Address | Tag`
+
 
 ### \[Proposed\] Undo/redo feature
 
