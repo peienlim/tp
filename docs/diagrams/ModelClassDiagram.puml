@@ -20,6 +20,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class EventTag
 
 Class I #FFFFFF
 }
@@ -46,11 +47,13 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person --> "*" Tag
+Person --> "*" EventTag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 
+EventTag -[hidden]right-> Name
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email

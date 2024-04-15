@@ -197,6 +197,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            eventListPanel = new EventListPanel(logic.getEventTagList());
+            eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
             //@@author {peienlim}-reused
             //Reused from https://github.com/AY2324S1-CS2103T-F08-3/tp
             //(src/main/java/seedu/address/ui/MainWindow.java) Lines 196 to 202 with minor modifications
@@ -208,11 +211,8 @@ public class MainWindow extends UiPart<Stage> {
                 }
                 eventListPanel.selectEvent(eventTag.get());
             }
+
             //@@author {peienlim}
-
-            eventListPanel = new EventListPanel(logic.getEventTagList());
-            eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-
             personListPanel = new PersonListPanel(logic.getFilteredPersonList());
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 

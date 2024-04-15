@@ -12,8 +12,7 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on [AddressBook Level 3](https://se-education.org/docs/templates.html#addressbook-level-3-ab3). 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -22,6 +21,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -65,6 +65,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +83,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,6 +119,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -123,11 +129,15 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Tag` objects (which are contained in a `UniqueTagList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* Stores the EventBook data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Tag` objects (which are contained in a `UniqueTagList` object).
+* Not modelled in diagram due to limitations of PlantUML: `UniqueTagList` object storing EventTags. 
+  * The `UniqueTagList` class involves the use of generics to allow it to store both `Tag` and `EventTag` objects. 
+  * Each EventBook stores a list of tags of type `UniqueTagList<Tag>` and a list of event tags of type `UniqueTagList<EventTag>`. However PlantUML is unable to capture the <Tag> and <EventTag> portion, hence we were unable to include the EventTag list in the diagram.
+* Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -145,28 +155,37 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Deleting by Name and Index feature
+### Deleting Contacts by Index/Name
 
-As our student leaders will be in-charge of multiple events, they will tend to encounter a large amount of contacts saved in the EventBook. As such, we are proposing to implement delete by name or index feature which allows them to delete the contacts by names. This saves their time of scrolling through the large amount of contacts before deleting them by index.
+As student leaders will be in charge of multiple events, they encounter a large number of contacts to be saved. By incorporating a delete feature in EventBook to allow student leaders to swiftly delete contacts either by name or index, it streamlines their workflow, sparing them the effort of manually sifting through extensive contact lists before deletion.
 
-This proposed delete name and index feature introduces the concept of deleting the contacts by either name or index.
+This proposed delete feature introduces the concept of deleting the contacts by either name or index.
 
 Given below is an example usage scenario and how delete mechanism behaves at each step.
 
 Step 1: The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
 
-Step 2: The user executes `delete John Doe` command to delete the person named John Doe in the EventBook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete John Doe` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2: The user executes `delete John Doe` command to delete the person named John Doe in the EventBook. 
+
+<box type="info" seamless>
 
 **Note:** If the command fails the execution, it means that the person does not exist and an error indicating that the person is not found will be shown.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+</box>
 
-<puml src="diagrams/DeleteActivityDiagram.puml" width="250" />
+The following sequence diagram shows how a delete operation goes through the `Logic` component:
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" />
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+<puml src="diagrams/DeleteActivityDiagram.puml" width="450" />
 
 #### Design considerations:
 
@@ -180,8 +199,34 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Able to see which name you want to delete by searching for their name.
     * Cons: Having to search and delete is slower than simply deleting the person by name.
 
-### Edit contact by Index/Name
+<div style="page-break-after: always;"></div>
 
+### Editing Contacts by Index/Name
+As student leaders manage multiple events, they often need to update contact information swiftly within EventBook. By introducing an edit feature, student leaders can efficiently modify contact details either by name or index, enhancing their productivity and streamlining their workflow.
+
+This proposed edit feature introduces the capability to edit contacts by either their name or index.
+
+Given below is an example usage scenario and how edit mechanism behaves at each step.
+
+Step 1: The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
+
+Step 2: The user executes `edit John Doe p/97979797` command to edit the person named John Doe with the updated phone number in the EventBook.
+
+<box type="info" seamless>
+
+**Note:** If the command fails the execution, it means that the person does not exist and an error indication that the person is not found will be shown.
+
+</box>
+
+The following sequence diagram shows how an edit operation goes through the `Logic` component:
+
+<puml src="diagrams/EditSequenceDiagram.puml" />
+
+The following activity diagram summarizes what happens when a user executes an edit command:
+
+<puml src="diagrams/EditActivityDiagram.puml" width="450" />
+
+<div style="page-break-after: always;"></div>
 
 ### Creating and Deleting Tag and EventTag Objects
 
@@ -231,6 +276,8 @@ contacts in the EventBook.
 2. The user executes `dtag Friend`, deleting the Tag object named `Friend`.
 3. All instances of `Friend` will be deleted from the EventBook.
 
+<div style="page-break-after: always;"></div>
+
 ### Assign Tag command
 The `assign` command allows users to assign Tags and Events to contacts within EventBook to be displayed as a label in
 the main interface.
@@ -262,6 +309,8 @@ Previously, `Person` was defined to be immutable such that no changes could be m
 implementation of `assign`, changes had ot be made to allow mutability of each `Person` object's TagList and EventTagList. 
 
 
+<div style="page-break-after: always;"></div>
+
 ### Search by Tags command
 The search by tag feature allows for easy searching of contact by `tag` to view people easily. This is achieved by filtering people in the contact list with the tags
 to see if they have the tag you are searching assigned to them.
@@ -282,6 +331,8 @@ This will update the `filteredPersons` field of ModelManager class to only conta
 4. A new `CommandResult` object is created and this is returned by `SwitchCommand::execute` which displays a success message
 that a tag was created. The message is stored in the `SearchTagCommand` class itself.
 ![](images/DG/SearchCommandExecute.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Switch Event command
 The event switching feature allows for easy switching between event tabs to view event members. This is achieved by the introducing event-specific filtering to EventBook.
@@ -316,7 +367,9 @@ When `executeCommand::MainWindow` is called to update the UI after the execution
   1. DEFAULT_TAG: `list` command was executed, call `EventListPanel::clearEventSelection` to switch highlighted tab back to `All` tab. 
   2. **Not** DEFAULT_TAG: `switch` command was executed, call `EventListPanel::selectEvent` with the EventTag to switch highlighted tab to corresponding Event tab. 
 
-### \[Proposed\] Importing and Exporting as .csv file
+<div style="page-break-after: always;"></div>
+  
+### Importing and Exporting as .csv file
 
 As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook
 aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
@@ -479,6 +532,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -489,6 +543,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -610,6 +665,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Project hierarchy**: The structure of a project team, including team members and organisational structure
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -625,9 +682,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the latest `EventBook.jar` file from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases) and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a command terminal and `cd` into the folder with `EventBook.jar`. Execute the following command to run `Eventbook`:
+   ```
+    java -jar EventBook.jar
+   ```
+   3. The app will start up and you will see a GUI similar to the following: 
+   ![](images/GUI_breakdown.png)
 
 2. Saving window preferences
 
@@ -636,34 +698,285 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Shut Down
+   1. Click on the cross at the top of the window:
+      - MacOS: Red dot at the top left hand corner of the window. 
+      - Windows and Linux: Cross at the top right hand corner of the window.
+   2. Click on File button in the Menu Bar, then click on the `Exit` option.
+   3. Type `exit` into the Command Box and click enter. 
+
+### Adding a person
+Test Cases: 
+1. Add person with **all necessary parameters**
+``` 
+add n/Alice Smith p/98765432 e/alice@gmail.com a/123 Main Street
+```
+- Expected: Alice Smith with the provided details should be successfully added to the EventBook.
+2. Add person with all necessary parameters and **optional parameters**
+``` 
+add n/Bob Johnson p/98675423 e/bob@gmail.com a/456 Elm Street t/logistics t/head
+```
+- Expected: Bob Johnson with the provided details and tags should be successfully added to the EventBook. 
+3. Add person with **necessary parameters missing**
+```
+add n/Carol Lee p/8765432109
+```
+- Expected: No person added. Error stating invalid command format displayed.
+4. Add person that **already exists** in the EventBook
+``` 
+add n/Alice Smith p/98765432 e/alice@gmail.com a/123 Main Street
+```
+- Expected: Error stating that person already exists in the EventBook. 
+
+### Editing a person
+Prerequisites:
+- Ensure that there is at least one person in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook. 
+Test Cases:
+1. Edit person with **valid index**
+```
+edit 1 n/John Doe p/91234567 e/johndoe@example.com
+```
+- Expected: The phone number and email address of the 1st person should be successfully updated.
+2. Edit person with **valid full name**
+``` 
+edit John Doe t/publicity
+```
+- Expected: The person named John Doe should have their tags updated to "publicity".
+3. Edit person with **invalid index**
+``` 
+edit 0 n/John Smith
+```
+- Expected: No person is edited. Error stating invalid command format displayed.
+4. Edit person with **invalid name** (not full name)
+``` 
+edit John t/logistics
+```
+- Expected: Error stating that person name provided is invalid. 
+
+### Finding a person
+Prerequisites:
+- Ensure that there is at least one person in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+  Test Cases:
+1. Find a **valid person**
+``` 
+find John
+```
+- Expected: Indicates number of persons whose names contain "John" and shows the displays the corresponding contacts.
+2. Find a valid person with **name in lowercase**
+``` 
+find john
+```
+- Expected: Same as 1, returns all persons whose names contain "john" regardless of case sensitivity.
+3. Find **two valid persons**
+``` 
+find Alice Bob
+```
+- Expected: Indicates number of persons whose name contain "Alice" **or** "Bob" and displays the corresponding contacts. 
+4. Find with **incomplete name** (missing one letter)
+``` 
+find Bo 
+```
+- Expected: Indicates that 0 persons were found, contact list is empty. 
 
 ### Deleting a person
+Prerequisites:
+- Ensure that there are multiple persons in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete with **valid index** 
+```
+delete 1
+```
+- Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+2. Delete by **valid name**
+```
+delete Alice 
+```
+- Expected: Alice is deleted from the list. Details of the deleted contact shown in the status message.
+3. Delete with **invalid index**
+```
+delete 0
+```
+- Expected: No person is deleted. Error stating invalid command format displayed.
+4. Delete by **invalid name**
+```
+delete Bo
+```
+- Expected: No person is deleted. Error stating person name invalid displayed.
 
-1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Importing contacts
+1. Import contacts from **valid .csv file**
+- Prerequisites: Ensure there is a valid .csv file containing contacts in the specified format.
+```
+import f/./import/import.csv
+```
+- Expected: Contacts from the specified .csv file should be successfully imported into the EventBook.
+2. Import contacts from **default .csv file**
+- Prerequisites: Ensure there is a default .csv file named "import.csv" in the default directory.
+```
+import f/
+```
+- Expected: Contacts from the default .csv file should be successfully imported into the EventBook.
+3. Attempt to import contacts from **invalid file path**
+```
+import f/./import/import.csv
+```
+- Expected: Error message indicating that import was unsuccessful, no such file was found at the given path.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Exporting contacts
+1. Export contacts to **default .csv file**
+```
+export
+```
+- Expected: Contacts from the EventBook should be successfully exported to the default .csv file named "export.csv" in the default directory.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Creating a Tag
+1. Create a tag with **valid name**
+```
+ctag Friend
+```
+- Expected: Message showing that a tag with name "Friend" has been successfully created 
+2. Create a tag with **invalid characters** in name
+```
+ctag Good Friends
+```
+- Expected: No new tag created successfully. Error message indicating that tag has not been added successfully displayed. 
+3. Create a tag with **existing tag name**
+```
+ctag Friend
+```
+- Expected: No new tag created successfully. Error message indicating that tag already exists displayed. 
+4. Create an event tag with valid parameters
+```
+ctag t/E-Orientation dc/ORIENTATION! sd/2024-04-15 10:00:00 ed/2024-04-15 12:00:00
+```
+- Expected: An event tag named "Orientation" should be successfully created with the specified start and end dates.
+5. Create an event tag with **invalid format**
+```
+ctag t/E-Team Meeting sd/2024-04-15 10:00:00 ed/2024-04-15 12:00:00
+```
+- Expected: No new tag created successfully. Error message indicating that format is invalid displayed.
+6. Create an event tag with **existing event name**
+```
+ctag t/E-Orientation dc/ORIENTATION! sd/2024-04-15 14:00:00 ed/2024-04-15 16:00:00
+```
+- Expected: No new tag created successfully. Error message indicating that tag already exists displayed.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Deleting a Tag
+Prerequisites:
+- Ensure that the tag `Friend` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete **existing tag**
+```
+dtag Friend
+```
+- Expected: Message indicating the tag with name "Friend" has been successfully deleted. "Friend" tag will also disappear from contacts who were previously tagged with it. 
+2. Delete **non-existing tag**
+```
+dtag test
+```
+- Expected: Error message indicating that such a tag does not exist. 
+3. Delete tag **without providing name**
+``` 
+dtag
+```
+- Expected: Error message indicating that command format is invalid.
 
-2. _{ more test cases …​ }_
+### Deleting an EventTag
+Prerequisites:
+- Ensure that the tag `Orientation` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete **existing event tag**
+```
+devent Orientation
+```
+- Expected: Message to indicate that event with name "Orientation" has successfully been deleted. The Orientation tab in the list of events and Orientation tag for contacts will also disappear. 
+2. Delete **non-existing event tag**
+``` 
+devent test
+```
+- Expected: Error message indicating that no such event exists displayed. No event tag deleted successfully. 
+3. Delete event tag with **whitespace** in name
+``` 
+devent ori ntation
+```
+- Expected: Error message indicating incorrect format of command entered. No event tag deleted successfully.
 
-### Saving data
+### Assigning a Tag
+Prerequisites:
+- Ensure that the tag `logistics` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Assign **tag** to person with **valid index**
+``` 
+assign 1 t/logistics
+```
+- Expected: Message indicating that person at index 1 has been successfully assigned the tag `logistics`. 
+2. Assign **event tag** to person with **valid name**
+``` 
+assign John t/E-Rag
+```
+- Expected: Message indicating that person at index 1 has been successfully assigned the event tag `Rag`.
+3. Assign a tag which does not currently exist 
+```
+assign 1 t/hello
+```
+- Expected: Error message indicating to user to check if the tag entered exists displayed. 
+4. Assign an event tag which does not currently exist
+```
+assign 1 t/E-hello
+```
+- Expected: Error message indicating to user to check if the event tag entered exists displayed.
 
-1. Dealing with missing/corrupted data files
+### Search by Tag
+Prerequisites:
+- run the following commands:
+``` 
+ctag test
+assign 1 test
+assign 2 test
+```
+- Execute the `list` command to display all contacts in your EventBook.
+1. Search **valid tag name**
+```
+search test
+```
+- Expected: Message indicates that all people with tag `test` have been found. Contacts displayed all contain the blue `test` tag.
+2. Search **invalid tag name**
+``` 
+search hello
+```
+- Expected: Error message indicating that no persons with tag `test` found. 
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Switching between Events
+Prerequisites:
+- Ensure that the event tag `Rag` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Switch to **existing event**
+```
+switch Rag
+```
+- Expected: highlighted tab switches from `All` to `Rag` and all contacts displayed contain the `Rag` tag. The details of `Rag` event are also displayed in the command result box.
+2. Switch back to **display all contacts** (list)
+```
+list
+```
+- Expected: highlighted tab switches back to the `All` tab and all contacts in EventBook displayed. 
+3. Switch to **non-existent event**
+```
+switch hello
+```
+- Expected: Error message indicating that no such event found displayed. 
 
-2. _{ more test cases …​ }_
+
+<box type="info" seamless>
+
+**Note:** The switch command only takes in alphanumeric characters for the name!
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Enhancement**
 
@@ -697,3 +1010,4 @@ We plane to make the window readjust properly for the future app instead of disp
 7. **Length inputs to be displayed in full in the EventBook**: In the current implementation, 
 lengthy inputs for the fields appear to not be displayed in full by the UI as shown in the image below. ![](images/DG/DG_Enhancement_Lengthy.png)
 We plan to make the display in full for up to 3 lines' length of information in the contact panel.
+
