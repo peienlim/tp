@@ -200,7 +200,7 @@ supercharge your event management in the next section!
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Features
+# Features
 
 EventBook is divided into 3 categories - managing contacts, managing events with tags and general functions, which are all listed below.
 
@@ -625,25 +625,6 @@ Now you want to assign a person to the Rag. You can do it with the
 2. Success! ![](images/UG/assign_e_after.png)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EventBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. When giving enormously long inputs such as long tag/event tag names, the tag will not get fully displayed by the app. 
-3. **Date Handling.** It has been identified in the Java Format library when user input an invalid date, eg: 31 Feb 2024, the system incorrectly accepts and converts it to a valid date such as 29 Feb 2024. This can result in incorrect date to be saved. Hence, it is recommended for users to manually verify that the date that they have written is accurate.
-
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## Command summary
@@ -665,4 +646,24 @@ Now you want to assign a person to the Rag. You can do it with the
 | **Import**          | `import f/PATH` <br> e.g., `import f/./import/import.csv`                                                                                                                                    |
 | **Export**          | `export`                                                                                                                                                                                     |
 | **Search Tag**      | `search TAG_NAME` <br> e.g., `search Friend`                                                                                                                                                 |
-| **Switch**          | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`                                                                                                                                              |
+| **Switch**          | `switch EVENT_TAG_NAME` <br> e.g. `switch Flag`         
+
+<div style="page-break-after: always;"></div>
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EventBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known issues
+
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. When giving enormously long inputs such as long tag/event tag names, the tag will not get fully displayed by the app. 
+3. **Date Handling.** It has been identified in the Java Format library when user input an invalid date, eg: 31 Feb 2024, the system incorrectly accepts and converts it to a valid date such as 29 Feb 2024. This can result in incorrect date to be saved. Hence, it is recommended for users to manually verify that the date that they have written is accurate.
+
+--------------------------------------------------------------------------------------------------------------------
+
+                                                                                                                                     |
