@@ -123,10 +123,13 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Tag` objects (which are contained in a `UniqueTagList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* Stores the EventBook data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Tag` objects (which are contained in a `UniqueTagList` object).
+* Not modelled in diagram due to limitations of PlantUML: `UniqueTagList` object storing EventTags. 
+  * The `UniqueTagList` class involves the use of generics to allow it to store both `Tag` and `EventTag` objects. 
+  * Each EventBook stores a list of tags of type `UniqueTagList<Tag>` and a list of event tags of type `UniqueTagList<EventTag>`. However PlantUML is unable to capture the <Tag> and <EventTag> portion, hence we were unable to include the EventTag list in the diagram.
+* Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
 ### Storage component
@@ -845,4 +848,4 @@ switch hello
 <box type="info" seamless>
 
 **Note:** The switch command only takes in alphanumeric characters for the name!
-</box>
+</box
