@@ -228,18 +228,40 @@ The following activity diagram summarizes what happens when a user executes an e
 
 <div style="page-break-after: always;"></div>
 
-### \[Proposed\] Creating and Deleting Tag Objects
+### Creating and Deleting Tag and EventTag Objects
 
-As part of the functionality of EventBook, a myriad of tag objects might be required to facilitate organisation of
-contacts within the program. EventBook aims to support this capability by providing the ability to create or delete
-standalone tags separate from people.
+The `ctag`, `dtag` and `devent` functions allow users to create and delete `Tag` and `EventTag` objects that are critical for EventBook to work.
 
-The proposed mechanism is as follows:
-* `ctag`: Creates a Tag object that will be stored in a global Tag array within the `ModelManager` class.
-* `dtag`: Deletes a Tag object that is currently stored in the global Tag array within the `ModelManager` class. This
-will also delete all instances of the Tag object within the program.
+#### Implementation
 
-Each Tag object that exists in the program must exist within this global Tag array. Existing functions such as
+##### `ctag` Command
+* The `ctag` command is facilitated by the following set of classes:
+  * CtagCommand
+  * CtagCommandParser
+* CtagCommand extends the Command class to allow it to interact with other predefined logic.
+* CtagCommandParser extends the Parser class, and returns a CtagCommand object.
+* In `CtagCommandParser::parse`, the user input is parsed to determine if a `Tag` object or an `EventTag` object is to
+be created. This is done via specifying `t/E-` as the prefix for an `EventTag`
+  * The appropriate CtagCommand object is then returned with either a `Tag` or `EventTag` object as a parameter.
+* In `CtagCommand::execute`, the given object is then added to the model.
+
+##### `dtag` Command
+* The `dtag` command is facilitated by the following set of classes:
+  * DtagCommand
+  * DtagCommandParser
+* In `DtagCommandParser::parse`, the user input is parsed to determine which `Tag` is to be deleted.
+* In `DtagCommand:execute`, the provided Tag is then deleted if it exists.
+
+##### `devent` Command
+* The `devent` command is facilitated by the following set of classes:
+    * DeventCommand
+    * DeventCommandParser
+* In `DeventCommandParser::parse`, the user input is parsed to determine which `EventTag` is to be deleted.
+* In `DeventCommand:execute`, the provided EventTag is then deleted if it exists.
+
+#### Storage of Tags
+
+Every Tag and EventTag object that exists in the program must exist within a global Tag array. Existing functions such as
 `add` will support the creation of Tag objects to be added to this global Tag array.
 
 An example usage scenario illustrates how the `ctag` feature operates:
@@ -257,6 +279,34 @@ contacts in the EventBook.
 <div style="page-break-after: always;"></div>
 
 ### Assign Tag command
+The `assign` command allows users to assign Tags and Events to contacts within EventBook to be displayed as a label in
+the main interface.
+
+#### Implementation
+* The `assign` command is facilitated by the following classes:
+  * `AssignCommand` which extends Command
+  * `AssignCommandParser` which extends Parser
+* In `AssignCommandParser::parse`, the user input is parsed to determine the contact and the Tag / EventTag that is to
+be assigned, and an `AssignCommand` object is returned.
+* In `AssignCommand::execute`, the Person that is specified will have the respective tags assigned to them.
+
+The `assign` command only takes in the index of the person to be assigned (as specified in the GUI), as well as a list of
+`TAGNAME` or `t/E-EVENTTAGNAME` separated by spaces.
+
+The following are the details of `AssignCommand::execute`:
+1. LogicManager calls `AssignCommand::execute`
+2. Within execute, `ModelManager::hasTag` and `ModelManager::hasEventTag` is called for each Tag and EventTag that is provided
+to see whether the provided tags are valid.
+3. If the tags / events do **not** exist, then an error is thrown.
+4. Using `ModelManager::getFilteredPersonList` and the provided index, the Person object is retrieved.
+5. Then, `ModelManager::assign` is called to assign the respective tags to the Person.
+
+#### Changes to Person
+
+In order to allow for assignment of `Tags` and `EventTags` to `Person` objects, `Person` was modified to be mutable.
+
+Previously, `Person` was defined to be immutable such that no changes could be made to their tags or fields. With the
+implementation of `assign`, changes had ot be made to allow mutability of each `Person` object's TagList and EventTagList. 
 
 
 <div style="page-break-after: always;"></div>
@@ -318,14 +368,8 @@ When `executeCommand::MainWindow` is called to update the UI after the execution
   2. **Not** DEFAULT_TAG: `switch` command was executed, call `EventListPanel::selectEvent` with the EventTag to switch highlighted tab to corresponding Event tab. 
 
 <div style="page-break-after: always;"></div>
-
-### Delete Event Command
-The delete event feature allows for easy deleting of event tags. This is great as when an event is over, an event tag
-can be deleted to allow easy management of the EventBook contact list.
-
-<div style="page-break-after: always;"></div>
-
-### \[Proposed\] Importing and Exporting as .csv file
+  
+### Importing and Exporting as .csv file
 
 As student leaders, a common and easily accessible file format type for event contacts would be .csv. Eventbook
 aims to support the ability to import and export contacts using .csv files to facilitate fast and effective contact
@@ -532,7 +576,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                   | know details about an event, such as its time, etc   | keep a clear mind on who is doing what and not get confused |
 | `*`      | user                   | sort my tags based on event (and subsequently role)  | visualise my contacts in a neat way                         |
 | `* *`    | user                   | have a space to write notes for each contact         | note my thoughts in an organised way                        |
-| `* *`    | user proficient in CLI | have short form commands                             | use the programe faster                                     |
+| `* *`    | user proficient in CLI | have short form commands                             | use the programme faster                                    |
+| `* *`    | user                   | import details from different file types             | quickly and efficiently input data                          |
+| `* *`    | user                   | assign people different tags at any time             | have a dynamic user experience in managing my contacts      |
+| `* *`    | user                   | save my event details in different formats           | move my data to another place if needed                     |
+
 
 
 *{More to be added}*
