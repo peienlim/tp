@@ -1,0 +1,35 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User provides name or index to edit;
+if (Is name provided?) then (yes)
+  :Find person by name;
+  if (Person found?) then (yes)
+    :Retrieve person's information;
+    :Allow user to edit information;
+    if (Edit successful?) then (yes)
+      :Display success message;
+    else (no)
+      :Display error message;
+    endif
+  else (no)
+    :Display error message;
+  endif
+else (no)
+  :Find person by index;
+  if (Person found?) then (yes)
+    :Retrieve person's information;
+    :Allow user to edit information;
+    if (Edit successful?) then (yes)
+      :Display success message;
+    else (no)
+      :Display error message;
+    endif
+  else (no)
+    :Display error message;
+  endif
+endif
+stop
+@enduml
