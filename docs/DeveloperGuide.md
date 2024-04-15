@@ -150,23 +150,31 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Deleting by Name and Index feature
+### Deleting Contacts by Index/Name
 
-As our student leaders will be in-charge of multiple events, they will tend to encounter a large amount of contacts saved in the EventBook. As such, we are proposing to implement delete by name or index feature which allows them to delete the contacts by names. This saves their time of scrolling through the large amount of contacts before deleting them by index.
+As student leaders will be in charge of multiple events, they encounter a large number of contacts to be saved. By incorporating a delete feature in EventBook to allow student leaders to swiftly delete contacts either by name or index, it streamlines their workflow, sparing them the effort of manually sifting through extensive contact lists before deletion.
 
-This proposed delete name and index feature introduces the concept of deleting the contacts by either name or index.
+This proposed delete feature introduces the concept of deleting the contacts by either name or index.
 
 Given below is an example usage scenario and how delete mechanism behaves at each step.
 
 Step 1: The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
 
-Step 2: The user executes `delete John Doe` command to delete the person named John Doe in the EventBook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete John Doe` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2: The user executes `delete John Doe` command to delete the person named John Doe in the EventBook. 
+
+<box type="info" seamless>
 
 **Note:** If the command fails the execution, it means that the person does not exist and an error indicating that the person is not found will be shown.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+</box>
 
-<puml src="diagrams/DeleteActivityDiagram.puml" width="250" />
+The following sequence diagram shows how a delete operation goes through the `Logic` component:
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" />
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+<puml src="diagrams/DeleteActivityDiagram.puml" width="450" />
 
 #### Design considerations:
 
@@ -180,8 +188,30 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Able to see which name you want to delete by searching for their name.
     * Cons: Having to search and delete is slower than simply deleting the person by name.
 
-### Edit contact by Index/Name
+### Editing Contacts by Index/Name
+As student leaders manage multiple events, they often need to update contact information swiftly within EventBook. By introducing an edit feature, student leaders can efficiently modify contact details either by name or index, enhancing their productivity and streamlining their workflow.
 
+This proposed edit feature introduces the capability to edit contacts by either their name or index.
+
+Given below is an example usage scenario and how edit mechanism behaves at each step.
+
+Step 1: The user launches the application. The application will be in its initial state showing the full list of contacts in the EventBook.
+
+Step 2: The user executes `edit John Doe p/97979797` command to edit the person named John Doe with the updated phone number in the EventBook.
+
+<box type="info" seamless>
+
+**Note:** If the command fails the execution, it means that the person does not exist and an error indication that the person is not found will be shown.
+
+</box>
+
+The following sequence diagram shows how an edit operation goes through the `Logic` component:
+
+<puml src="diagrams/EditSequenceDiagram.puml" />
+
+The following activity diagram summarizes what happens when a user executes an edit command:
+
+<puml src="diagrams/EditActivityDiagram.puml" width="450" />
 
 ### \[Proposed\] Creating and Deleting Tag Objects
 
