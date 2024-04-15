@@ -35,6 +35,7 @@ information you need, you can either:
     3. Type the keyword or phrase that you want to find into the search box and press enter
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -61,7 +62,7 @@ correctly.
         3. Left click on `Open in Windows Terminal`
 
 5. Use the `java -jar EventBook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. <br>
    ![Ui](images/Ui.png)
 
 6. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open
@@ -87,6 +88,8 @@ correctly.
 7. Refer to the [Features](#features) below for details of each command or to [Command Summary](#command-summary)
 for a quick summary.
 
+<div style="page-break-after: always;"></div>
+
 ## Graphical User Interface (GUI)
 
 ![GUI](images/GUI_breakdown.png)
@@ -108,6 +111,8 @@ This detailed overview enables users to quickly access essential contact informa
 > [**Note**]
 > <br>The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result
 > Panel.
+
+<div style="page-break-after: always;"></div>
 
 ## Try Out Your First Commands!
 
@@ -143,7 +148,10 @@ switch Flag
 ```
 
 * Notice that the highlighted tab on the left switches from the `All` tab to the `Flag` tab, and all listed contacts
-  have the `Flag` event tag.
+  have the `Flag` event tag. <br> 
+**Note:**<br>
+  The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
+  </box>
 
 5. To **switch back to the `All` tab** to view all your contacts, enter the following command:
 
@@ -151,17 +159,14 @@ switch Flag
 list
 ```
 
-6. Experiment with other basic commands that we have listed in the [Quick Start](#quick-start) section the to get a feel
+6. Experiment with other basic commands that we have listed in the [Quick Start](#quick-start) section to get a feel
    for how EventBook works! <br>
 
 Now that you are all warmed up, let's delve deeper into the details of each command and how you can use them to
 supercharge your event management in the next section!
 
 --------------------------------------------------------------------------------------------------------------------
-
-**Note:**<br>
-The default tab on entering the app is the `All` tab, with all contacts in EventBook displayed in the Result Panel.
-</box>
+<div style="page-break-after: always;"></div>
 
 ## Command Format
 
@@ -193,6 +198,7 @@ The default tab on entering the app is the `All` tab, with all contacts in Event
 > as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -322,6 +328,8 @@ Format: `export`
 > [**❗WARNING❗**]
 > There should be an empty folder named `export` inside the folder with `EventBook.jar` to ensure that export function works.
 >
+
+<div style="page-break-after: always;"></div>
 
 ## Managing Events and Tags
 
@@ -492,6 +500,8 @@ Examples:
 > After searching, you can reset the app to display all the contacts with the [list](#listing-all-persons--list)
 command.
 
+<div style="page-break-after: always;"></div>
+
 ## General Functions
 
 ### Getting help : `help`
@@ -537,6 +547,8 @@ welcome to update data directly by editing that data file.
 > the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Setting Up Your First Event!
 
@@ -609,10 +621,12 @@ the command `ctag t/E-Orientation dc/SoC Orientation 2024 sd/2024-02-09 20:00:00
 Now you want to assign a person to the Rag. You can do it with the
 `assign` command.
 
-1. Assign John with meeting using `assign Alex Yeoh t/Rag`.
+1. Assign Alex with meeting using `assign Alex Yeoh t/Rag`.
 2. Success! ![](images/UG/assign_e_after.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -630,6 +644,8 @@ Now you want to assign a person to the Rag. You can do it with the
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                                             |
@@ -643,9 +659,9 @@ Now you want to assign a person to the Rag. You can do it with the
 | **List**            | `list`                                                                                                                                                                                       |
 | **Help**            | `help`                                                                                                                                                                                       |
 | **Create Tag**      | `ctag TAG_NAME` <br> e.g., `ctag Friend`                                                                                                                                                     |
-| **Create EventTag** | `ctag t/E-eventName dc/ Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`           |
+| **Create EventTag** | `ctag t/E-eventName dc/Description sd/yyyy-MM-dd HH:mm:ss ed/yyyy-MM-dd HH:mm:ss` <br> e.g., `ctag t/E-orientation dc/Orientation! sd/2024-04-04 02:02:02 ed/2024-04-05 02:02:02`            |
 | **Delete Tag**      | `dtag TAG_NAME` <br> e.g., `dtag Friend`                                                                                                                                                     |
-| **Delete Event**    | `devent EVENT_TAG_NAME` <br> e.g., `devent fire`                                                                                                                                             |
+| **Delete Event**    | `devent EVENT_TAG_NAME` <br> e.g., `devent orientation`                                                                                                                                      |
 | **Import**          | `import f/PATH` <br> e.g., `import f/./import/import.csv`                                                                                                                                    |
 | **Export**          | `export`                                                                                                                                                                                     |
 | **Search Tag**      | `search TAG_NAME` <br> e.g., `search Friend`                                                                                                                                                 |
