@@ -213,14 +213,32 @@ contacts in the EventBook.
 
 
 ### Search by Tags command
+The search by tag feature allows for easy searching of contact by `tag` to view people easily. This is achieved by filtering people in the contact list with the tags
+to see if they have the tag you are searching assigned to them.
 
+#### Implementation
+* The Search feature is facilitated by the SearchCommand class which extends the Command class.
+* In `SearchTagCommand::execute`, the input tag name provided by the user is checked to see it is an existing tag.
+* If the tag already exists, the actual is used to update the filteredPersons list of Model class using the method 
+`ModelManager::updateTagPersonList`. This allows the `filteredPersons` list to be updated to **show the correct contacts**.
+
+The initial parsing of the search command follows the standard parsing process for all commands. Refer to the [Logic component](#logic-component) for the sequence diagram and details. <br>
+<br>
+The following are the details of the execute method of SwitchCommand:
+1. LogicManager calls `SearchTagCommand::execute`
+2. Within execute, `ModelManager::hasTag` is called to check whether a tag with the given name already exists.
+3. If the tag exists, `ModelManager::updateTagPersonList` is called to update the contacts displayed with the given `tag`.
+This will update the `filteredPersons` field of ModelManager class to only contain contacts with the particular Tag.
+4. A new `CommandResult` object is created and this is returned by `SwitchCommand::execute` which displays a success message
+that a tag was created. The message is stored in the `SearchTagCommand` class itself.
+![](images/DG/SearchCommandExecute.png)
 
 ### Switch Event command
 The event switching feature allows for easy switching between event tabs to view event members. This is achieved by the introducing event-specific filtering to EventBook.
 
 #### Implementation
 * The Switch feature is facilitated by the SwitchCommand class which extends the Command class. 
-* In `SwitchCommand::execute`, the input tag name provided by the user is checked to see whether it is an existing tag. 
+* In `SwitchCommand::execute`, the input tag name provided by the user is checked to see whether it is an existing event tag. 
 * If the tag already exists, the actual `EventTag` is retrieved and used to update the filteredPersons list of Model class. This allows the `filteredPersons` list to be updated to **show the correct contacts**. 
 * The `currentEventTag` field in Model class is also updated to the corresponding `EventTag`. This ensures that the highlighted tab in the EventPanelList switches to **highlight the correct Event**.
 
@@ -249,6 +267,8 @@ When `executeCommand::MainWindow` is called to update the UI after the execution
   2. **Not** DEFAULT_TAG: `switch` command was executed, call `EventListPanel::selectEvent` with the EventTag to switch highlighted tab to corresponding Event tab. 
 
 ### Delete Event Command
+The delete event feature allows for easy deleting of event tags. This is great as when an event is over, an event tag
+can be deleted to allow easy management of the EventBook contact list.
 
 ### \[Proposed\] Importing and Exporting as .csv file
 
@@ -592,3 +612,38 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Enhancement**
+
+1. **To show custom error for wrong time in `ctag` command**: When creating event tags with the `ctag` command,
+you will not get notified correctly on why you failed when you input the incorrect time(like 25:73:74 in the 24-hour 
+format). We plan to make the error message also mention why failed and the reason for the failure: `Incorrect time input:
+please check that your time is correct!`
+2. **Help message in the `delete` command updates with spacing**: When displaying an error message prompting you to
+input with the correct format for the `delete` command, the example given displays: `Example: delete 1ordelete JohnDoe`.
+We plan to fix it to `Example: delete 1 or delete JohnDoe`.
+3. **Allow only correct phone numbers to recognized as phone numbers**: For contacts' phone number, we currently allow
+it to be any number value with size of `int` which can create some issues. We plan to make the phone number we add to
+contact only valid phone numbers types like **+65 8888 8888** in singapore or **+1 (123) 123-1234** in the United States.
+4. **New error message when creating tag or event tags that is not single-word or contains illegal characters with the `ctag` command**:
+All tags and event tags in this app are strictly **one word only with and alphanumeric only(a-z, A-Z, 0-9)**.
+When a person attempts to create tag or event tag with more than one word or contains illegal alphabet,
+he/she currently will only get an error message that is not related what caused the command to fail. We plan to create an
+custom error that will inform the user to that tag/event tag need to be one word with **legal characters(a-z, A-Z, 0-9) only**
+when this mistake by the user occurs.
+5. **Display all existing tags with a `taglist` command**: The current implementation **does not allow you to see all the existing tags 
+within the EventBook** and this will cause some trouble for the user. For example, according to the user guide, when assigning a tag in the address book to a specified person,
+the provided tag(s) must already exist in the EventBook. However, there is no accessible list of tags (not event tags) that have been added.
+The absence of tag visibility aside from the ones you see beside contact panels in the app makes it challenging for users 
+to remember if a tag was added when there are too many tags in the contact. We plan to create a new command that will
+display all the tags that are in the address book with a command called `taglist`. For example, if I input `taglist`,
+the app will display all the existing tags in the EventBook, with an output like `Tags: Tag1, Tag2, Tag3, Tag4`.
+6. **Make the app window adjust to the correct size without whitespace when you try to change its size`**:
+The current app's default display works fine but when trying to adjust the window, whitespace will appear at the bottom
+of the app instead of adjusting the size of the whole window as shown below. ![](images/DG/DG_Enhancement_Window.png)
+We plane to make the window readjust properly for the future app instead of displaying this whitespace.
+7. **Length inputs to be displayed in full in the EventBook**: In the current implementation, 
+lengthy inputs for the fields appear to not be displayed in full by the UI as shown in the image below. ![](images/DG/DG_Enhancement_Lengthy.png)
+We plan to make the display in full for up to 3 lines' length of information in the contact panel.
