@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.EventBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -161,7 +161,7 @@ public class ImportCommand extends Command {
     private void handleEventTag(String details, String personName) throws CommandException {
         if (!details.equals("N/A") && !details.equalsIgnoreCase("EVENTS")) {
             try {
-                AddressBookParser addressBookParser = new AddressBookParser();
+                EventBookParser addressBookParser = new EventBookParser();
                 if (details.trim().split(" ").length != 1) { // case where event is defined
                     commands.add(addressBookParser.parseCommand("ctag " + details));
                     String eventName = details.trim().split(" ")[0].substring(2);
@@ -177,7 +177,7 @@ public class ImportCommand extends Command {
 
     private void loadEventTags(Model model) throws CommandException {
         try {
-            AddressBookParser addressBookParser = new AddressBookParser();
+            EventBookParser addressBookParser = new EventBookParser();
             // access model and add/assign events into address book
             for (Command command : commands) {
                 command.execute(model);
@@ -212,7 +212,7 @@ public class ImportCommand extends Command {
      */
     private void addPersons(Model model) throws CommandException {
         try {
-            AddressBookParser addressBookParser = new AddressBookParser();
+            EventBookParser addressBookParser = new EventBookParser();
             // access model and add people into address book
             for (String person : personsToAdd) {
                 String commandText = "add " + person;

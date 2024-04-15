@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.AddressBook.DEFAULT_EVENT_TAG;
+import static seedu.address.model.EventBook.DEFAULT_EVENT_TAG;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getEventBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

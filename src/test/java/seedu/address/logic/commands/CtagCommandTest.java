@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CtagCommand.MESSAGE_SUCCESS_EVENT_TAG;
 import static seedu.address.logic.commands.CtagCommand.MESSAGE_SUCCESS_TAG;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEventBook;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +19,7 @@ import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
 //
 public class CtagCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalEventBook(), new UserPrefs());
     private Tag tag = new Tag("dummy");
     private Tag tag2 = new Tag("dummy2");
     private EventTag eTag = new EventTag("dummy",

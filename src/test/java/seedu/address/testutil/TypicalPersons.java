@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.EventTag;
 import seedu.address.model.tag.Tag;
@@ -66,8 +66,8 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static EventBook getTypicalEventBook() {
+        EventBook ab = new EventBook();
         for (Tag tag : getTypicalTags()) {
             ab.addTag(tag);
         }

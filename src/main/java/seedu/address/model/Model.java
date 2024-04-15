@@ -43,22 +43,22 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getEventBookFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setEventBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code eventBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setEventBook(ReadOnlyEventBook eventBook);
 
     /**
      * Returns the AddressBook
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEventBook getEventBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.AddressBook.DEFAULT_EVENT_TAG;
+import static seedu.address.model.EventBook.DEFAULT_EVENT_TAG;
 
 import java.util.ArrayList;
 import java.util.List;

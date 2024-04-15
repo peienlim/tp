@@ -23,27 +23,27 @@ import seedu.address.model.tag.Tag;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final EventBook eventBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private EventTag currentEventTag;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given eventBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyEventBook eventBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(eventBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with event book: " + eventBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.eventBook = new EventBook(eventBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.eventBook.getPersonList());
         currentEventTag = null;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EventBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -71,42 +71,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getEventBookFilePath() {
+        return userPrefs.getEventBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setEventBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setEventBookFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setEventBook(ReadOnlyEventBook eventBook) {
+        this.eventBook.resetData(eventBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyEventBook getEventBook() {
+        return eventBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return eventBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        eventBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        eventBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -114,60 +114,60 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        eventBook.setPerson(target, editedPerson);
     }
 
     @Override
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
-        return addressBook.hasTag(tag);
+        return eventBook.hasTag(tag);
     }
 
     @Override
     public void assign(Person targetPerson, Set<Tag> tags, Set<Tag> eventTags) {
         requireAllNonNull(targetPerson, tags, eventTags);
-        addressBook.assign(targetPerson, tags, eventTags);
+        eventBook.assign(targetPerson, tags, eventTags);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void deleteTag(Tag tag) {
-        addressBook.removeTag(tag);
+        eventBook.removeTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void addTag(Tag tag) {
-        addressBook.addTag(tag);
+        eventBook.addTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public boolean hasEventTag(EventTag tag) {
         requireNonNull(tag);
-        return addressBook.hasEventTag(tag);
+        return eventBook.hasEventTag(tag);
     }
 
     @Override
     public boolean hasEventTag(String tagName) {
         requireNonNull(tagName);
-        return addressBook.hasEventTag(tagName);
+        return eventBook.hasEventTag(tagName);
     }
 
     @Override
     public void deleteEventTag(EventTag tag) {
-        addressBook.removeEventTag(tag);
+        eventBook.removeEventTag(tag);
     }
 
     @Override
     public void addEventTag(EventTag tag) {
-        addressBook.addEventTag(tag);
+        eventBook.addEventTag(tag);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public EventTag getEventTag(String tag) {
-        return addressBook.getEventTag(tag);
+        return eventBook.getEventTag(tag);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -233,7 +233,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return eventBook.equals(otherModelManager.eventBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
@@ -244,7 +244,7 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     public ObservableSet<EventTag> getEventTagList() {
-        return addressBook.getEventTagList();
+        return eventBook.getEventTagList();
     }
 
 }

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEventBook;
 import static seedu.address.testutil.TypicalTags.FRIEND;
 
 import java.util.Arrays;
@@ -32,26 +32,26 @@ import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class EventBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final EventBook eventBook = new EventBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptySet(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), eventBook.getPersonList());
+        assertEquals(Collections.emptySet(), eventBook.getTagList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> eventBook.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyEventBook_replacesData() {
+        EventBook newData = getTypicalEventBook();
+        eventBook.resetData(newData);
+        assertEquals(newData, eventBook);
     }
 
     @Test
@@ -62,135 +62,135 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> newTags = List.of();
         List<EventTag> newEventTags = List.of();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags, newEventTags);
+        EventBookStub newData = new EventBookStub(newPersons, newTags, newEventTags);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> eventBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> eventBook.hasPerson(null));
     }
 
     @Test
     public void hasTag_nullTag_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTag((Tag) null));
+        assertThrows(NullPointerException.class, () -> eventBook.hasTag((Tag) null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInEventBook_returnsFalse() {
+        assertFalse(eventBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasTag_tagNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTag(FRIEND));
+    public void hasTag_tagNotInEventBook_returnsFalse() {
+        assertFalse(eventBook.hasTag(FRIEND));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInEventBook_returnsTrue() {
+        eventBook.addPerson(ALICE);
+        assertTrue(eventBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasTag_tagInAddressBook_returnsTrue() {
-        addressBook.addTag(FRIEND);
-        assertTrue(addressBook.hasTag(FRIEND));
+    public void hasTag_tagInEventBook_returnsTrue() {
+        eventBook.addTag(FRIEND);
+        assertTrue(eventBook.hasTag(FRIEND));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInEventBook_returnsTrue() {
+        eventBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(eventBook.hasPerson(editedAlice));
     }
 
     @Test
-    public void hasTag_tagWithSameNameInAddressBook_returnsTrue() {
-        addressBook.addTag(FRIEND);
+    public void hasTag_tagWithSameNameInEventBook_returnsTrue() {
+        eventBook.addTag(FRIEND);
         Tag editedFriend = new Tag("friends");
-        assertTrue(addressBook.hasTag(editedFriend));
+        assertTrue(eventBook.hasTag(editedFriend));
     }
 
     @Test
     public void addDuplicatePerson_throwsDuplicatePersonException() {
-        addressBook.addPerson(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> addressBook.addPerson(ALICE));
+        eventBook.addPerson(ALICE);
+        assertThrows(DuplicatePersonException.class, () -> eventBook.addPerson(ALICE));
     }
 
     @Test
     public void addDuplicateTag_throwsDuplicateTagException() {
-        addressBook.addTag(FRIEND);
-        assertThrows(DuplicateTagException.class, () -> addressBook.addTag(FRIEND));
+        eventBook.addTag(FRIEND);
+        assertThrows(DuplicateTagException.class, () -> eventBook.addTag(FRIEND));
     }
 
     @Test
     public void setPerson_withDifferentIdentityFields_success() {
-        addressBook.addPerson(ALICE);
+        eventBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertDoesNotThrow(() -> addressBook.setPerson(ALICE, editedAlice));
+        assertDoesNotThrow(() -> eventBook.setPerson(ALICE, editedAlice));
     }
 
     @Test
     public void setTags_withUniqueTags_success() {
         Set<Tag> uniqueTags = new HashSet<>(Arrays.asList(FRIEND, new Tag("colleague")));
-        assertDoesNotThrow(() -> addressBook.setTagList(uniqueTags));
+        assertDoesNotThrow(() -> eventBook.setTagList(uniqueTags));
     }
 
     @Test
     public void removePerson_notExistingPerson_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> addressBook.removePerson(ALICE));
+        assertThrows(PersonNotFoundException.class, () -> eventBook.removePerson(ALICE));
     }
 
     @Test
     public void removeTag_notExistingTag_throwsTagNotFoundException() {
-        assertThrows(TagNotFoundException.class, () -> addressBook.removeTag(FRIEND));
+        assertThrows(TagNotFoundException.class, () -> eventBook.removeTag(FRIEND));
     }
 
 
 
     @Test
     public void removePerson_existingPerson_success() {
-        addressBook.addPerson(ALICE);
-        assertDoesNotThrow(() -> addressBook.removePerson(ALICE));
+        eventBook.addPerson(ALICE);
+        assertDoesNotThrow(() -> eventBook.removePerson(ALICE));
     }
 
     @Test
     public void removeTag_existingTag_success() {
-        addressBook.addTag(FRIEND);
-        assertDoesNotThrow(() -> addressBook.removeTag(FRIEND));
+        eventBook.addTag(FRIEND);
+        assertDoesNotThrow(() -> eventBook.removeTag(FRIEND));
     }
 
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", tags=" + addressBook.getTagList() + ", event tags=" + addressBook.getEventTagList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = EventBook.class.getCanonicalName() + "{persons=" + eventBook.getPersonList()
+                + ", tags=" + eventBook.getTagList() + ", event tags=" + eventBook.getEventTagList() + "}";
+        assertEquals(expected, eventBook.toString());
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> eventBook.getPersonList().remove(0));
     }
 
     @Test
     public void getTagList_modifySet_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(FRIEND));
+        assertThrows(UnsupportedOperationException.class, () -> eventBook.getTagList().remove(FRIEND));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyEventBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class EventBookStub implements ReadOnlyEventBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableSet<Tag> tags = FXCollections.observableSet();
         private final ObservableSet<EventTag> eventTags = FXCollections.observableSet();
 
-        AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<EventTag> eventTags) {
+        EventBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<EventTag> eventTags) {
             this.persons.setAll(persons);
             this.tags.addAll(tags);
             this.eventTags.addAll(eventTags);
