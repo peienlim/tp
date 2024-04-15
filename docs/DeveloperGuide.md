@@ -555,9 +555,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the latest `EventBook.jar` file from [here](https://github.com/AY2324S2-CS2103T-T11-3/tp/releases) and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a command terminal and `cd` into the folder with `EventBook.jar`. Execute the following command to run `Eventbook`:
+   ```
+    java -jar EventBook.jar
+   ```
+   3. The app will start up and you will see a GUI similar to the following: 
+   ![](images/GUI_breakdown.png)
 
 2. Saving window preferences
 
@@ -566,29 +571,278 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Shut Down
+   1. Click on the cross at the top of the window:
+      - MacOS: Red dot at the top left hand corner of the window. 
+      - Windows and Linux: Cross at the top right hand corner of the window.
+   2. Click on File button in the Menu Bar, then click on the `Exit` option.
+   3. Type `exit` into the Command Box and click enter. 
+
+### Adding a person
+Test Cases: 
+1. Add person with **all necessary parameters**
+``` 
+add n/Alice Smith p/98765432 e/alice@gmail.com a/123 Main Street
+```
+- Expected: Alice Smith with the provided details should be successfully added to the EventBook.
+2. Add person with all necessary parameters and **optional parameters**
+``` 
+add n/Bob Johnson p/98675423 e/bob@gmail.com a/456 Elm Street t/logistics t/head
+```
+- Expected: Bob Johnson with the provided details and tags should be successfully added to the EventBook. 
+3. Add person with **necessary parameters missing**
+```
+add n/Carol Lee p/8765432109
+```
+- Expected: No person added. Error stating invalid command format displayed.
+4. Add person that **already exists** in the EventBook
+``` 
+add n/Alice Smith p/98765432 e/alice@gmail.com a/123 Main Street
+```
+- Expected: Error stating that person already exists in the EventBook. 
+
+### Editing a person
+Prerequisites:
+- Ensure that there is at least one person in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook. 
+Test Cases:
+1. Edit person with **valid index**
+```
+edit 1 n/John Doe p/91234567 e/johndoe@example.com
+```
+- Expected: The phone number and email address of the 1st person should be successfully updated.
+2. Edit person with **valid full name**
+``` 
+edit John Doe t/publicity
+```
+- Expected: The person named John Doe should have their tags updated to "publicity".
+3. Edit person with **invalid index**
+``` 
+edit 0 n/John Smith
+```
+- Expected: No person is edited. Error stating invalid command format displayed.
+4. Edit person with **invalid name** (not full name)
+``` 
+edit John t/logistics
+```
+- Expected: Error stating that person name provided is invalid. 
+
+### Finding a person
+Prerequisites:
+- Ensure that there is at least one person in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+  Test Cases:
+1. Find a **valid person**
+``` 
+find John
+```
+- Expected: Indicates number of persons whose names contain "John" and shows the displays the corresponding contacts.
+2. Find a valid person with **name in lowercase**
+``` 
+find john
+```
+- Expected: Same as 1, returns all persons whose names contain "john" regardless of case sensitivity.
+3. Find **two valid persons**
+``` 
+find Alice Bob
+```
+- Expected: Indicates number of persons whose name contain "Alice" **or** "Bob" and displays the corresponding contacts. 
+4. Find with **incomplete name** (missing one letter)
+``` 
+find Bo 
+```
+- Expected: Indicates that 0 persons were found, contact list is empty. 
 
 ### Deleting a person
+Prerequisites:
+- Ensure that there are multiple persons in the EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete with **valid index** 
+```
+delete 1
+```
+- Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+2. Delete by **valid name**
+```
+delete Alice 
+```
+- Expected: Alice is deleted from the list. Details of the deleted contact shown in the status message.
+3. Delete with **invalid index**
+```
+delete 0
+```
+- Expected: No person is deleted. Error stating invalid command format displayed.
+4. Delete by **invalid name**
+```
+delete Bo
+```
+- Expected: No person is deleted. Error stating person name invalid displayed.
 
-1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Importing contacts
+1. Import contacts from **valid .csv file**
+- Prerequisites: Ensure there is a valid .csv file containing contacts in the specified format.
+```
+import f/./import/import.csv
+```
+- Expected: Contacts from the specified .csv file should be successfully imported into the EventBook.
+2. Import contacts from **default .csv file**
+- Prerequisites: Ensure there is a default .csv file named "import.csv" in the default directory.
+```
+import f/
+```
+- Expected: Contacts from the default .csv file should be successfully imported into the EventBook.
+3. Attempt to import contacts from **invalid file path**
+```
+import f/./import/import.csv
+```
+- Expected: Error message indicating that import was unsuccessful, no such file was found at the given path.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Exporting contacts
+1. Export contacts to **default .csv file**
+```
+export
+```
+- Expected: Contacts from the EventBook should be successfully exported to the default .csv file named "export.csv" in the default directory.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Creating a Tag
+1. Create a tag with **valid name**
+```
+ctag Friend
+```
+- Expected: Message showing that a tag with name "Friend" has been successfully created 
+2. Create a tag with **invalid characters** in name
+```
+ctag Good Friends
+```
+- Expected: No new tag created successfully. Error message indicating that tag has not been added successfully displayed. 
+3. Create a tag with **existing tag name**
+```
+ctag Friend
+```
+- Expected: No new tag created successfully. Error message indicating that tag already exists displayed. 
+4. Create an event tag with valid parameters
+```
+ctag t/E-Orientation dc/ORIENTATION! sd/2024-04-15 10:00:00 ed/2024-04-15 12:00:00
+```
+- Expected: An event tag named "Orientation" should be successfully created with the specified start and end dates.
+5. Create an event tag with **invalid format**
+```
+ctag t/E-Team Meeting sd/2024-04-15 10:00:00 ed/2024-04-15 12:00:00
+```
+- Expected: No new tag created successfully. Error message indicating that format is invalid displayed.
+6. Create an event tag with **existing event name**
+```
+ctag t/E-Orientation dc/ORIENTATION! sd/2024-04-15 14:00:00 ed/2024-04-15 16:00:00
+```
+- Expected: No new tag created successfully. Error message indicating that tag already exists displayed.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Deleting a Tag
+Prerequisites:
+- Ensure that the tag `Friend` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete **existing tag**
+```
+dtag Friend
+```
+- Expected: Message indicating the tag with name "Friend" has been successfully deleted. "Friend" tag will also disappear from contacts who were previously tagged with it. 
+2. Delete **non-existing tag**
+```
+dtag test
+```
+- Expected: Error message indicating that such a tag does not exist. 
+3. Delete tag **without providing name**
+``` 
+dtag
+```
+- Expected: Error message indicating that command format is invalid.
 
-2. _{ more test cases …​ }_
+### Deleting an EventTag
+Prerequisites:
+- Ensure that the tag `Orientation` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Delete **existing event tag**
+```
+devent Orientation
+```
+- Expected: Message to indicate that event with name "Orientation" has successfully been deleted. The Orientation tab in the list of events and Orientation tag for contacts will also disappear. 
+2. Delete **non-existing event tag**
+``` 
+devent test
+```
+- Expected: Error message indicating that no such event exists displayed. No event tag deleted successfully. 
+3. Delete event tag with **whitespace** in name
+``` 
+devent ori ntation
+```
+- Expected: Error message indicating incorrect format of command entered. No event tag deleted successfully.
 
-### Saving data
+### Assigning a Tag
+Prerequisites:
+- Ensure that the tag `logistics` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Assign **tag** to person with **valid index**
+``` 
+assign 1 t/logistics
+```
+- Expected: Message indicating that person at index 1 has been successfully assigned the tag `logistics`. 
+2. Assign **event tag** to person with **valid name**
+``` 
+assign John t/E-Rag
+```
+- Expected: Message indicating that person at index 1 has been successfully assigned the event tag `Rag`.
+3. Assign a tag which does not currently exist 
+```
+assign 1 t/hello
+```
+- Expected: Error message indicating to user to check if the tag entered exists displayed. 
+4. Assign an event tag which does not currently exist
+```
+assign 1 t/E-hello
+```
+- Expected: Error message indicating to user to check if the event tag entered exists displayed.
 
-1. Dealing with missing/corrupted data files
+### Search by Tag
+Prerequisites:
+- run the following commands:
+``` 
+ctag test
+assign 1 test
+assign 2 test
+```
+- Execute the `list` command to display all contacts in your EventBook.
+1. Search **valid tag name**
+```
+search test
+```
+- Expected: Message indicates that all people with tag `test` have been found. Contacts displayed all contain the blue `test` tag.
+2. Search **invalid tag name**
+``` 
+search hello
+```
+- Expected: Error message indicating that no persons with tag `test` found. 
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Switching between Events
+Prerequisites:
+- Ensure that the event tag `Rag` exists in EventBook.
+- Execute the `list` command to display all contacts in your EventBook.
+1. Switch to **existing event**
+```
+switch Rag
+```
+- Expected: highlighted tab switches from `All` to `Rag` and all contacts displayed contain the `Rag` tag. The details of `Rag` event are also displayed in the command result box.
+2. Switch back to **display all contacts** (list)
+```
+list
+```
+- Expected: highlighted tab switches back to the `All` tab and all contacts in EventBook displayed. 
+3. Switch to **non-existent event**
+```
+switch hello
+```
+- Expected: Error message indicating that no such event found displayed. 
 
-2. _{ more test cases …​ }_
+<box type="info" seamless>
+
+**Note:** The switch command only takes in alphanumeric characters for the name!
+</box>
